@@ -10,59 +10,68 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Trainer {
-  id           String        @id @default(auto()) @map("_id") @db.ObjectId
-  permissions  String
-  username     String
-  password     String
-  type         String
-  email        String
-  firstName    String
-  lastName     String
-  about        String
-  clients      Client[]
-  appointments Appointment[]
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
+model User {
+  id             String        @id @default(auto()) @map("_id") @db.ObjectId
+  permissions    Permission    @default(ADMIN)
+  type           Type          @default(TRAINER)
+  profile        Profile
+  appointmentIDs String[]      @db.ObjectId
+  appointments   Appointment[] @relation(fields: [appointmentIDs], references: [id])
+  clients        Client[]
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+}
+
+type Profile {
+  username  String
+  password  String
+  firstName String
+  lastName  String
+  phone     Int
+  email     String
+  about     String
+  age       Int
+}
+
+enum Permission {
+  USER
+  ADMIN
+}
+
+enum Type {
+  TRAINER
+  CLIENT
 }
 
 model Client {
-  id           String        @id @default(auto()) @map("_id") @db.ObjectId
-  clientId     String        @db.ObjectId
-  firstName    String
-  lastname     String
-  phone        Int
-  about        String
-  type         String
-  trainer      Trainer?      @relation(fields: [clientId], references: [id])
-  appointments Appointment[]
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  clientID String  @db.ObjectId
+  user     User?   @relation(fields: [clientID], references: [id])
+  profile  Profile
 }
 
 model WorkoutPlan {
-  id            String       @id @default(auto()) @map("_id") @db.ObjectId
-  appointmentId String?      @db.ObjectId
+  id            String      @id @default(auto()) @map("_id") @db.ObjectId
+  appointmentId String      @db.ObjectId
   title         String
   description   String
   duration      Int
-  appointment   Appointment? @relation(fields: [appointmentId], references: [id])
+  appointment   Appointment @relation(fields: [appointmentId], references: [id])
 }
 
 model AppointmentNotes {
-  id                 String       @id @default(auto()) @map("_id") @db.ObjectId
-  appointmentNotesId String       @db.ObjectId
+  id                 String      @id @default(auto()) @map("_id") @db.ObjectId
+  appointmentNotesId String      @db.ObjectId
   title              String
   description        String
-  appointment        Appointment? @relation(fields: [appointmentNotesId], references: [id])
+  appointment        Appointment @relation(fields: [appointmentNotesId], references: [id])
 }
 
 model Appointment {
   id               String             @id @default(auto()) @map("_id") @db.ObjectId
-  appointmentId    String             @unique @db.ObjectId
   type             String
-  client           Client?            @relation(fields: [appointmentId], references: [id])
-  trainer          Trainer?           @relation(fields: [appointmentId], references: [id])
+  userIDs          String[]           @db.ObjectId
+  users            User[]             @relation(fields: [userIDs], references: [id])
   workoutPlan      WorkoutPlan[]
   appointmentNotes AppointmentNotes[]
   date             DateTime           @default(now())
