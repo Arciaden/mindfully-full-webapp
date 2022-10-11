@@ -10,8 +10,71 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Admin {
-  id    String @id @default(auto()) @map("_id") @db.ObjectId
-  name  String
-  email String
+model User {
+  id             String        @id @default(auto()) @map("_id") @db.ObjectId
+  permissions    Permission    @default(ADMIN)
+  type           Type          @default(TRAINER)
+  profile        Profile
+  appointmentIDs String[]      @db.ObjectId
+  appointments   Appointment[] @relation(fields: [appointmentIDs], references: [id])
+  clients        Client[]
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+}
+
+type Profile {
+  username  String
+  password  String
+  firstName String
+  lastName  String
+  phone     Int
+  email     String
+  about     String
+  age       Int
+}
+
+enum Permission {
+  USER
+  ADMIN
+}
+
+enum Type {
+  TRAINER
+  CLIENT
+}
+
+model Client {
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  clientID String  @db.ObjectId
+  user     User?   @relation(fields: [clientID], references: [id])
+  profile  Profile
+}
+
+model WorkoutPlan {
+  id            String      @id @default(auto()) @map("_id") @db.ObjectId
+  appointmentId String      @db.ObjectId
+  title         String
+  description   String
+  duration      Int
+  appointment   Appointment @relation(fields: [appointmentId], references: [id])
+}
+
+model AppointmentNotes {
+  id                 String      @id @default(auto()) @map("_id") @db.ObjectId
+  appointmentNotesId String      @db.ObjectId
+  title              String
+  description        String
+  appointment        Appointment @relation(fields: [appointmentNotesId], references: [id])
+}
+
+model Appointment {
+  id               String             @id @default(auto()) @map("_id") @db.ObjectId
+  type             String
+  userIDs          String[]           @db.ObjectId
+  users            User[]             @relation(fields: [userIDs], references: [id])
+  workoutPlan      WorkoutPlan[]
+  appointmentNotes AppointmentNotes[]
+  date             DateTime           @default(now())
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
 }
