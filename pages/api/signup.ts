@@ -17,7 +17,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   //Creating the password encryption
   const salt = bcrypt.genSaltSync()
-  const { email, password, profile } = req.body
+  const { email, password, firstName, lastName, phone, age, about } = req.body
 
   let user
 
@@ -26,7 +26,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       data: {
         email,
         password: bcrypt.hashSync(password, salt),
-        profile,
+        firstName,
+        lastName,
+        phone,
+        age,
+        about,
       },
     })
   } catch (e) {
