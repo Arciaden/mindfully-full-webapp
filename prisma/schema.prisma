@@ -13,8 +13,14 @@ model User {
   id             String        @id @default(auto()) @map("_id") @db.ObjectId
   permissions    Permission    @default(ADMIN)
   type           Type          @default(TRAINER)
-  profile        Profile
-  name           String        @unique
+  // profile        Profile
+  email          String        @unique
+  password       String
+  firstName      String
+  lastName       String
+  phone          Int
+  about          String?
+  age            Int
   appointmentIDs String[]      @db.ObjectId
   appointments   Appointment[] @relation(fields: [appointmentIDs], references: [id])
   clients        Client[]
@@ -22,16 +28,13 @@ model User {
   updatedAt      DateTime      @updatedAt
 }
 
-type Profile {
-  username  String
-  password  String
-  firstName String
-  lastName  String
-  phone     Int
-  email     String
-  about     String
-  age       Int
-}
+// type Profile {
+//   firstName String
+//   lastName  String
+//   phone     Int
+//   about     String?
+//   age       Int
+// }
 
 //Enum gives us the ability to set a type for each user, as well as a default.
 enum Permission {
@@ -48,7 +51,6 @@ model Client {
   id        String  @id @default(auto()) @map("_id") @db.ObjectId
   clientID  String  @db.ObjectId
   user      User?   @relation(fields: [clientID], references: [id], onDelete: Cascade)
-  name      String
   firstName String
   lastName  String
   age       Int
