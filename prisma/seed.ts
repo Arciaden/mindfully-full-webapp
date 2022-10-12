@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import { userData } from './userData'
+import bcrypt from 'bcrypt'
 
 const prisma = new PrismaClient()
 
@@ -8,25 +9,24 @@ const run = async () => {
   await prisma.appointment.deleteMany()
   await prisma.client.deleteMany()
 
+  const salt = bcrypt.genSaltSync()
   await Promise.all(
     userData.map((user) => {
       return prisma.user.upsert({
-        where: { name: user.name },
+        where: { email: user.email },
         update: {},
         create: {
-          name: user.name,
           permissions: user.permissions,
           type: user.type,
-          profile: {
-            username: user.profile.username,
-            password: user.profile.password,
-            firstName: user.profile.firstName,
-            lastName: user.profile.lastName,
-            age: user.profile.age,
-            phone: user.profile.phone,
-            email: user.profile.email,
-            about: user.profile.about,
-          },
+          password: bcrypt.hashSync(user.password, salt),
+          email: user.email,
+          // profile: {
+          firstName: user.firstName,
+          lastName: user.lastName,
+          age: user.age,
+          phone: user.phone,
+          about: user.about,
+          // },
           clients: {
             create: user.clients.map((client) => ({
               name: client.name,
@@ -49,61 +49,14 @@ const run = async () => {
             })),
           },
         },
+        include: {
+          clients: true,
+          appointments: true,
+        },
       })
     })
   )
 }
-
-// const run = async () => {
-//   await Promise.all(
-//     userData.map(async (user) => {
-//       return prisma.user.upsert({
-//         where: { name: user.name },
-//         update: {},
-//         create: {
-//           name: user.name,
-//           permissions: user.permissions,
-//           type: user.type,
-//           profile: {
-//             username: user.profile.username,
-//             password: user.profile.password,
-//             firstName: user.profile.firstName,
-//             lastName: user.profile.lastName,
-//             age: user.profile.age,
-//             phone: user.profile.phone,
-//             email: user.profile.email,
-//             about: user.profile.about,
-//           },
-//             clients: {
-//               create: user.clients.map((client) => ({
-//                 firstName: client.firstName,
-//                 lastName: client.lastName,
-//                 phone: client.phone,
-//                 email: client.email,
-//                 about: client.about,
-//                 age: client.age,
-//               })),
-//             },
-//           appointments: {
-//             create: user.appointments.map((appointment) => ({
-//               type: appointment.type,
-//               date: appointment.date,
-//               workoutPlan: {
-//                 title: appointment.workoutPlan.title,
-//                 description: appointment.workoutPlan.description,
-//                 duration: appointment.workoutPlan.duration,
-//               },
-//               appointmentNotes: {
-//                 title: appointment.appointmentNotes.title,
-//                 description: appointment.appointmentNotes.description,
-//               },
-//             })),
-//           },
-//         },
-//       })
-//     })
-//   )
-// }
 
 run()
   .catch((error) => {

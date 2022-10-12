@@ -1,30 +1,33 @@
-import { Permission, Type, Profile } from '@prisma/client'
+import { Permission, Type } from '@prisma/client'
 
 export const userData: {
   permissions: Permission
-  name: string
+  password: string
+  email: string
   type: Type
-  profile: Profile
+  firstName: string
+  lastName: string
+  age: number
+  phone: number
+  about: string
+  // profile: Profile
   appointments: any[]
   clients: any[]
 }[] = [
   {
-    name: 'Ian Borman',
     permissions: 'ADMIN',
     type: 'TRAINER',
-    profile: {
-      username: 'IanBor',
-      password: 'mypass',
-      firstName: 'Ian',
-      lastName: 'Borman',
-      age: 27,
-      phone: 8888888888,
-      email: 'ianborman@gmail.com',
-      about: 'this is my biography',
-    },
+    password: 'mypass',
+    email: 'ianborman@gmail.com',
+    // profile: {
+    firstName: 'Ian',
+    lastName: 'Borman',
+    age: 27,
+    phone: 8888888888,
+    about: 'this is my biography',
+    // },
     clients: [
       {
-        name: 'Jerry Seinfield',
         firstName: 'Jerry',
         lastName: 'Seinfield',
         age: 50,
@@ -33,7 +36,6 @@ export const userData: {
         about: 'This is Jerry Seinfield',
       },
       {
-        name: 'Lebron James',
         firstName: 'Lebron',
         lastName: 'James',
         age: 45,
@@ -42,7 +44,6 @@ export const userData: {
         about: 'Michael is always better',
       },
       {
-        name: 'Jace Olsen',
         firstName: 'Jace',
         lastName: 'Olsen',
         age: 21,
@@ -51,7 +52,6 @@ export const userData: {
         about: 'I am the forgotten twin',
       },
       {
-        name: 'Vance Jenkins',
         firstName: 'Vance',
         lastName: 'Jenkins',
         age: 27,
@@ -60,7 +60,6 @@ export const userData: {
         about: 'Call me V',
       },
       {
-        name: 'Leroy Jenkins',
         firstName: 'Leroy',
         lastName: 'Jenkins',
         age: 77,
@@ -69,7 +68,6 @@ export const userData: {
         about: 'Lerooooooy Jeeeenkiiinnsss',
       },
       {
-        name: 'Spider Man',
         firstName: 'Spider',
         lastName: 'Man',
         age: 17,
@@ -78,7 +76,6 @@ export const userData: {
         about: 'Everybody dies!',
       },
       {
-        name: 'Bat Man',
         firstName: 'Bat',
         lastName: 'Man',
         age: 17,
@@ -87,7 +84,6 @@ export const userData: {
         about: "I'm Batman!",
       },
       {
-        name: 'Super Man',
         firstName: 'Super',
         lastName: 'Man',
         age: 30,
@@ -96,7 +92,6 @@ export const userData: {
         about: 'Man of Steel',
       },
       {
-        name: 'Aqua Man',
         firstName: 'Aqua',
         lastName: 'Man',
         age: 40,
@@ -105,7 +100,6 @@ export const userData: {
         about: 'Speaks dolphin, climbs V9',
       },
       {
-        name: 'Bartholomew Angelopoulos',
         firstName: 'Bartholomew',
         lastName: 'Angelopoulos',
         age: 109,
@@ -115,7 +109,6 @@ export const userData: {
           "I'm gonna give you hell in your design!!! Cause my name is unrealistically long.",
       },
       {
-        name: 'Faulk Faulkingham',
         firstName: 'Faulk',
         lastName: 'Faulkingham',
         age: 902,
