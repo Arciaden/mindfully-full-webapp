@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,11 +7,14 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+//The User model has a one-many relationship to clients and a many-many relationship with appointments.
+//It is also pulling the profile object from type Profile.
 model User {
   id             String        @id @default(auto()) @map("_id") @db.ObjectId
   permissions    Permission    @default(ADMIN)
   type           Type          @default(TRAINER)
   profile        Profile
+  name           String        @unique
   appointmentIDs String[]      @db.ObjectId
   appointments   Appointment[] @relation(fields: [appointmentIDs], references: [id])
   clients        Client[]
@@ -33,6 +33,7 @@ type Profile {
   age       Int
 }
 
+//Enum gives us the ability to set a type for each user, as well as a default.
 enum Permission {
   USER
   ADMIN
@@ -44,37 +45,27 @@ enum Type {
 }
 
 model Client {
-  id       String  @id @default(auto()) @map("_id") @db.ObjectId
-  clientID String  @db.ObjectId
-  user     User?   @relation(fields: [clientID], references: [id])
-  profile  Profile
-}
-
-model WorkoutPlan {
-  id            String      @id @default(auto()) @map("_id") @db.ObjectId
-  appointmentId String      @db.ObjectId
-  title         String
-  description   String
-  duration      Int
-  appointment   Appointment @relation(fields: [appointmentId], references: [id])
-}
-
-model AppointmentNotes {
-  id                 String      @id @default(auto()) @map("_id") @db.ObjectId
-  appointmentNotesId String      @db.ObjectId
-  title              String
-  description        String
-  appointment        Appointment @relation(fields: [appointmentNotesId], references: [id])
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  clientID  String  @db.ObjectId
+  user      User?   @relation(fields: [clientID], references: [id], onDelete: Cascade)
+  name      String
+  firstName String
+  lastName  String
+  age       Int
+  phone     Int
+  email     String
+  about     String?
 }
 
 model Appointment {
-  id               String             @id @default(auto()) @map("_id") @db.ObjectId
-  type             String
-  userIDs          String[]           @db.ObjectId
-  users            User[]             @relation(fields: [userIDs], references: [id])
-  workoutPlan      WorkoutPlan[]
-  appointmentNotes AppointmentNotes[]
-  date             DateTime           @default(now())
-  createdAt        DateTime           @default(now())
-  updatedAt        DateTime           @updatedAt
+  id                         String   @id @default(auto()) @map("_id") @db.ObjectId
+  type                       String
+  userIDs                    String[] @db.ObjectId
+  users                      User[]   @relation(fields: [userIDs], references: [id])
+  appointmentPlanTitle       String
+  appointmentPlanDescription String
+  appointmentDuration        Int
+  date                       DateTime @default(now())
+  createdAt                  DateTime @default(now())
+  updatedAt                  DateTime @updatedAt
 }
