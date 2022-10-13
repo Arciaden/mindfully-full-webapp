@@ -8,14 +8,12 @@ const signedInPages = ['/']
 export default function middleware(req) {
   if (signedInPages.find((page) => page === req.nextUrl.pathname)) {
     const token = req.cookies.MINDFULLY_FULL_ACCESS_TOKEN
-    console.log(req.cookies)
 
+    console.log(token)
     if (!token) {
       //This url will need to be an absolute URL. When the application is deployed this will need to change
-      // return NextResponse.redirect('/signin')
-      const url = req.nextUrl.clone()
-      url.pathname = '/signin'
-      return NextResponse.rewrite(url)
+      console.log('didnt find a damn token??')
+      return NextResponse.redirect('http://localhost:3000/signin')
     }
   }
 }

@@ -16,6 +16,13 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/api/signup.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "pages/api/signup.js",
+    "components/signinForm.tsx",
+    "theme/components/button.js"
+  ],
   "exclude": ["node_modules"]
 }
