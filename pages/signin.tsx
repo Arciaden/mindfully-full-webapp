@@ -1,12 +1,5 @@
 import Image from 'next/image'
-import {
-  Box,
-  Flex,
-  FormControl,
-  FormLabel,
-  Input,
-  FormErrorMessage,
-} from '@chakra-ui/react'
+import { Box, Flex } from '@chakra-ui/react'
 //need to upload this to a cloud eventually
 import backgroundImage from '../public/yoga-mat.jpeg'
 import SigninForm from '../components/signinForm'
