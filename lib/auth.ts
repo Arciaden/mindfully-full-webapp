@@ -8,6 +8,7 @@ export const validateRoute = (handler) => {
   return async (req: NextApiRequest, res: NextApiResponse) => {
     const token = req.cookies.MINDFULLY_FULL_ACCESS_TOKEN
 
+    console.log(token)
     if (token) {
       let user
 
