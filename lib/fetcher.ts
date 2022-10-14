@@ -6,10 +6,7 @@ export default function (url: string, data = undefined) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
-  }).then((res) => {
-    if (res.status > 299 || res.status < 200) {
-      throw new Error()
-    }
-    return res.json()
   })
+    .then((res) => res.json())
+    .catch((error) => error)
 }

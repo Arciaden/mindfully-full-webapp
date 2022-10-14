@@ -2,10 +2,10 @@ import Image from 'next/image'
 import { Box, Flex, useMediaQuery } from '@chakra-ui/react'
 //need to upload this to a cloud eventually
 import backgroundImage from '../public/yoga-mat.jpeg'
-import SigninForm from '../components/signinForm'
+import SignupForm from '../components/signupForm'
 
 //Im using classnames to make it easier to read. We can access these through css if needed but I'm going to try and avoid that
-const Signin = () => {
+const Signup = () => {
   const [isMobile] = useMediaQuery('(max-width: 600px)')
   return (
     <Flex
@@ -26,8 +26,7 @@ const Signin = () => {
         left="0"
         zIndex="1"
       ></Box>
-      <SigninForm mode="signin" />
-
+      <SignupForm mode="signup" />
       <Image
         className="signin-background-image"
         src={backgroundImage}
@@ -39,4 +38,4 @@ const Signin = () => {
   )
 }
 
-export default Signin
+export default Signup

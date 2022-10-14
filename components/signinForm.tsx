@@ -5,6 +5,8 @@ import {
   FormControl,
   Input,
   Link,
+  Text,
+  FormErrorMessage,
 } from '@chakra-ui/react'
 import { OutlineButton } from './buttons'
 import Image from 'next/image'
@@ -19,7 +21,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState(false)
+  const [isError, setIsError] = useState(false)
   const router = useRouter()
 
   const handleSubmit = async (e) => {
@@ -27,39 +29,43 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
 
     setIsLoading(true)
 
-    await auth(mode, { email, password })
+    if (!isError) {
+      await auth(mode, { email, password })
+      setIsLoading(false)
+      router.push('/')
+    }
+
+    setIsError(true)
     setIsLoading(false)
-    router.push('/')
   }
 
   return (
     <Flex
-      className="logo-form-container"
+      className="logo-and-form-container"
       direction="column"
       alignItems="center"
-      justifyContent="space-around"
+      justifyContent="center"
       position="absolute"
       zIndex="5"
       width="100%"
       maxW="450px"
-      height="400px"
+      height="auto"
       margin="20px"
     >
       <Box className="form-image-container">
-        <Image src={logo} layout="fixed" />
+        <Image src={logo} priority={true} layout="fixed" />
       </Box>
       <Box
         className="signin-form"
         width="100%"
-        maxWidth="650px"
         height="auto"
         backgroundColor={['transparent', 'transparent', 'white']}
         borderRadius="10px"
         boxShadow={['none', 'none', '0px 0px 5px rgba(68, 125, 245, 0.4)']}
-        padding={['7']}
+        padding={['7', '7', '25px 25px 40px 25px']}
       >
         <form onSubmit={handleSubmit}>
-          <FormControl>
+          <FormControl isInvalid={isError}>
             <FormLabel
               fontSize="text.xs"
               fontWeight="light"
@@ -69,12 +75,18 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
               Username
             </FormLabel>
             <Input
+              id="signin-email-input"
               type="email"
               required
-              backgroundColor={['white', 'white', 'transparent']}
               borderRadius="3px"
+              fontSize="text.xs"
+              fontWeight="light"
+              backgroundColor={['white', 'white', 'transparent']}
               _active={{ border: 'border.textInputAtive' }}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                setEmail(e.target.value)
+                setIsError(false)
+              }}
             />
             <Flex
               className="forgot-username-contianer"
@@ -94,22 +106,41 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
               Password
             </FormLabel>
             <Input
+              id="signin-password-input"
               type="password"
               required
               borderRadius="3px"
+              fontSize="text.xs"
               backgroundColor={['white', 'white', 'transparent']}
               _active={{ border: 'border.inputActive' }}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {
+                setPassword(e.target.value)
+                setIsError(false)
+              }}
             />
+
             <Flex
               className="forgot-password-contianer"
-              margin="15px 0"
-              justifyContent="end"
+              margin="5px 0 30px 0"
+              justifyContent="space-between"
+              alignItems="center"
               color={['white', 'white', 'black']}
               fontSize="text.xxs"
             >
+              {isError ? (
+                <FormErrorMessage
+                  fontSize="text.xxs"
+                  color={['white', 'white', 'red']}
+                  margin="0"
+                >
+                  Incorrect Username or Password
+                </FormErrorMessage>
+              ) : (
+                <Box></Box>
+              )}
               <Link href="/user-help/forgotPassword">Forgot Password?</Link>
             </Flex>
+
             <Flex className="signin-button-container" justifyContent="center">
               <OutlineButton
                 text={'Sign In'}
@@ -119,6 +150,13 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
             </Flex>
           </FormControl>
         </form>
+      </Box>
+      <Box height="100px" marginTop="5px" color="white" fontSize="text.xs">
+        {isError ? (
+          <Link href="/signup">Don't have an account? Sign Up</Link>
+        ) : (
+          ''
+        )}
       </Box>
     </Flex>
   )
