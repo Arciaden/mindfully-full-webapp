@@ -34,7 +34,6 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
       setIsLoading(false)
       router.push('/')
     }
-
     setIsError(true)
     setIsLoading(false)
   }
