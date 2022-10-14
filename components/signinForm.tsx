@@ -77,6 +77,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
               id="signin-email-input"
               type="email"
               required
+              marginBottom="20px"
               borderRadius="3px"
               fontSize="text.xs"
               fontWeight="light"
@@ -87,7 +88,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
                 setIsError(false)
               }}
             />
-            <Flex
+            {/* <Flex
               className="forgot-username-contianer"
               margin="2px 0"
               justifyContent="end"
@@ -95,7 +96,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
               fontSize="text.xxs"
             >
               <Link href="/user-help/forgotUsername">Forgot Username?</Link>
-            </Flex>
+            </Flex> */}
             <FormLabel
               fontSize="text.xs"
               fontWeight="light"
@@ -151,11 +152,11 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
         </form>
       </Box>
       <Box height="100px" marginTop="5px" color="white" fontSize="text.xs">
-        {isError ? (
-          <Link href="/signup">Don't have an account? Sign Up</Link>
-        ) : (
-          ''
-        )}
+        {/* {isError ? ( */}
+        <Link href="/signup">Don't have an account? Sign Up</Link>
+        {/* ) : (
+           ''
+        )} */}
       </Box>
     </Flex>
   )
