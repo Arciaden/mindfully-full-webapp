@@ -125,6 +125,8 @@ export const userData: {
         appointmentPlanDescription:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Habitasse platea dictumst quisque sagittis. Urna neque viverra justo nec. Donec ultrices tincidunt arcu non sodales neque sodales ut. Diam ut venenatis tellus in metus.',
         appointmentDuration: 20000,
+        appointmentNotes:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Habitasse platea dictumst quisque sagittis. Urna neque viverra justo nec. Donec ultrices tincidunt arcu non sodales neque sodales ut. Diam ut venenatis tellus in metus.',
       },
       {
         type: 'STRETCHING',
@@ -133,6 +135,8 @@ export const userData: {
         appointmentPlanDescription:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Habitasse platea dictumst quisque sagittis. Urna neque viverra justo nec. Donec ultrices tincidunt arcu non sodales neque sodales ut. Diam ut venenatis tellus in metus.',
         appointmentDuration: 30000,
+        appointmentNotes:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Habitasse platea dictumst quisque sagittis. Urna neque viverra justo nec. Donec ultrices tincidunt arcu non sodales neque sodales ut. Diam ut venenatis tellus in metus.',
       },
       {
         type: 'YOGA',
@@ -141,6 +145,8 @@ export const userData: {
         appointmentPlanDescription:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Habitasse platea dictumst quisque sagittis. Urna neque viverra justo nec. Donec ultrices tincidunt arcu non sodales neque sodales ut. Diam ut venenatis tellus in metus.',
         appointmentDuration: 30000,
+        appointmentNotes:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Habitasse platea dictumst quisque sagittis. Urna neque viverra justo nec. Donec ultrices tincidunt arcu non sodales neque sodales ut. Diam ut venenatis tellus in metus.',
       },
       {
         type: 'WEIGHTLIFTING',
@@ -149,6 +155,8 @@ export const userData: {
         appointmentPlanDescription:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Habitasse platea dictumst quisque sagittis. Urna neque viverra justo nec. Donec ultrices tincidunt arcu non sodales neque sodales ut. Diam ut venenatis tellus in metus.',
         appointmentDuration: 30000,
+        appointmentNotes:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Habitasse platea dictumst quisque sagittis. Urna neque viverra justo nec. Donec ultrices tincidunt arcu non sodales neque sodales ut. Diam ut venenatis tellus in metus.',
       },
       {
         type: 'YOGA',
@@ -157,6 +165,8 @@ export const userData: {
         appointmentPlanDescription:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Habitasse platea dictumst quisque sagittis. Urna neque viverra justo nec. Donec ultrices tincidunt arcu non sodales neque sodales ut. Diam ut venenatis tellus in metus.',
         appointmentDuration: 30000,
+        appointmentNotes:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Habitasse platea dictumst quisque sagittis. Urna neque viverra justo nec. Donec ultrices tincidunt arcu non sodales neque sodales ut. Diam ut venenatis tellus in metus.',
       },
       {
         type: 'WORKOUT',
@@ -165,6 +175,8 @@ export const userData: {
         appointmentPlanDescription:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Habitasse platea dictumst quisque sagittis. Urna neque viverra justo nec. Donec ultrices tincidunt arcu non sodales neque sodales ut. Diam ut venenatis tellus in metus.',
         appointmentDuration: 30000,
+        appointmentNotes:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Habitasse platea dictumst quisque sagittis. Urna neque viverra justo nec. Donec ultrices tincidunt arcu non sodales neque sodales ut. Diam ut venenatis tellus in metus.',
       },
       {
         type: 'WORKOUT',
@@ -173,6 +185,8 @@ export const userData: {
         appointmentPlanDescription:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Habitasse platea dictumst quisque sagittis. Urna neque viverra justo nec. Donec ultrices tincidunt arcu non sodales neque sodales ut. Diam ut venenatis tellus in metus.',
         appointmentDuration: 30000,
+        appointmentNotes:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Habitasse platea dictumst quisque sagittis. Urna neque viverra justo nec. Donec ultrices tincidunt arcu non sodales neque sodales ut. Diam ut venenatis tellus in metus.',
       },
     ],
   },

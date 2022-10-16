@@ -1,4 +1,4 @@
-export default function (url: string, data = undefined) {
+export default function fetcher(url: string, data = undefined) {
   return fetch(`${window.location.origin}/api${url}`, {
     method: data ? 'POST' : 'GET',
     credentials: 'include',
@@ -7,6 +7,8 @@ export default function (url: string, data = undefined) {
     },
     body: JSON.stringify(data),
   })
-    .then((res) => res.json())
+    .then((res) => {
+      return res.json()
+    })
     .catch((error) => error)
 }
