@@ -23,7 +23,8 @@
     "pages/api/signup.js",
     "components/signinForm.tsx",
     "theme/components/button.js",
-    "pages/forgotPassword.tsx"
+    "pages/forgotPassword.tsx",
+    "pages/api/resetPassword.js"
   ],
   "exclude": ["node_modules"]
 }
