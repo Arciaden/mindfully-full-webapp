@@ -5,7 +5,6 @@ import {
   FormControl,
   Input,
   Link,
-  Text,
   FormErrorMessage,
 } from '@chakra-ui/react'
 import { OutlineButton } from './buttons'
@@ -138,7 +137,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
               ) : (
                 <Box></Box>
               )}
-              <Link href="/user-help/forgotPassword">Forgot Password?</Link>
+              <Link href="/forgotPassword">Forgot Password?</Link>
             </Flex>
 
             <Flex className="signin-button-container" justifyContent="center">

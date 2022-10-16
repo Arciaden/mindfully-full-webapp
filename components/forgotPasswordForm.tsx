@@ -1,8 +1,12 @@
 import { Box, Input, Text, Button, FormLabel } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
 
 export const ForgotPasswordForm = () => {
   const [email, setEmail] = useState('')
+  const [success, setSuccess] = useState(false)
+  const router = useRouter()
+
   const mailObj = {
     email,
   }
@@ -18,17 +22,32 @@ export const ForgotPasswordForm = () => {
       },
     }).then((res) => {
       setEmail('')
+      setSuccess(true)
+      setTimeout(() => {
+        router.push('/signin')
+      }, 3000)
     })
   }
 
   return (
-    <Box>
-      <Text>Forgot Password</Text>
-      <form onSubmit={handleSubmit}>
-        <FormLabel>Email</FormLabel>
-        <Input type="email" onChange={(e) => setEmail(e.target.value)} />
-        <Button type="submit">Reset Password</Button>
-      </form>
-    </Box>
+    <>
+      {success ? (
+        <Box>
+          <Text>
+            Success! Check your email for a link to reset your password.
+          </Text>
+          <Text>You will now be redirected to the sign in page...</Text>
+        </Box>
+      ) : (
+        <Box>
+          <Text>Forgot Password</Text>
+          <form onSubmit={handleSubmit}>
+            <FormLabel>Email</FormLabel>
+            <Input type="email" onChange={(e) => setEmail(e.target.value)} />
+            <Button type="submit">Reset Password</Button>
+          </form>
+        </Box>
+      )}
+    </>
   )
 }
