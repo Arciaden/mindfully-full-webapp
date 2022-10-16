@@ -22,7 +22,8 @@
     "**/*.tsx",
     "pages/api/signup.js",
     "components/signinForm.tsx",
-    "theme/components/button.js"
+    "theme/components/button.js",
+    "pages/forgotPassword.tsx"
   ],
   "exclude": ["node_modules"]
 }
