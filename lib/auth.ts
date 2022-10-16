@@ -7,8 +7,6 @@ const jwtSecret = process.env.JWT_SECRET
 export const validateRoute = (handler) => {
   return async (req: NextApiRequest, res: NextApiResponse) => {
     const token = req.cookies.MINDFULLY_FULL_ACCESS_TOKEN
-
-    console.log(token)
     if (token) {
       let user
 
@@ -16,7 +14,12 @@ export const validateRoute = (handler) => {
         const { id } = jwt.verify(token, jwtSecret)
         user = await prisma.user.findUnique({
           where: { id },
+          include: {
+            clients: true,
+            appointments: true,
+          },
         })
+
         if (!user) {
           throw new Error('User not found')
         }
