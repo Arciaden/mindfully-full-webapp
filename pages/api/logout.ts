@@ -1,11 +1,17 @@
 import cookie from 'cookie'
 import { NextApiRequest, NextApiResponse } from 'next'
 
-export default (req: NextApiRequest, res: NextApiResponse) => {
+export default async (req: NextApiRequest, res: NextApiResponse) => {
   res.setHeader(
     'Set-Cookie',
-    cookie.serialize('MINDFULLY_FULL_ACCESS_TOKEN', {
-      maxAge: 0,
+    await cookie.serialize('MINDFULLY_FULL_ACCESS_TOKEN', null, {
+      httpOnly: true,
+      maxAge: -1,
+      path: '/',
+      sameSite: 'lax',
+      secure: process.env.NODE_ENV === 'production',
     })
   )
+
+  res.redirect('/signin')
 }
