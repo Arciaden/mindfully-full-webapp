@@ -10,11 +10,10 @@ const jwtSecret = process.env.JWT_SECRET
 //to execute.
 //Each serverless funciton will take 2 args a req and res which can be type checked
 //Since we're using next these will be typed to next objects. Typing these gives us some autocomplete
+//In the future it may be a good idea to create a set timeout function that checks the
+//jwt and if it has expired. If it has have the user be redirected and log back in or
+//auto refresh the token so that the user doesn't have to log back in as often
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  //In the future it may be a good idea to create a set timeout function that checks the
-  //jwt and if it has expired. If it has have the user be redirected and loog back in or
-  //auto refresh the token so that the user doesn't have to log back in as often
-
   //Creating the password encryption
   const salt = bcrypt.genSaltSync()
   const { email, password, firstName, lastName, phone, age, about } = req.body

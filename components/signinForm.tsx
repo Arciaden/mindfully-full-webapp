@@ -29,6 +29,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
     setIsLoading(true)
 
     if (!isError) {
+      //This auth method is coming from the mutations.ts file
       await auth(mode, { email, password })
       setIsLoading(false)
       router.push('/')

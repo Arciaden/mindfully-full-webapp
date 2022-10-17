@@ -17,6 +17,7 @@ export default async (req, res) => {
     res.status(401).json({ error: 'User does not exist' })
   }
 
+  //creating a random string and assigning it to result
   function makeid(length) {
     var result = ''
     var characters =
@@ -28,7 +29,10 @@ export default async (req, res) => {
     return result
   }
 
+  //calling the makeid function to create a random string that is 30 characters in length.
   const token = makeid(30)
+
+  //Taking the randomly generated string and hashing it using the MD5 alogo from the CryptoJS package
   const hashedToken = String(CryptoJS.MD5(token))
 
   const updatedUser = await prisma.user.update({
@@ -40,9 +44,11 @@ export default async (req, res) => {
     },
   })
 
+  //Checking to see if the reset token that was added to the user matches with the current token.
   if (updatedUser.passwordResetToken === hashedToken) {
     const resetUrl = `http://localhost:3000/user-help/${updatedUser.email}/${token}`
 
+    //sending an email with a link to the reset password page using the SendGrid API and the Password Reset Template
     mail
       .send({
         to: email,
@@ -52,11 +58,6 @@ export default async (req, res) => {
           url: resetUrl,
         },
         templateId: 'd-90decdeb9cbf48c98fb1db2e684bc425',
-        // html: `<h1>Mindfully Full Password Reset</h1>\n<h2>Dear, ${updatedUser.firstName} ${updatedUser.lastName}</h2>\n
-        // <p>We have recieved a password reset request for your account.\n
-        // If you made this request please click <a href="${resetUrl}">here</a></p>\n
-        // <p>If you have not requested this change please and are concearned about the scruity
-        //  of your account please contact us.</p>\n`,
       })
       .then(res.status(200).json(email))
       .catch((e) => e.message)

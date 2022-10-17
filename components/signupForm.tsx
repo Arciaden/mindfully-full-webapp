@@ -35,6 +35,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
     setIsLoading(true)
 
     if (!isError) {
+      //This auth method is coming from the mutations.ts file
       await auth(mode, { email, password, firstName, lastName, phone, age })
       setIsLoading(false)
       console.log(email, password, firstName, lastName, phone, age)

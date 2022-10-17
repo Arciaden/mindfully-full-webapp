@@ -6,9 +6,9 @@ mail.setApiKey(process.env.SENDGRID_API_KEY)
 export default async (req, res) => {
   const { password, email } = req.body
 
+  //generateing a salt and updating the field in the database with a new
+  //and encrypted password.
   const salt = bcrypt.genSaltSync()
-
-  console.log(email)
   const user = await prisma.user.update({
     where: {
       email: email,
@@ -21,6 +21,8 @@ export default async (req, res) => {
   if (!user) {
     res.status(401).json((e) => e.message)
   }
+
+  //sending a confirmation email to the users email using the Password Confirmation Template from SendGrid
   mail
     .send({
       to: email,
@@ -30,9 +32,6 @@ export default async (req, res) => {
       dynamicTemplateData: {
         url: 'http://localhost:3000/signin',
       },
-      // html: `<h1">Mindfully Full Password Reset</h1>\n<h2>Dear, ${user.firstName} ${user.lastName}</h2>\n
-      // <p>Your password has been successfully updated!\n</p>
-      // `,
     })
     .then(res.status(200).json(email))
     .catch((e) => e.message)
