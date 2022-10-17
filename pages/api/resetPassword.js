@@ -26,9 +26,13 @@ export default async (req, res) => {
       to: email,
       from: 'deverauxdesign@gmail.com',
       subject: 'Mindfully Full Password Confirmation',
-      html: `<h1>Mindfully Full Password Reset</h1>\n<h2>Dear, ${user.firstName} ${user.lastName}</h2>\n
-      <p>Your password has been successfully updated!\n</p>
-      `,
+      templateId: 'd-d6f22d2a3a15423295d80fa1bfc714a2',
+      dynamicTemplateData: {
+        url: 'http://localhost:3000/signin',
+      },
+      // html: `<h1">Mindfully Full Password Reset</h1>\n<h2>Dear, ${user.firstName} ${user.lastName}</h2>\n
+      // <p>Your password has been successfully updated!\n</p>
+      // `,
     })
     .then(res.status(200).json(email))
     .catch((e) => e.message)
