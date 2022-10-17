@@ -10,7 +10,7 @@ const Signup = () => {
   const [isMobile] = useMediaQuery('(max-width: 600px)')
   return (
     <Flex
-      className="signin-wrapper"
+      className="signup-wrapper"
       width="100vw"
       height="100vh"
       position="relative"
@@ -36,7 +36,7 @@ const Signup = () => {
         objectFit="cover"
       /> */}
       <Image
-        className="signin-background-image"
+        className="signup-background-image"
         src={backgroundImage}
         layout="fill"
         objectPosition={isMobile ? '95%' : '50%'}

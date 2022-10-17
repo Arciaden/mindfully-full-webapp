@@ -14,7 +14,7 @@ export const colors = {
     blue: 'rgba(68, 165, 225, 0.2)',
   },
   overlay: {
-    lightBlue: 'rgba(68, 125, 245, 0.4)',
+    lightBlue: 'rgba(2, 95, 198, 0.6);',
   },
 }
 

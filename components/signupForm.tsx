@@ -6,6 +6,7 @@ import {
   Input,
   InputGroup,
   FormErrorMessage,
+  Link,
   InputLeftElement,
 } from '@chakra-ui/react'
 import { PhoneIcon } from '@chakra-ui/icons'
@@ -59,7 +60,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
       height="auto"
       margin="20px"
     >
-      <Box className="form-image-container">
+      <Box className="form-image-container" marginBottom="35px">
         <Image src={logo} priority={true} layout="fixed" />
       </Box>
       <Box
@@ -69,7 +70,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
         backgroundColor={['transparent', 'transparent', 'white']}
         borderRadius="10px"
         boxShadow={['none', 'none', '0px 0px 5px rgba(68, 125, 245, 0.4)']}
-        padding={['7', '7', '25px 25px 40px 25px']}
+        padding={['40', '40px', '25px 25px 40px 25px']}
       >
         <form onSubmit={handleSubmit}>
           <FormControl isInvalid={isError}>
@@ -96,6 +97,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
                   id="signup-firstname-input"
                   type="text"
                   required
+                  height="48px"
                   borderRadius="3px"
                   fontSize="text.xs"
                   fontWeight="light"
@@ -124,6 +126,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
                   id="signup-lastname-input"
                   type="text"
                   required
+                  height="48px"
                   borderRadius="3px"
                   fontSize="text.xs"
                   backgroundColor={['white', 'white', 'transparent']}
@@ -161,6 +164,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
                   id="signup-email-input"
                   type="email"
                   required
+                  height="48px"
                   borderRadius="3px"
                   fontSize="text.xs"
                   fontWeight="light"
@@ -189,6 +193,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
                   id="signup-password-input"
                   type="password"
                   required
+                  height="48px"
                   borderRadius="3px"
                   fontSize="text.xs"
                   backgroundColor={['white', 'white', 'transparent']}
@@ -224,6 +229,9 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
                   id="signup-age-input"
                   type="number"
                   required
+                  height="48px"
+                  min={18}
+                  max={99}
                   pattern="/\b([01]?[0-9][0-9]?|2[0-4][0-9]|25[0-5])"
                   borderRadius="3px"
                   fontSize="text.xs"
@@ -255,6 +263,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
                     id="signup-password-input"
                     type="phone"
                     required
+                    height="48px"
                     borderRadius="3px"
                     fontSize="text.xs"
                     backgroundColor={['white', 'white', 'transparent']}
@@ -270,7 +279,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
 
             <Flex className="signin-button-container" justifyContent="center">
               <OutlineButton
-                text={'Sign In'}
+                text={'Sign Up'}
                 type={'submit'}
                 loading={isLoading}
               />
@@ -278,12 +287,9 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
           </FormControl>
         </form>
       </Box>
-      <Box
-        height="100px"
-        marginTop="5px"
-        color="white"
-        fontSize="text.xs"
-      ></Box>
+      <Box height="100px" marginTop="5px" color="white" fontSize="text.xs">
+        <Link href="/signin">Already Have an Account? Sign In</Link>
+      </Box>
     </Flex>
   )
 }
