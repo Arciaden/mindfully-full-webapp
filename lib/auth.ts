@@ -2,11 +2,16 @@ import jwt from 'jsonwebtoken'
 import { NextApiRequest, NextApiResponse } from 'next'
 import prisma from './prisma'
 
+//grabbing jwt from the env variable
 const jwtSecret = process.env.JWT_SECRET
 
 export const validateRoute = (handler) => {
   return async (req: NextApiRequest, res: NextApiResponse) => {
+    //assigning the access cookie to the token variable
     const token = req.cookies.MINDFULLY_FULL_ACCESS_TOKEN
+
+    //checking if we have the token. If we do, declare a user variable and then inside of a try catch statement
+    //find the user's email within the database and include the client and appointsments on the response object.
     if (token) {
       let user
 
@@ -27,6 +32,7 @@ export const validateRoute = (handler) => {
         res.status(401).json({ e: e.message })
         return
       }
+
       return handler(req, res, user)
     }
     res.status(401).json({ e: 'Not Authorized' })
