@@ -15,9 +15,11 @@ export const OutlineButton: FC<{
       background={['white', 'white', 'transparent']}
       border="borders.softGray"
       fontWeight="light"
-      width="125px"
+      fontSize="text.md"
+      width="160px"
+      height="50px"
       borderRadius="3px"
-      _hover={{ backgroundColor: 'buttonHover.blue' }}
+      _hover={{ border: 'borders.textInputActive' }}
       type={type}
       isLoading={loading}
     >

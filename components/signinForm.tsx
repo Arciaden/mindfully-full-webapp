@@ -47,11 +47,11 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
       position="absolute"
       zIndex="5"
       width="100%"
-      maxW="450px"
-      height="auto"
+      maxW="525px"
+      height="100%"
       margin="20px"
     >
-      <Box className="form-image-container">
+      <Box className="form-image-container" marginBottom="35px">
         <Image src={logo} priority={true} layout="fixed" />
       </Box>
       <Box
@@ -61,7 +61,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
         backgroundColor={['transparent', 'transparent', 'white']}
         borderRadius="10px"
         boxShadow={['none', 'none', '0px 0px 5px rgba(68, 125, 245, 0.4)']}
-        padding={['7', '7', '25px 25px 40px 25px']}
+        padding={['40', '40px', '25px 25px 40px 25px']}
       >
         <form onSubmit={handleSubmit}>
           <FormControl isInvalid={isError}>
@@ -81,6 +81,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
               borderRadius="3px"
               fontSize="text.xs"
               fontWeight="light"
+              height="48px"
               backgroundColor={['white', 'white', 'transparent']}
               _active={{ border: 'border.textInputActive' }}
               onChange={(e) => {
@@ -108,6 +109,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
             <Input
               id="signin-password-input"
               type="password"
+              height="48px"
               required
               borderRadius="3px"
               fontSize="text.xs"
