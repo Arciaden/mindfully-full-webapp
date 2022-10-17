@@ -82,7 +82,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
               fontSize="text.xs"
               fontWeight="light"
               backgroundColor={['white', 'white', 'transparent']}
-              _active={{ border: 'border.textInputAtive' }}
+              _active={{ border: 'border.textInputActive' }}
               onChange={(e) => {
                 setEmail(e.target.value)
                 setIsError(false)
