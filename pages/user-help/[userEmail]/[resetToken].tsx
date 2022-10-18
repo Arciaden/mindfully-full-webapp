@@ -1,10 +1,12 @@
 import { Box, Button, Input, FormLabel } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import { Text } from '@chakra-ui/react'
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('')
   const [newPassword, setNewPassword] = useState('')
+  const [error, setError] = useState(false)
   const router = useRouter()
 
   const handleResetPassword = async (e) => {
@@ -19,8 +21,14 @@ const ForgotPassword = () => {
       headers: {
         'Content-Type': 'application/json',
       },
+    }).then((res) => {
+      if (res.status === 401) {
+        setError(true)
+      } else {
+        router.push('/signin')
+      }
     })
-    router.push('/')
+    // .catch((error) => console.log(error))
   }
 
   useEffect(() => {
@@ -39,6 +47,7 @@ const ForgotPassword = () => {
         />
         <Button type="submit">Change Password</Button>
       </form>
+      {error && <Text>Unauthourized Request!</Text>}
     </Box>
   )
 }

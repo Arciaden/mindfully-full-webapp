@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken'
+import cookie from 'cookie'
 import { NextApiRequest, NextApiResponse } from 'next'
 import prisma from './prisma'
 
@@ -29,6 +30,17 @@ export const validateRoute = (handler) => {
           throw new Error('User not found')
         }
       } catch (e) {
+        res.setHeader(
+          'Set-Cookie',
+          await cookie.serialize('MINDFULLY_FULL_ACCESS_TOKEN', null, {
+            httpOnly: true,
+            maxAge: -1,
+            path: '/',
+            sameSite: 'lax',
+            secure: process.env.NODE_ENV === 'production',
+          })
+        )
+        console.log('CATCH unauthourized user')
         res.status(401).json({ e: e.message })
         return
       }

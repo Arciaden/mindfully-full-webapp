@@ -1,10 +1,11 @@
 import { Box, Input, Text, Button, FormLabel } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export const ForgotPasswordForm = () => {
   const [email, setEmail] = useState('')
   const [success, setSuccess] = useState(false)
+  const [error, setError] = useState(false)
   const router = useRouter()
 
   const mailObj = {
@@ -21,11 +22,17 @@ export const ForgotPasswordForm = () => {
         'Content-Type': 'application/json',
       },
     }).then((res) => {
-      setEmail('')
-      setSuccess(true)
-      setTimeout(() => {
-        router.push('/signin')
-      }, 3000)
+      console.log(res.status)
+      if (res.status === 401) {
+        setError(true)
+        console.log(error)
+      } else {
+        setEmail('')
+        setSuccess(true)
+        setTimeout(() => {
+          router.push('/signin')
+        }, 3000)
+      }
     })
   }
 
@@ -46,6 +53,7 @@ export const ForgotPasswordForm = () => {
             <Input type="email" onChange={(e) => setEmail(e.target.value)} />
             <Button type="submit">Reset Password</Button>
           </form>
+          {error && <Text>Error! User not found!</Text>}
         </Box>
       )}
     </>
