@@ -1,13 +1,32 @@
 const mail = require('@sendgrid/mail')
 import bcrypt from 'bcrypt'
 import prisma from '../../lib/prisma'
+
 mail.setApiKey(process.env.SENDGRID_API_KEY)
 
 export default async (req, res) => {
   const { password, email } = req.body
+  const token = req.cookies.PASSWORD_RESET_TOKEN
 
+  if (!token) {
+    console.log('RESET PASSWORD: reset token invalid')
+    res.status(401).json({ error: 'Reset Token Invalid' })
+    return
+  }
   //generateing a salt and updating the field in the database with a new
-  //and encrypted password.
+  //and encrypted password
+  const isUser = await prisma.user.findUnique({
+    where: {
+      email: email,
+    },
+  })
+
+  if (!isUser) {
+    console.log('RESET PASSWORD: User not found')
+    res.status(401).json({ error: 'Unauthourized' })
+    return
+  }
+
   const salt = bcrypt.genSaltSync()
   const user = await prisma.user.update({
     where: {
@@ -19,10 +38,10 @@ export default async (req, res) => {
   })
 
   if (!user) {
-    res.status(401).json((e) => e.message)
+    console.log('RESET PASSWORD: User not found')
+    res.status(401).json({ error: 'User not found' })
+    return
   }
-
-  //sending a confirmation email to the users email using the Password Confirmation Template from SendGrid
   mail
     .send({
       to: email,
@@ -35,4 +54,6 @@ export default async (req, res) => {
     })
     .then(res.status(200).json(email))
     .catch((e) => e.message)
+
+  //sending a confirmation email to the users email using the Password Confirmation Template from SendGrid
 }
