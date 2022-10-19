@@ -1,55 +1,40 @@
-import { Box, Button, Input, FormLabel } from '@chakra-ui/react'
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
-import { Text } from '@chakra-ui/react'
+import Image from 'next/image'
+import { Box, Flex, useMediaQuery } from '@chakra-ui/react'
+//need to upload this to a cloud eventually
+import backgroundImage from '../../../public/yoga-mat.jpeg'
+import { ResetPasswordForm } from '../../../components/resetPasswordForm'
 
-const ForgotPassword = () => {
-  const [email, setEmail] = useState('')
-  const [newPassword, setNewPassword] = useState('')
-  const [error, setError] = useState(false)
-  const router = useRouter()
-
-  const handleResetPassword = async (e) => {
-    e.preventDefault()
-    const userInformation = {
-      email,
-      password: newPassword,
-    }
-    await fetch('/api/resetPassword', {
-      method: 'POST',
-      body: JSON.stringify(userInformation),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }).then((res) => {
-      if (res.status === 401) {
-        setError(true)
-      } else {
-        router.push('/signin')
-      }
-    })
-    // .catch((error) => console.log(error))
-  }
-
-  useEffect(() => {
-    const userEmail = router.asPath.split('/')[2]
-    setEmail(userEmail)
-  })
-
+const ResetPasswordPage = () => {
+  const [isMobile] = useMediaQuery('(max-width: 600px)')
   return (
-    <Box>
-      <form onSubmit={handleResetPassword}>
-        <FormLabel>New Password</FormLabel>
-        <Input type="email" value={email} readOnly />
-        <Input
-          type="password"
-          onChange={(e) => setNewPassword(e.target.value)}
-        />
-        <Button type="submit">Change Password</Button>
-      </form>
-      {error && <Text>Unauthourized Request!</Text>}
-    </Box>
+    <Flex
+      className="signin-wrapper"
+      width="100vw"
+      height="100vh"
+      position="relative"
+      justifyContent="center"
+      alignItems="center"
+    >
+      <Box
+        className="overlay"
+        width="100%"
+        height="100%"
+        position="absolute"
+        backgroundColor="overlay.lightBlue"
+        top="0"
+        left="0"
+        zIndex="1"
+      ></Box>
+      <ResetPasswordForm />
+      <Image
+        className="signin-background-image"
+        src={backgroundImage}
+        layout="fill"
+        objectPosition={isMobile ? '95%' : '50%'}
+        objectFit="cover"
+      />
+    </Flex>
   )
 }
 
-export default ForgotPassword
+export default ResetPasswordPage

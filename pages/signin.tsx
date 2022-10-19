@@ -2,7 +2,6 @@ import Image from 'next/image'
 import { Box, Flex, useMediaQuery } from '@chakra-ui/react'
 //need to upload this to a cloud eventually
 import backgroundImage from '../public/yoga-mat.jpeg'
-import testBackground from '../public/background-stacked-stones.jpg'
 import SigninForm from '../components/signinForm'
 
 //Im using classnames to make it easier to read. We can access these through css if needed but I'm going to try and avoid that

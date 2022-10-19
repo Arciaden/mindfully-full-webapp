@@ -59,7 +59,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
         width="100%"
         height="auto"
         backgroundColor={['transparent', 'transparent', 'white']}
-        borderRadius="10px"
+        borderRadius="13px"
         boxShadow={['none', 'none', '0px 0px 5px rgba(68, 125, 245, 0.4)']}
         padding={['40', '40px', '25px 25px 40px 25px']}
       >
@@ -122,7 +122,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
             />
 
             <Flex
-              className="forgot-password-contianer"
+              className="forgot-password-container"
               margin="5px 0 30px 0"
               justifyContent="space-between"
               alignItems="center"
@@ -148,6 +148,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
                 text={'Sign In'}
                 type={'submit'}
                 loading={isLoading}
+                backgroundColor={'black'}
               />
             </Flex>
           </FormControl>
