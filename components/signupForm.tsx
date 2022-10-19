@@ -284,6 +284,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
                 text={'Sign Up'}
                 type={'submit'}
                 loading={isLoading}
+                backgroundColor={'white'}
               />
             </Flex>
           </FormControl>

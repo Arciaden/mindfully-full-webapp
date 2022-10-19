@@ -31,10 +31,3 @@ export const fontSizes = {
     xxxs: '0.512rem',
   },
 }
-
-// export const breakpoints = {
-//   breakpoints: {
-//     mobileSM: '375px',
-//     mobileMD: ''
-//   }
-// }
