@@ -2,12 +2,10 @@
 import { extendTheme } from '@chakra-ui/react'
 
 const theme = extendTheme({
-  fonts: {
-    font: {
+    fonts: {
       heading: `'Montserrat', sans-serif`,
       body: `'Montserrat', sans-serif`,
     },
-  },
   colors: {
     brand: {
       100: '#E2FFFF',
