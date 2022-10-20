@@ -149,6 +149,8 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
                 type={'submit'}
                 loading={isLoading}
                 backgroundColor={'black'}
+                borderRadius={4}
+                border={'1px solid #ccc'}
               />
             </Flex>
           </FormControl>

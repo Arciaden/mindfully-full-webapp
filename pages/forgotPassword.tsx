@@ -1,4 +1,4 @@
-import { Flex } from '@chakra-ui/react'
+import { Flex, Box } from '@chakra-ui/react'
 import Image from 'next/image'
 import { ForgotPasswordForm } from '../components/forgotPasswordForm'
 import backgroundImage from '../public/yoga-mat.jpeg'
@@ -14,6 +14,16 @@ const ForgotPassword = () => {
       justifyContent="center"
       alignItems="center"
     >
+      <Box
+        className="overlay"
+        width="100%"
+        height="100%"
+        position="absolute"
+        backgroundColor="brand.overlay"
+        top="0"
+        left="0"
+        zIndex="1"
+      ></Box>
       <ForgotPasswordForm />
       <Image
         className="signin-background-image"
