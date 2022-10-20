@@ -10,16 +10,18 @@ export const OutlineButton: FC<{
   type: 'submit' | 'button' | 'reset'
   loading: boolean
   backgroundColor: string
-}> = ({ text, type, loading, backgroundColor }) => {
+  border: string
+  borderRadius: number
+}> = ({ text, type, loading, backgroundColor, border, borderRadius }) => {
   return (
     <Button
       background={['white', 'white', 'transparent']}
-      border="borders.softGray"
+      border={border}
+      borderRadius={borderRadius}
       fontWeight="light"
       fontSize="text.s"
       width="160px"
       height="50px"
-      borderRadius="3px"
       _hover={{ border: 'borders.textInputActive' }}
       type={type}
       isLoading={loading}
