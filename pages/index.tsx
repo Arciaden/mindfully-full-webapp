@@ -10,11 +10,14 @@ const Home = () => {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
+        <Text>Welcome to Mindfully Well!</Text>
         <NavigationBar />
         <Text>{user?.firstName}</Text>
         {user?.appointments &&
           user.appointments.map((appointment) => (
-            <Text>{appointment.type}</Text>
+            <>
+              <Text>{appointment.type}</Text>
+            </>
           ))}
         {user?.clients &&
           user.clients.map((client) => (
@@ -22,9 +25,6 @@ const Home = () => {
               {client.firstName} {client.lastName}
             </Text>
           ))}
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Mindfully Well!</a>
-        </h1>
       </main>
     </div>
   )

@@ -51,18 +51,13 @@ export const ForgotPasswordForm = () => {
       justifyContent="center"
       width="500px"
       height="auto"
-      backgroundColor="white"
+      backgroundColor={['transparent', 'transparent', '#fff']}
       borderRadius="13px"
       padding="30px"
       position="absolute"
       zIndex="5"
     >
-      <Box
-        className="forgot-pass-form-container"
-        width="100%"
-        
-      >
-
+      <Box className="forgot-pass-form-container" width="100%">
         {/* ADD IN LOGO AND HAVE IT REDIRECT TO HOMEPAGE */}
 
         {error && (
@@ -82,21 +77,26 @@ export const ForgotPasswordForm = () => {
           </Box>
         )}
         <form onSubmit={handleSubmit}>
-          <FormLabel htmlFor="email">Email</FormLabel>
           <Flex
             className="forgot-pass-form-content"
             direction="column"
             alignItems="center"
             justifyContent="space-around"
+            padding={['10px', '10px', '0']}
           >
             <Box className="forgot-pass-input" width="100%" pb="5">
+              <FormLabel htmlFor="email" color={['#fff', '#fff', '#000']}>
+                Email
+              </FormLabel>
               <Input
                 id="email"
                 type="email"
+                height="48px"
                 borderStyle="solid"
                 borderWidth={1}
                 borderColor="#CCC"
                 borderRadius={4}
+                backgroundColor={['#fff', '#fff', 'transparent']}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </Box>

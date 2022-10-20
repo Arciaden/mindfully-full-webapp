@@ -67,7 +67,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
         className="signin-form"
         width="100%"
         height="auto"
-        backgroundColor={['transparent', 'transparent', 'white']}
+        backgroundColor={['transparent', 'transparent', '#fff']}
         borderRadius="10px"
         boxShadow={['none', 'none', '0px 0px 5px rgba(68, 125, 245, 0.4)']}
         padding={['40', '40px', '25px 25px 40px 25px']}
@@ -88,7 +88,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
                 <FormLabel
                   fontSize="text.xs"
                   fontWeight="light"
-                  color={['white', 'white', 'black']}
+                  color={['#fff', '#fff', 'black']}
                   marginBottom="5px"
                 >
                   First Name
@@ -101,7 +101,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
                   borderRadius="3px"
                   fontSize="text.xs"
                   fontWeight="light"
-                  backgroundColor={['white', 'white', 'transparent']}
+                  backgroundColor={['#fff', '#fff', 'transparent']}
                   _active={{ border: 'border.textInputAtive' }}
                   onChange={(e) => {
                     setFirstName(e.target.value)
@@ -117,7 +117,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
                 <FormLabel
                   fontSize="text.xs"
                   fontWeight="light"
-                  color={['white', 'white', 'black']}
+                  color={['#fff', '#fff', 'black']}
                   marginBottom="5px"
                 >
                   Last Name
@@ -129,7 +129,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
                   height="48px"
                   borderRadius="3px"
                   fontSize="text.xs"
-                  backgroundColor={['white', 'white', 'transparent']}
+                  backgroundColor={['#fff', '#fff', 'transparent']}
                   _active={{ border: 'border.inputActive' }}
                   onChange={(e) => {
                     setLastName(e.target.value)
@@ -155,7 +155,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
                 <FormLabel
                   fontSize="text.xs"
                   fontWeight="light"
-                  color={['white', 'white', 'black']}
+                  color={['#fff', '#fff', 'black']}
                   marginBottom="5px"
                 >
                   Email
@@ -168,7 +168,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
                   borderRadius="3px"
                   fontSize="text.xs"
                   fontWeight="light"
-                  backgroundColor={['white', 'white', 'transparent']}
+                  backgroundColor={['#fff', '#fff', 'transparent']}
                   _active={{ border: 'border.textInputAtive' }}
                   onChange={(e) => {
                     setEmail(e.target.value)
@@ -184,7 +184,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
                 <FormLabel
                   fontSize="text.xs"
                   fontWeight="light"
-                  color={['white', 'white', 'black']}
+                  color={['#fff', '#fff', 'black']}
                   marginBottom="5px"
                 >
                   Password
@@ -196,7 +196,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
                   height="48px"
                   borderRadius="3px"
                   fontSize="text.xs"
-                  backgroundColor={['white', 'white', 'transparent']}
+                  backgroundColor={['#fff', '#fff', 'transparent']}
                   _active={{ border: 'border.inputActive' }}
                   onChange={(e) => {
                     setPassword(e.target.value)
@@ -220,7 +220,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
                 <FormLabel
                   fontSize="text.xs"
                   fontWeight="light"
-                  color={['white', 'white', 'black']}
+                  color={['#fff', '#fff', 'black']}
                   marginBottom="5px"
                 >
                   Age
@@ -236,7 +236,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
                   borderRadius="3px"
                   fontSize="text.xs"
                   fontWeight="light"
-                  backgroundColor={['white', 'white', 'transparent']}
+                  backgroundColor={['#fff', '#fff', 'transparent']}
                   _active={{ border: 'border.textInputAtive' }}
                   onChange={(e) => {
                     setAge(Number(e.target.value))
@@ -252,7 +252,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
                 <FormLabel
                   fontSize="text.xs"
                   fontWeight="light"
-                  color={['white', 'white', 'black']}
+                  color={['#fff', '#fff', 'black']}
                   marginBottom="5px"
                 >
                   Phone Number
@@ -268,7 +268,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
                     height="48px"
                     borderRadius="3px"
                     fontSize="text.xs"
-                    backgroundColor={['white', 'white', 'transparent']}
+                    backgroundColor={['#fff', '#fff', 'transparent']}
                     _active={{ border: 'border.inputActive' }}
                     onChange={(e) => {
                       setPhone(Number(e.target.value))
@@ -284,13 +284,15 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
                 text={'Sign Up'}
                 type={'submit'}
                 loading={isLoading}
-                backgroundColor={'white'}
+                backgroundColor={'#fff'}
+                borderRadius={4}
+                border="1px solid #ccc"
               />
             </Flex>
           </FormControl>
         </form>
       </Box>
-      <Box height="100px" marginTop="5px" color="white" fontSize="text.xs">
+      <Box height="100px" marginTop="5px" color="#fff" fontSize="text.xs">
         <Link href="/signin">Already Have an Account? Sign In</Link>
       </Box>
     </Flex>
