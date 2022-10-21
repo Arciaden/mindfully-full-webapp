@@ -7,6 +7,7 @@ import SigninForm from '../components/signinForm'
 //Im using classnames to make it easier to read. We can access these through css if needed but I'm going to try and avoid that
 const Signin = () => {
   const [isMobile] = useMediaQuery('(max-width: 600px)')
+
   return (
     <Flex
       className="signin-wrapper"
@@ -37,5 +38,7 @@ const Signin = () => {
     </Flex>
   )
 }
+
+Signin.authPage = true
 
 export default Signin
