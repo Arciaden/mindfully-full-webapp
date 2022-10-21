@@ -27,14 +27,6 @@ const Signin = () => {
         zIndex="1"
       ></Box>
       <SigninForm mode="signin" />
-
-      {/* <Image
-        className="signin-background-image"
-        src={testBackground}
-        layout="fill"
-        objectPosition={isMobile ? '95%' : '50%'}
-        objectFit="cover"
-      /> */}
       <Image
         className="signin-background-image"
         src={backgroundImage}

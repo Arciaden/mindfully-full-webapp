@@ -19,7 +19,7 @@ import { useRouter } from 'next/router'
 
 //Making a seperate form component for signin & signup because the fields on each will be different
 
-const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
+const SignupForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [firstName, setFirstName] = useState('')
@@ -70,7 +70,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
         backgroundColor={['transparent', 'transparent', '#fff']}
         borderRadius="10px"
         boxShadow={['none', 'none', '0px 0px 5px rgba(68, 125, 245, 0.4)']}
-        padding={['40', '40px', '25px 25px 40px 25px']}
+        padding={['10', '40px', '25px 25px 40px 25px']}
       >
         <form onSubmit={handleSubmit}>
           <FormControl isInvalid={isError}>
@@ -299,4 +299,4 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
   )
 }
 
-export default SigninForm
+export default SignupForm
