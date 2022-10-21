@@ -37,4 +37,6 @@ const ResetPasswordPage = () => {
   )
 }
 
+ResetPasswordPage.authPage = true
+
 export default ResetPasswordPage

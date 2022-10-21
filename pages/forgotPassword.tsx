@@ -36,4 +36,6 @@ const ForgotPassword = () => {
   )
 }
 
+ForgotPassword.authPage = true
+
 export default ForgotPassword
