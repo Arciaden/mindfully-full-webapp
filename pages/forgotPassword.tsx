@@ -1,16 +1,16 @@
-import { Flex, Box } from '@chakra-ui/react'
+import { Flex, Box, useMediaQuery } from '@chakra-ui/react'
 import Image from 'next/image'
 import { ForgotPasswordForm } from '../components/forgotPasswordForm'
 import backgroundImage from '../public/yoga-mat.jpeg'
-import { useMediaQuery } from '@chakra-ui/react'
 
 const ForgotPassword = () => {
   const [isMobile] = useMediaQuery('(max-width: 600px)')
   return (
     <Flex
-      className="forgot-pass-wrapper"
-      height="100vh"
+      className="forgot-password-wrapper"
       width="100vw"
+      height="100vh"
+      position="relative"
       justifyContent="center"
       alignItems="center"
     >

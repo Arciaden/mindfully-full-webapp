@@ -61,7 +61,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
         backgroundColor={['transparent', 'transparent', 'white']}
         borderRadius="13px"
         boxShadow={['none', 'none', '0px 0px 5px rgba(68, 125, 245, 0.4)']}
-        padding={['40', '40px', '25px 25px 40px 25px']}
+        padding={['10', '40px', '25px 25px 40px 25px']}
       >
         <form onSubmit={handleSubmit}>
           <FormControl isInvalid={isError}>
@@ -148,7 +148,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
                 text={'Sign In'}
                 type={'submit'}
                 loading={isLoading}
-                backgroundColor={'black'}
+                backgroundColor={'#fff'}
                 borderRadius={4}
                 border={'1px solid #ccc'}
               />
