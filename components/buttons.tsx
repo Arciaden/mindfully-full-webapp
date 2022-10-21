@@ -5,7 +5,14 @@ import { FC } from 'react'
 //If we need to I will make a specific button for the login / signup pages
 
 //Added typing to the button
-export const OutlineButton = ({ text, type, loading, backgroundColor, border, borderRadius }) => {
+export const OutlineButton = ({
+  text,
+  type,
+  loading,
+  backgroundColor,
+  border,
+  borderRadius,
+}) => {
   return (
     <Button
       background={['white', 'white', 'transparent']}

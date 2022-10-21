@@ -1,7 +1,8 @@
 import styles from '../styles/Home.module.css'
-import { NavigationBar } from '../components/navigation'
 import { useProfile } from '../lib/hooks'
 import { Text } from '@chakra-ui/react'
+import { Grid, GridItem, Box, Heading } from '@chakra-ui/react'
+import { Spinner } from '@chakra-ui/react'
 
 //Dashboard
 const Home = () => {
@@ -11,20 +12,43 @@ const Home = () => {
     <div className={styles.container}>
       <main className={styles.main}>
         <Text>Welcome to Mindfully Well!</Text>
-        <NavigationBar />
+
         <Text>{user?.firstName}</Text>
-        {user?.appointments &&
-          user.appointments.map((appointment) => (
-            <>
-              <Text>{appointment.type}</Text>
-            </>
-          ))}
-        {user?.clients &&
-          user.clients.map((client) => (
-            <Text>
-              {client.firstName} {client.lastName}
-            </Text>
-          ))}
+        <Grid templateColumns="repeat(2, 1fr)" width="100%" height="100%">
+          {user?.appointments &&
+            user.appointments.map((appointment) => (
+              <GridItem bg="tomato">
+                <Text>{appointment.type}</Text>
+              </GridItem>
+            ))}
+        </Grid>
+        <Grid templateColumns="repeat(5, 1fr)" width="100%" height="100%">
+          {user?.clients &&
+            user.clients.map((client) => (
+              <GridItem bg="tomato" border="1px solid black" p="5" m="2">
+                <Grid templateColumns="repeat(3, 1fr)">
+                  <GridItem border="1px solid black">
+                    <Text>First Name</Text>
+                  </GridItem>
+                  <GridItem border="1px solid black">
+                    <Text>Last Name</Text>
+                  </GridItem>
+                  <GridItem border="1px solid black">
+                    <Text>Age</Text>
+                  </GridItem>
+                  <GridItem border="1px solid black">
+                    <Text>{client.firstName}</Text>
+                  </GridItem>
+                  <GridItem border="1px solid black">
+                    <Text>{client.lastName}</Text>
+                  </GridItem>
+                  <GridItem border="1px solid black">
+                    <Text>{client.age}</Text>
+                  </GridItem>
+                </Grid>
+              </GridItem>
+            ))}
+        </Grid>
       </main>
     </div>
   )

@@ -95,11 +95,6 @@ export const ForgotPasswordForm = () => {
               alignItems="center"
               justifyContent="space-around"
               padding={['10px', '10px', '0']}
-              boxShadow={[
-                'none',
-                'none',
-                '0px 0px 5px rgba(68, 125, 245, 0.4)',
-              ]}
             >
               <Box className="forgot-pass-input" width="100%" pb="5">
                 <FormLabel htmlFor="email" color={['#fff', '#fff', '#000']}>
