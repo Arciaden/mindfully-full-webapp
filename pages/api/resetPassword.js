@@ -1,6 +1,7 @@
 const mail = require('@sendgrid/mail')
 import bcrypt from 'bcrypt'
 import prisma from '../../lib/prisma'
+import cookie from 'cookie'
 
 mail.setApiKey(process.env.SENDGRID_API_KEY)
 
@@ -42,6 +43,18 @@ export default async (req, res) => {
     res.status(401).json({ error: 'User not found' })
     return
   }
+
+  res.setHeader(
+    'Set-Cookie',
+    await cookie.serialize('PASSWORD_RESET_TOKEN', null, {
+      httpOnly: true,
+      maxAge: -1,
+      path: '/',
+      sameSite: 'lax',
+      secure: process.env.NODE_ENV === 'production',
+    })
+  )
+
   mail
     .send({
       to: email,
