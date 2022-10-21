@@ -12,6 +12,7 @@ export const OutlineButton = ({
   backgroundColor,
   border,
   borderRadius,
+  disabled,
 }) => {
   return (
     <Button
@@ -26,6 +27,7 @@ export const OutlineButton = ({
       type={type}
       isLoading={loading}
       backgroundColor={backgroundColor}
+      disabled={disabled}
     >
       {text}
     </Button>

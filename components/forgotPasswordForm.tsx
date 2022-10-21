@@ -1,5 +1,5 @@
 import { Box, Flex, FormLabel, Input } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import logo from '../public/placeholderLogo.png'
 import Link from 'next/link'
@@ -10,6 +10,8 @@ import {
   AlertIcon,
   AlertTitle,
   AlertDescription,
+  useDisclosure,
+  ScaleFade,
 } from '@chakra-ui/react'
 
 export const ForgotPasswordForm = () => {
@@ -17,6 +19,7 @@ export const ForgotPasswordForm = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(false)
   const [success, setSuccess] = useState(false)
+  const { isOpen, onOpen, onClose } = useDisclosure()
   const router = useRouter()
 
   const handleSubmit = async (e) => {
@@ -48,6 +51,10 @@ export const ForgotPasswordForm = () => {
     })
   }
 
+  useEffect(() => {
+    onOpen()
+  })
+
   //Responsivness here is bit buggy on my computer, may or may not actually be weird on the phone
   return (
     <Flex
@@ -70,23 +77,35 @@ export const ForgotPasswordForm = () => {
         padding="30px"
       >
         <Box className="forgot-pass-form-container" width="100%">
-          {/* ADD IN LOGO AND HAVE IT REDIRECT TO HOMEPAGE */}
-
+          {!error && !success && (
+            <ScaleFade initialScale={0.9} in={isOpen}>
+              <Box mb="20px">
+                <Alert status="info">
+                  <AlertIcon />
+                  Enter Email Address
+                </Alert>
+              </Box>
+            </ScaleFade>
+          )}
           {error && (
-            <Box>
-              <Alert status="error">
-                <AlertIcon />
-                There was an error processing your request
-              </Alert>
-            </Box>
+            <ScaleFade initialScale={0.9} in={isOpen}>
+              <Box mb="20px">
+                <Alert status="error">
+                  <AlertIcon />
+                  User does not exist!
+                </Alert>
+              </Box>
+            </ScaleFade>
           )}
           {success && (
-            <Box>
-              <Alert status="success">
-                <AlertIcon />
-                Success! Check your email!
-              </Alert>
-            </Box>
+            <ScaleFade initialScale={0.9} in={isOpen}>
+              <Box mb="20px">
+                <Alert status="success">
+                  <AlertIcon />
+                  Success! Check your email!
+                </Alert>
+              </Box>
+            </ScaleFade>
           )}
           <form onSubmit={handleSubmit}>
             <Flex
@@ -109,7 +128,12 @@ export const ForgotPasswordForm = () => {
                   borderColor="#CCC"
                   borderRadius={4}
                   backgroundColor={['#fff', '#fff', 'transparent']}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => {
+                    setEmail(e.target.value)
+                    setError(false)
+                    onOpen()
+                    onClose()
+                  }}
                 />
               </Box>
               <Box className="forgot-pass-button">
@@ -120,6 +144,7 @@ export const ForgotPasswordForm = () => {
                   backgroundColor="transparent"
                   border="1px solid #ccc"
                   borderRadius={4}
+                  disabled={false}
                 />
               </Box>
             </Flex>

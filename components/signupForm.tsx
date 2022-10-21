@@ -287,6 +287,7 @@ const SignupForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
                 backgroundColor={'#fff'}
                 borderRadius={4}
                 border="1px solid #ccc"
+                disabled={false}
               />
             </Flex>
           </FormControl>

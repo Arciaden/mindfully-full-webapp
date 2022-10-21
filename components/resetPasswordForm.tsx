@@ -40,7 +40,7 @@ export const ResetPasswordForm = () => {
       email,
       password: newPassword,
     }
-    if (password === newPassword) {
+    if (password === newPassword && password !== '' && newPassword !== '') {
       await fetch('/api/resetPassword', {
         method: 'POST',
         body: JSON.stringify(userInformation),
@@ -76,6 +76,9 @@ export const ResetPasswordForm = () => {
     const userEmail = router.asPath.split('/')[2]
     setEmail(userEmail)
     onOpen()
+    if (newPassword === '' || password === '') {
+      setDisabled(true)
+    }
   })
 
   return (
@@ -179,6 +182,7 @@ export const ResetPasswordForm = () => {
                   setPassword(e.target.value)
                   setError(false)
                   setPasswordError(false)
+                  setDisabled(false)
                 }}
               />
 
@@ -206,6 +210,7 @@ export const ResetPasswordForm = () => {
                 backgroundColor={'#fff'}
                 borderRadius={4}
                 border={'1px solid #ccc'}
+                disabled={disabled}
               />
             </Flex>
           </Flex>
