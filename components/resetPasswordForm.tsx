@@ -7,6 +7,8 @@ import {
   Alert,
   AlertIcon,
   FormControl,
+  ScaleFade,
+  useDisclosure,
 } from '@chakra-ui/react'
 
 import { useEffect, useState } from 'react'
@@ -23,12 +25,17 @@ export const ResetPasswordForm = () => {
   const [success, setSuccess] = useState(false)
   const [showFirst, setShowFirst] = useState(false)
   const [showSecond, setShowSecond] = useState(false)
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const [disabled, setDisabled] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
   const router = useRouter()
 
   const handleResetPassword = async (e) => {
     e.preventDefault()
+
+    setIsLoading(true)
+
     const userInformation = {
       email,
       password: newPassword,
@@ -44,23 +51,31 @@ export const ResetPasswordForm = () => {
         if (res.status === 401) {
           setError(true)
           setSuccess(false)
+          setDisabled(true)
+          setIsLoading(false)
+          onOpen()
         } else {
           setSuccess(true)
           setError(false)
+          setIsLoading(false)
           setTimeout(() => {
             router.push('/signin')
           }, 3000)
+          onOpen()
         }
       })
       // .catch((error) => console.log(error))
     } else {
+      onOpen()
       setPasswordError(true)
+      setIsLoading(false)
     }
   }
 
   useEffect(() => {
     const userEmail = router.asPath.split('/')[2]
     setEmail(userEmail)
+    onOpen()
   })
 
   return (
@@ -77,31 +92,45 @@ export const ResetPasswordForm = () => {
             backgroundColor={['transparent', 'transparent', 'white']}
             boxShadow={['none', 'none', '0px 0px 5px rgba(68, 125, 245, 0.4)']}
           >
-            {error ? (
-              <Box mb="20px">
-                <Alert status="error">
-                  <AlertIcon />
-                  There was an error processing your request
-                </Alert>
-              </Box>
-            ) : (
-              ''
+            {!error && !passwordError && !success && (
+              <ScaleFade initialScale={0.9} in={isOpen}>
+                <Box mb="20px">
+                  <Alert status="info" borderRadius={4}>
+                    <AlertIcon />
+                    Enter and Confirm a New Password
+                  </Alert>
+                </Box>
+              </ScaleFade>
+            )}
+            {error && (
+              <ScaleFade initialScale={0.9} in={isOpen}>
+                <Box mb="20px" borderRadius={4}>
+                  <Alert status="error">
+                    <AlertIcon />
+                    Link Invalid Please Request Another Link
+                  </Alert>
+                </Box>
+              </ScaleFade>
             )}
             {passwordError && (
-              <Box mb="20px">
-                <Alert status="error">
-                  <AlertIcon />
-                  Passwords Don't Match
-                </Alert>
-              </Box>
+              <ScaleFade initialScale={0.9} in={isOpen}>
+                <Box borderRadius={4} mb="20px">
+                  <Alert status="error">
+                    <AlertIcon />
+                    Passwords Don't Match
+                  </Alert>
+                </Box>
+              </ScaleFade>
             )}
             {success && (
-              <Box mb="20px">
-                <Alert status="success">
-                  <AlertIcon />
-                  Success! Check your email!
-                </Alert>
-              </Box>
+              <ScaleFade initialScale={0.9} in={isOpen}>
+                <Box mb="20px">
+                  <Alert status="success">
+                    <AlertIcon />
+                    Success! Check your email!
+                  </Alert>
+                </Box>
+              </ScaleFade>
             )}
 
             <FormLabel color={['#fff', '#fff', '#000']}>New Password</FormLabel>
@@ -110,10 +139,14 @@ export const ResetPasswordForm = () => {
               <Input
                 type={showFirst ? 'text' : 'password'}
                 backgroundColor="white"
+                height="45px"
                 color={['#fff', '#fff', '#000']}
                 onChange={(e) => {
                   setNewPassword(e.target.value)
                   setError(false)
+                  setPasswordError(false)
+                  onClose()
+                  onOpen()
                 }}
               />
               <Flex
@@ -142,7 +175,11 @@ export const ResetPasswordForm = () => {
                 height="45px"
                 backgroundColor="white"
                 isInvalid={error}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => {
+                  setPassword(e.target.value)
+                  setError(false)
+                  setPasswordError(false)
+                }}
               />
 
               <Flex
