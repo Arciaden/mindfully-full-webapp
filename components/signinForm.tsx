@@ -20,7 +20,8 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const [isError, setIsError] = useState(false)
+  const [error, setError] = useState(false)
+  const [success, setSuccess] = useState(false)
   const router = useRouter()
 
   const handleSubmit = async (e) => {
@@ -28,13 +29,15 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
 
     setIsLoading(true)
 
-    if (!isError) {
+    if (!error) {
       //This auth method is coming from the mutations.ts file
       await auth(mode, { email, password })
       setIsLoading(false)
       router.push('/')
+      setError(false)
+      setSuccess(true)
     }
-    setIsError(true)
+    setError(true)
     setIsLoading(false)
   }
 
@@ -64,7 +67,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
         padding={['10', '40px', '25px 25px 40px 25px']}
       >
         <form onSubmit={handleSubmit}>
-          <FormControl isInvalid={isError}>
+          <FormControl isInvalid={error}>
             <FormLabel
               fontSize="text.xs"
               fontWeight="light"
@@ -86,7 +89,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
               _active={{ border: 'border.textInputActive' }}
               onChange={(e) => {
                 setEmail(e.target.value)
-                setIsError(false)
+                setError(false)
               }}
             />
             {/* <Flex
@@ -117,7 +120,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
               _active={{ border: 'border.inputActive' }}
               onChange={(e) => {
                 setPassword(e.target.value)
-                setIsError(false)
+                setError(false)
               }}
             />
 
@@ -129,7 +132,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
               color={['white', 'white', 'black']}
               fontSize="text.xxs"
             >
-              {isError ? (
+              {error ? (
                 <FormErrorMessage
                   fontSize="text.xxs"
                   color={['white', 'white', 'red']}
@@ -158,7 +161,7 @@ const SigninForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
         </form>
       </Box>
       <Box height="100px" marginTop="5px" color="white" fontSize="text.xs">
-        {/* {isError ? ( */}
+        {/* {error ? ( */}
         <Link href="/signup">Don't have an account? Sign Up</Link>
         {/* ) : (
            ''
