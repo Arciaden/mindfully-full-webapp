@@ -130,7 +130,7 @@ export const ResetPasswordForm = () => {
                 <Box mb="20px">
                   <Alert status="success">
                     <AlertIcon />
-                    Success! Check your email!
+                    Success! Redirecting to Sign In...
                   </Alert>
                 </Box>
               </ScaleFade>
