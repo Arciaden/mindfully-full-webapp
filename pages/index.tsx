@@ -2,7 +2,6 @@ import styles from '../styles/Home.module.css'
 import { useProfile } from '../lib/hooks'
 import { Text } from '@chakra-ui/react'
 import { Grid, GridItem, Box, Heading } from '@chakra-ui/react'
-import { Spinner } from '@chakra-ui/react'
 
 //Dashboard
 const Home = () => {
