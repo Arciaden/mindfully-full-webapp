@@ -30,7 +30,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         userIDs: trainerID,
         appointmentPlanTitle: appPlanTitle,
         appointmentDuration: appDuration,
-        appointmentNotes: appNotes,
         appointmentPlanDescription: appPlanDesc,
         type,
       },
