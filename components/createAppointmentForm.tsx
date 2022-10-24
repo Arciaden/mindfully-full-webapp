@@ -18,8 +18,9 @@ const CreateAppointmentForm = () => {
   const [appTitle, setAppTitle] = useState('')
   const [appDuration, setAppDuration] = useState(0)
   const [type, setType] = useState('')
+  const [clientName, setClientName] = useState('')
 
-  console.log(trainer + ' ' + client)
+  console.log(client + '\n' + clientName)
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -27,6 +28,7 @@ const CreateAppointmentForm = () => {
     const formData = {
       trainerID: trainer,
       clientID: client,
+      clientName,
       appPlanTitle: appTitle,
       appPlanDesc: appDesc,
       appDuration,
@@ -62,9 +64,21 @@ const CreateAppointmentForm = () => {
           >
             <option value={user?.id}>Ian Borman</option>
           </Select>
-          <Select onChange={(e) => setClient(e.target.value)}>
+          <Select
+            onChange={(e) => {
+              setClient(e.target.value.split(',')[0])
+              setClientName(
+                e.target.value.split(',')[1] +
+                  ' ' +
+                  e.target.value.split(',')[2]
+              )
+            }}
+          >
             {user?.clients.map((client) => (
-              <option key={client.id} value={client.id}>
+              <option
+                key={client.id}
+                value={[client.id, client.firstName, client.lastName]}
+              >
                 {client.firstName} {client.lastName}
               </option>
             ))}
