@@ -2,6 +2,7 @@ import styles from '../styles/Home.module.css'
 import { useProfile } from '../lib/hooks'
 import { Text } from '@chakra-ui/react'
 import { Grid, GridItem, Box, Heading } from '@chakra-ui/react'
+import CreateAppointmentForm from '../components/createAppointmentForm'
 
 //Dashboard
 const Home = () => {
@@ -18,6 +19,7 @@ const Home = () => {
             user.appointments.map((appointment) => (
               <GridItem bg="tomato">
                 <Text>{appointment.type}</Text>
+                <Text>{user?.firstName}</Text>
               </GridItem>
             ))}
         </Grid>
@@ -48,6 +50,7 @@ const Home = () => {
               </GridItem>
             ))}
         </Grid>
+        <CreateAppointmentForm />
       </main>
     </div>
   )
