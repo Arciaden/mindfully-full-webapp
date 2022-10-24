@@ -6,9 +6,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const {
       trainerID,
       clientID,
+      clientName,
       appPlanTitle,
       appDuration,
-      appNotes,
       appPlanDesc,
       type,
     } = req.body
@@ -32,6 +32,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         appointmentDuration: appDuration,
         appointmentPlanDescription: appPlanDesc,
         type,
+        clientId: clientID,
+        clientName,
       },
     })
 

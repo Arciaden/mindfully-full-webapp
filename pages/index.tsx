@@ -20,6 +20,7 @@ const Home = () => {
               <GridItem bg="tomato">
                 <Text>{appointment.type}</Text>
                 <Text>{user?.firstName}</Text>
+                <Text>{appointment.clientName}</Text>
               </GridItem>
             ))}
         </Grid>
