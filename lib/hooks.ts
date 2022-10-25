@@ -1,7 +1,6 @@
 import useSWR from 'swr'
 import fetcher from './fetcher'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
 
 //This custom hook is specific to using SWR
 

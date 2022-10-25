@@ -5,7 +5,7 @@ import { NextResponse } from 'next/server'
 //Pages that the middleware will protect
 //This syntax is new to nextjs 12.2.0+
 export const config = {
-  matcher: ['/', '/profile', '/userClients/:id*'],
+  matcher: ['/', '/profile', '/userClients/:id*', '/userAppointments/:id*'],
 }
 
 export default function middleware(req) {
