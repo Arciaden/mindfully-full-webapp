@@ -1,5 +1,7 @@
 import useSWR from 'swr'
 import fetcher from './fetcher'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 
 //This custom hook is specific to using SWR
 
@@ -13,3 +15,17 @@ export const useProfile = () => {
     isError: error,
   }
 }
+
+// Brain isn't wanting to work, I also need to do quite a bit of research to and get a better understanding of how these hooks work
+// And how to make them dynamic.
+// export const useClient = () => {
+//   const router = useRouter()
+//   const { id } = router.query
+//   const { data, error } = useSWR(id ? `/getClient/${id}` : null, fetcher)
+
+//   return {
+//     client: data,
+//     isLoading: !data && !error,
+//     isError: error,
+//   }
+// }
