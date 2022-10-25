@@ -3,6 +3,7 @@ import { useProfile } from '../lib/hooks'
 import { Text } from '@chakra-ui/react'
 import { Grid, GridItem, Box, Heading } from '@chakra-ui/react'
 import CreateAppointmentForm from '../components/createAppointmentForm'
+import Link from 'next/link'
 
 //Dashboard
 const Home = () => {
@@ -38,12 +39,13 @@ const Home = () => {
                   <GridItem border="1px solid black">
                     <Text>Age</Text>
                   </GridItem>
-                  <GridItem border="1px solid black">
-                    <Text>{client.firstName}</Text>
-                  </GridItem>
-                  <GridItem border="1px solid black">
-                    <Text>{client.lastName}</Text>
-                  </GridItem>
+                  <Link href={`/userClients/${client.id}`}>
+                    <GridItem border="1px solid black">
+                      <Text _hover={{ cursor: 'pointer' }}>
+                        {client.firstName} {client.lastName}
+                      </Text>
+                    </GridItem>
+                  </Link>
                   <GridItem border="1px solid black">
                     <Text>{client.age}</Text>
                   </GridItem>
