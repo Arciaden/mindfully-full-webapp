@@ -19,7 +19,9 @@ const Home = () => {
           {user?.appointments &&
             user.appointments.map((appointment) => (
               <GridItem bg="tomato">
-                <Text>{appointment.type}</Text>
+                <Link href={`/userAppointments/${appointment.id}`}>
+                  <Text _hover={{ cursor: 'pointer' }}>{appointment.type}</Text>
+                </Link>
                 <Text>{user?.firstName}</Text>
                 <Text>{appointment.clientName}</Text>
               </GridItem>
