@@ -10,6 +10,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     },
   })
 
-  console.log(client)
+  if (!client) {
+    res.status(404).json({ error: 'That client does not exist' })
+  }
+
   res.status(200).json(client)
 }
