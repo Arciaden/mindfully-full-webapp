@@ -15,7 +15,7 @@ const isExpanded = {
   closed: {
     height: 100,
     overflow: 'hidden',
-    transition: { duration: 0.5 },
+    transition: { duration: 0.4 },
   },
 }
 
@@ -29,17 +29,14 @@ const textEffect = {
 
 const ClientCard = ({ firstName, lastName, age, bio, email, phone, id }) => {
   const [expanded, setExpanded] = useState(false)
-  const [active, setActive] = useState(false)
   const toggleExpanded = () => {
     setExpanded((state) => !state)
-    setActive((state) => !state)
   }
 
   console.log(expanded)
 
   return (
     <Box
-      backgroundColor="yellow"
       width="100%"
       p="21px"
       fontSize="text.xs"
@@ -95,7 +92,6 @@ const ClientCard = ({ firstName, lastName, age, bio, email, phone, id }) => {
             >
               <motion.p>
                 {bio.substring(0, 200)}
-
                 <motion.span
                   initial={'closedText'}
                   animate={expanded ? 'expandedText' : 'closedText'}
