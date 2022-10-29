@@ -27,7 +27,7 @@ const Home = () => {
         >
           <LayoutGroup>
             {user?.clients.map((client) => (
-              <GridItem w="85%">
+              <GridItem w="95%">
                 <ClientCard
                   key={client.id}
                   firstName={client.firstName}
