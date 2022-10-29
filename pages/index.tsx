@@ -1,18 +1,48 @@
 import styles from '../styles/Home.module.css'
 import { useProfile } from '../lib/hooks'
 import { Text } from '@chakra-ui/react'
-import { Grid, GridItem, Box, Heading } from '@chakra-ui/react'
+import { Grid, GridItem, Box, Heading, Flex } from '@chakra-ui/react'
 import CreateAppointmentForm from '../components/createAppointmentForm'
 import Link from 'next/link'
+import ClientCard from '../components/clientCard'
+import { LayoutGroup } from 'framer-motion'
 
 //Dashboard
 const Home = () => {
   const { user, isLoading } = useProfile()
 
   return (
-    <div className={styles.container}>
-      <main className={styles.main}>
-        <Text>Welcome to Mindfully Well!</Text>
+    <>
+      <Box>
+        <Heading>Dashboard</Heading>
+      </Box>
+      <Flex className="dashboard-wrapper" justifyContent="center">
+        <Grid
+          className="dashboard-container"
+          gridTemplateColumns="repeat(3, 1fr)"
+          w="90%"
+          gap={4}
+          rowGap={4}
+          justifyContent="center"
+        >
+          <LayoutGroup>
+            {user?.clients.map((client) => (
+              <GridItem w="85%">
+                <ClientCard
+                  key={client.id}
+                  firstName={client.firstName}
+                  lastName={client.lastName}
+                  age={client.age}
+                  bio={client.about}
+                  email={client.email}
+                  phone={client.phone}
+                  id={client.id}
+                />
+              </GridItem>
+            ))}
+          </LayoutGroup>
+        </Grid>
+        {/* <Text>Welcome to Mindfully Well!</Text>
 
         <Text>{user?.firstName}</Text>
         <Grid templateColumns="repeat(2, 1fr)" width="100%" height="100%">
@@ -55,9 +85,9 @@ const Home = () => {
               </GridItem>
             ))}
         </Grid>
-        <CreateAppointmentForm />
-      </main>
-    </div>
+        <CreateAppointmentForm /> */}
+      </Flex>
+    </>
   )
 }
 
