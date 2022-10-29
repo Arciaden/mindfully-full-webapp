@@ -9,6 +9,7 @@ import {
 } from '@chakra-ui/react'
 import { motion, LayoutGroup, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
+import styles from '../styles/clientCard.module.css'
 
 const isExpanded = {
   expanded: { height: 240, transition: { duration: 0.5 } },
@@ -38,17 +39,18 @@ const ClientCard = ({ firstName, lastName, age, bio, email, phone, id }) => {
   console.log(expanded)
 
   return (
-    <Box
-      backgroundColor="yellow"
-      width="100%"
-      p="21px"
-      fontSize="text.xs"
-      color="#086F83"
-      borderRadius="4px"
-      background="linear-gradient(0deg, #2F80ED -45%, rgba(235, 248, 255, 0.47) 63.75%, #FAFDFF 99.24%)"
-      box-shadow="3px 4px 7px rgba(0, 0, 0, 0.25)"
-      overflow="hidden"
-    >
+    // <Box
+    //   backgroundColor="yellow"
+    //   width="100%"
+    //   p="21px"
+    //   fontSize="text.xs"
+    //   color="#086F83"
+    //   borderRadius="4px"
+    //   background="linear-gradient(0deg, #2F80ED -45%, rgba(235, 248, 255, 0.47) 63.75%, #FAFDFF 99.24%)"
+    //   box-shadow="3px 4px 7px rgba(0, 0, 0, 0.25)"
+    //   overflow="hidden"
+    // >
+    <motion.div className={styles.clientCardContainer}>
       <Flex lineHeight={6} mb="10px">
         <Box mr="20px">
           <Avatar
@@ -123,7 +125,8 @@ const ClientCard = ({ firstName, lastName, age, bio, email, phone, id }) => {
           )}
         </Flex>
       </Flex>
-    </Box>
+    </motion.div>
+    // </Box>
   )
 }
 
