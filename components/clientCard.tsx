@@ -13,7 +13,6 @@ import { useState } from 'react'
 import styles from '../styles/clientCard.module.css'
 
 // Framer motion variants objects
-
 const isExpanded = {
   expanded: { height: 240, transition: { duration: 0.5 } },
   closed: {
@@ -34,7 +33,6 @@ const textEffect = {
 const editCard = {
   edit: {
     transform: 'rotateY(180deg)',
-    perspective: '500px',
     transition: { duration: 0.2 },
   },
   read: {},
@@ -43,6 +41,15 @@ const editCard = {
 const ClientCard = ({ firstName, lastName, age, bio, email, phone, id }) => {
   const [expanded, setExpanded] = useState(false)
   const [edit, setEdit] = useState(false)
+
+  //Edit Form State
+  const [editFirstName, setEditFirstName] = useState(firstName)
+  const [editLastName, setEditLastName] = useState(lastName)
+  const [editAge, setEditAge] = useState(age)
+  const [editBio, setEditBio] = useState(bio)
+  const [editEmail, setEditEmail] = useState(email)
+  const [editPhone, setEditPhone] = useState(phone)
+  // const [rotateContent, setRotateContent] = useState(false)
 
   //Functions
   const toggleExpanded = () => {
@@ -53,7 +60,18 @@ const ClientCard = ({ firstName, lastName, age, bio, email, phone, id }) => {
     setEdit((state) => !state)
   }
 
-  console.log(expanded)
+  const cancelEdit = () => {
+    setEdit((state) => !state)
+    setEditFirstName(firstName)
+    setEditLastName(lastName)
+    setEditBio(bio)
+    setEditEmail(email)
+    setEditPhone(phone)
+    setEditAge(age)
+  }
+
+  //Request Functions
+  const handleSubmit = () => {}
 
   return (
     <motion.div
@@ -62,40 +80,60 @@ const ClientCard = ({ firstName, lastName, age, bio, email, phone, id }) => {
       animate={edit ? 'edit' : 'read'}
       variants={editCard}
     >
-      {/* EDIT SIDE OF THE CARD... Maybe try css?  */}
+      {/* EDIT SIDE OF THE CARD */}
       {edit ? (
-        <>
-          <Flex lineHeight={6} mb="10px" transform="rotateY(180deg)">
+        <form onSubmit={handleSubmit}>
+          <Flex lineHeight={6} mb="10px" transform={'rotateY(180deg)'}>
             <Box mr="20px" position="relative">
               <Avatar
                 name={firstName + ' ' + lastName}
                 size="lg"
                 src="https://res.cloudinary.com/deveraux-design/image/upload/v1667011530/Mindfully%20Full/seinfeld_teftvl.jpg"
               />
-              <EditIcon
-                position="absolute"
-                top="0"
-                left="0"
-                height={5}
-                width={5}
-                color="#fff"
-              />
             </Box>
             <Box>
               <Flex>
                 <Input
                   type="text"
-                  value={firstName}
+                  value={editFirstName}
+                  onChange={(e) => setEditFirstName(e.target.value)}
                   fontSize={12}
                   height={8}
-                  m="0 10px 10px 0px"
                 />
-                <Input type="text" value={lastName} fontSize={12} height={8} />
+                <Input
+                  type="number"
+                  min="18"
+                  max="99"
+                  value={editAge}
+                  onChange={(e) => setEditAge(e.target.value)}
+                  fontSize={12}
+                  height={8}
+                  m="0 10px 10px 10px"
+                />
+                <Input
+                  type="text"
+                  value={editLastName}
+                  onChange={(e) => setEditLastName(e.target.value)}
+                  fontSize={12}
+                  height={8}
+                />
               </Flex>
               <Box fontWeight={500} mb="10px">
-                <Input type="email" value={email} fontSize={12} height={8} />
+                <Input
+                  type="email"
+                  value={editEmail}
+                  onChange={(e) => setEditEmail(e.target.value)}
+                  fontSize={12}
+                  height={8}
+                />
               </Box>
-              <Input type="tel" value={phone} fontSize={12} height={8} />
+              <Input
+                type="tel"
+                value={editPhone}
+                onChange={(e) => setEditPhone(e.target.value)}
+                fontSize={12}
+                height={8}
+              />
             </Box>
           </Flex>
 
@@ -104,66 +142,24 @@ const ClientCard = ({ firstName, lastName, age, bio, email, phone, id }) => {
               <Text>BIO:</Text>
             </Box>
             <Flex direction="column" width="100%">
-              <Textarea resize="none" fontSize={12} value={bio} mb="20px" />
-              {/* <Flex direction="column">
-              {bio.length > 250 && expanded === false ? (
-                <motion.div
-                  className="motion-div"
-                  initial={'closed'}
-                  animate={expanded ? 'expanded' : 'closed'}
-                  variants={isExpanded}
-                  layout
-                >
-                  {bio.substring(0, 200)}...
-                </motion.div>
-              ) : (
-                <motion.div
-                  className="motion-div"
-                  initial={'closed'}
-                  animate={expanded ? 'expanded' : 'closed'}
-                  variants={isExpanded}
-                  layout
-                >
-                  <motion.p>
-                    {bio.substring(0, 200)}
-                    <motion.span
-                      initial={'closedText'}
-                      animate={expanded ? 'expandedText' : 'closedText'}
-                      variants={textEffect}
-                    >
-                      {bio.substring(200, 500)}
-                    </motion.span>
-                  </motion.p>
-                </motion.div>
-              )}
-              {bio.length > 250 ? (
-                <Box
-                  as="button"
-                  onClick={toggleExpanded}
-                  backgroundColor="transparent"
-                  textAlign="left"
-                  fontWeight={700}
-                  height="20px"
-                  mt="5px"
-                >
-                  {expanded ? 'Read Less' : 'Continue Reading'}
-                </Box>
-              ) : (
-                <Box height="20px"></Box>
-              )}
-              
-            </Flex> */}
+              <Textarea
+                resize="none"
+                fontSize={12}
+                value={editBio}
+                onChange={(e) => setEditBio(e.target.value)}
+                mb="20px"
+              />
               <Flex width="100%" justifyContent="space-evenly">
-                <Button height={5} fontSize="text.xs" onClick={toggleEdit}>
+                <Button height={5} fontSize="text.xs" onClick={cancelEdit}>
                   Cancel
                 </Button>
-                <Button height={5} fontSize="text.xs" onClick={toggleEdit}>
+                <Button height={5} fontSize="text.xs">
                   Save
                 </Button>
               </Flex>
             </Flex>
           </Flex>
-        </>
+        </form>
       ) : (
         // READ SIDE OF THE CARD
         <>
@@ -192,7 +188,7 @@ const ClientCard = ({ firstName, lastName, age, bio, email, phone, id }) => {
               top="0"
               right="0"
               _hover={{ cursor: 'pointer' }}
-              onClick={() => setEdit((state) => !state)}
+              onClick={toggleEdit}
             >
               Cancel
             </EditIcon>
@@ -203,7 +199,7 @@ const ClientCard = ({ firstName, lastName, age, bio, email, phone, id }) => {
               <Text>BIO:</Text>
             </Box>
             <Flex direction="column">
-              {bio.length > 250 && expanded === false ? (
+              {bio.length > 300 && expanded === false ? (
                 <motion.div
                   className="motion-div"
                   initial={'closed'}
@@ -211,7 +207,7 @@ const ClientCard = ({ firstName, lastName, age, bio, email, phone, id }) => {
                   variants={isExpanded}
                   layout
                 >
-                  {bio.substring(0, 200)}...
+                  {bio.substring(0, 300)}...
                 </motion.div>
               ) : (
                 <motion.div
@@ -222,18 +218,18 @@ const ClientCard = ({ firstName, lastName, age, bio, email, phone, id }) => {
                   layout
                 >
                   <motion.p>
-                    {bio.substring(0, 200)}
+                    {bio.substring(0, 300)}
                     <motion.span
                       initial={'closedText'}
                       animate={expanded ? 'expandedText' : 'closedText'}
                       variants={textEffect}
                     >
-                      {bio.substring(200, 500)}
+                      {bio.substring(300, 500)}
                     </motion.span>
                   </motion.p>
                 </motion.div>
               )}
-              {bio.length > 250 ? (
+              {bio.length > 300 ? (
                 <Box
                   as="button"
                   onClick={toggleExpanded}
@@ -246,7 +242,7 @@ const ClientCard = ({ firstName, lastName, age, bio, email, phone, id }) => {
                   {expanded ? 'Read Less' : 'Continue Reading'}
                 </Box>
               ) : (
-                <Box height="20px"></Box>
+                <Box height="20px" mt="5px"></Box>
               )}
             </Flex>
           </Flex>

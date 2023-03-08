@@ -28,3 +28,5 @@ export const useProfile = () => {
 //     isError: error,
 //   }
 // }
+
+export const useClientContext = () => {}
