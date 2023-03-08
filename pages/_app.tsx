@@ -14,17 +14,22 @@ import Theme from '../theme/theme'
 import { ChakraProvider } from '@chakra-ui/react'
 import NavigationBar from '../components/navigation'
 
+import { StoreProvider } from 'easy-peasy'
+import { clientStore } from '../lib/store'
+
 const MyApp = ({ Component, pageProps }) => {
   return (
-    <ChakraProvider theme={Theme}>
-      {Component.authPage ? (
-        <Component {...pageProps} />
-      ) : (
-        <NavigationBar>
+    <StoreProvider store={clientStore}>
+      <ChakraProvider theme={Theme}>
+        {Component.authPage ? (
           <Component {...pageProps} />
-        </NavigationBar>
-      )}
-    </ChakraProvider>
+        ) : (
+          <NavigationBar>
+            <Component {...pageProps} />
+          </NavigationBar>
+        )}
+      </ChakraProvider>
+    </StoreProvider>
   )
 }
 

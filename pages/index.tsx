@@ -1,7 +1,15 @@
 import styles from '../styles/Home.module.css'
 import { useProfile } from '../lib/hooks'
 import { Text } from '@chakra-ui/react'
-import { Grid, GridItem, Box, Heading, Flex } from '@chakra-ui/react'
+import {
+  Grid,
+  GridItem,
+  Box,
+  Heading,
+  Flex,
+  Input,
+  Button,
+} from '@chakra-ui/react'
 import CreateAppointmentForm from '../components/createAppointmentForm'
 import Link from 'next/link'
 import ClientCard from '../components/clientCard'
@@ -12,10 +20,25 @@ const Home = () => {
   const { user, isLoading } = useProfile()
 
   return (
-    <>
-      <Box>
-        <Heading>Dashboard</Heading>
-      </Box>
+    <Box>
+      <Flex
+        mb="10"
+        p="5"
+        pb="3"
+        borderBottom="1px solid #e6e6e6"
+        justifyContent="space-between"
+        w="100%"
+        zIndex="10"
+        backgroundColor="#fff"
+      >
+        <Heading as="h1" size="lg" fontWeight="300" pb="2">
+          My Clients
+        </Heading>
+        <Flex w="25%">
+          <Input className="client-search-bar" w="75%" mr="10px" />
+          <Button w="25%">Search</Button>
+        </Flex>
+      </Flex>
       <Flex className="dashboard-wrapper" justifyContent="center">
         <Grid
           className="dashboard-container"
@@ -26,7 +49,7 @@ const Home = () => {
           justifyContent="center"
         >
           <LayoutGroup>
-            {user?.clients.map((client) => (
+            {user?.clients?.map((client) => (
               <GridItem w="95%">
                 <ClientCard
                   key={client.id}
@@ -42,52 +65,9 @@ const Home = () => {
             ))}
           </LayoutGroup>
         </Grid>
-        {/* <Text>Welcome to Mindfully Well!</Text>
-
-        <Text>{user?.firstName}</Text>
-        <Grid templateColumns="repeat(2, 1fr)" width="100%" height="100%">
-          {user?.appointments &&
-            user.appointments.map((appointment) => (
-              <GridItem bg="tomato">
-                <Link href={`/userAppointments/${appointment.id}`}>
-                  <Text _hover={{ cursor: 'pointer' }}>{appointment.type}</Text>
-                </Link>
-                <Text>{user?.firstName}</Text>
-                <Text>{appointment.clientName}</Text>
-              </GridItem>
-            ))}
-        </Grid>
-        <Grid templateColumns="repeat(5, 1fr)" width="100%" height="100%">
-          {user?.clients &&
-            user.clients.map((client) => (
-              <GridItem bg="tomato" border="1px solid black" p="5" m="2">
-                <Grid templateColumns="repeat(3, 1fr)">
-                  <GridItem border="1px solid black">
-                    <Text>First Name</Text>
-                  </GridItem>
-                  <GridItem border="1px solid black">
-                    <Text>Last Name</Text>
-                  </GridItem>
-                  <GridItem border="1px solid black">
-                    <Text>Age</Text>
-                  </GridItem>
-                  <Link href={`/userClients/${client.id}`}>
-                    <GridItem border="1px solid black">
-                      <Text _hover={{ cursor: 'pointer' }}>
-                        {client.firstName} {client.lastName}
-                      </Text>
-                    </GridItem>
-                  </Link>
-                  <GridItem border="1px solid black">
-                    <Text>{client.age}</Text>
-                  </GridItem>
-                </Grid>
-              </GridItem>
-            ))}
-        </Grid>
-        <CreateAppointmentForm /> */}
+        {/* <CreateAppointmentForm /> */}
       </Flex>
-    </>
+    </Box>
   )
 }
 
