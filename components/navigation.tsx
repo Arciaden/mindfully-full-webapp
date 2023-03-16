@@ -20,7 +20,7 @@ const NavigationBar = ({ children }) => {
           <Link href="/" style={{ textDecoration: 'none' }}>
             <Flex alignItems="center">
               <Image src={logo} height="50%" width="50%" />
-              <Text fontSize={22} fontWeight={500} ml="5">
+              <Text fontSize="text.lg" fontWeight={500} ml="5">
                 Mindfully Full
               </Text>
             </Flex>
@@ -35,7 +35,7 @@ const NavigationBar = ({ children }) => {
               borderRadius={4}
               px={30}
               size="md"
-              fontWeight={400}
+              fontWeight={500}
             >
               Logout
             </Button>

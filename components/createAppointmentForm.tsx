@@ -52,7 +52,7 @@ const CreateAppointmentForm = () => {
 
   return (
     <Box>
-      <h1>This form is working</h1>
+      <h1>Add Appointment</h1>
       <form onSubmit={handleSubmit}>
         <FormControl>
           <FormLabel>Appointment Title</FormLabel>
