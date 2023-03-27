@@ -11,6 +11,7 @@ import { EditIcon } from '@chakra-ui/icons'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import styles from '../styles/clientCard.module.css'
+import Link from 'next/link'
 
 // Framer motion variants objects
 const isExpanded = {
@@ -49,7 +50,6 @@ const ClientCard = ({ firstName, lastName, age, bio, email, phone, id }) => {
   const [editBio, setEditBio] = useState(bio)
   const [editEmail, setEditEmail] = useState(email)
   const [editPhone, setEditPhone] = useState(phone)
-  // const [rotateContent, setRotateContent] = useState(false)
 
   //Functions
   const toggleExpanded = () => {
@@ -70,8 +70,55 @@ const ClientCard = ({ firstName, lastName, age, bio, email, phone, id }) => {
     setEditAge(age)
   }
 
-  //Request Functions
-  const handleSubmit = () => {}
+  //Updating a client
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    const formData = {
+      id,
+      firstName: editFirstName,
+      lastName: editLastName,
+      age: editAge,
+      email: editEmail,
+      phone: editPhone,
+      about: editBio,
+    }
+
+    fetch(`${window.location.origin}/api/clientCRUD`, {
+      method: 'PATCH',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((res) => {
+        console.log('Client Updated!')
+        return res.json()
+      })
+      .catch((error) => error)
+
+    setEdit((state) => !state)
+  }
+
+  //Delete a client
+  const handleDelete = () => {
+    fetch(`${window.location.origin}/api/clientCRUD`, {
+      method: 'DELETE',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id,
+      }),
+    })
+      .then((res) => console.log(res))
+      .catch((error) => {
+        console.log(error)
+        console.log(id)
+      })
+  }
 
   return (
     <motion.div
@@ -82,84 +129,117 @@ const ClientCard = ({ firstName, lastName, age, bio, email, phone, id }) => {
     >
       {/* EDIT SIDE OF THE CARD */}
       {edit ? (
-        <form onSubmit={handleSubmit}>
-          <Flex lineHeight={6} mb="10px" transform={'rotateY(180deg)'}>
-            <Box mr="20px" position="relative">
-              <Avatar
-                name={firstName + ' ' + lastName}
-                size="lg"
-                src="https://res.cloudinary.com/deveraux-design/image/upload/v1667011530/Mindfully%20Full/seinfeld_teftvl.jpg"
-              />
-            </Box>
-            <Box>
-              <Flex>
-                <Input
-                  type="text"
-                  value={editFirstName}
-                  onChange={(e) => setEditFirstName(e.target.value)}
-                  fontSize={12}
-                  height={8}
+        <>
+          <form onSubmit={handleSubmit} className="client-card-edit-form">
+            <Flex
+              lineHeight={6}
+              mb="10px"
+              transform={'rotateY(180deg)'}
+              className="client-card-edit-name-container"
+            >
+              <Box
+                mr="20px"
+                position="relative"
+                className="client-card-avatar-container"
+              >
+                <Avatar
+                  name={firstName + ' ' + lastName}
+                  size="lg"
+                  src="https://res.cloudinary.com/deveraux-design/image/upload/v1667011530/Mindfully%20Full/seinfeld_teftvl.jpg"
                 />
+              </Box>
+              <Box>
+                <Flex>
+                  <Input
+                    type="text"
+                    value={editFirstName}
+                    onChange={(e) => setEditFirstName(e.target.value)}
+                    fontSize={12}
+                    height={8}
+                  />
+                  <Input
+                    type="text"
+                    value={editLastName}
+                    onChange={(e) => setEditLastName(e.target.value)}
+                    fontSize={12}
+                    height={8}
+                    m="0 10px 10px 10px"
+                  />
+                  <Input
+                    type="number"
+                    min="18"
+                    max="99"
+                    value={editAge}
+                    onChange={(e) => setEditAge(Number(e.target.value))}
+                    fontSize={12}
+                    height={8}
+                  />
+                </Flex>
+                <Box fontWeight={500} mb="10px">
+                  <Input
+                    type="email"
+                    value={editEmail}
+                    onChange={(e) => setEditEmail(e.target.value)}
+                    fontSize={12}
+                    height={8}
+                  />
+                </Box>
                 <Input
-                  type="number"
-                  min="18"
-                  max="99"
-                  value={editAge}
-                  onChange={(e) => setEditAge(e.target.value)}
-                  fontSize={12}
-                  height={8}
-                  m="0 10px 10px 10px"
-                />
-                <Input
-                  type="text"
-                  value={editLastName}
-                  onChange={(e) => setEditLastName(e.target.value)}
-                  fontSize={12}
-                  height={8}
-                />
-              </Flex>
-              <Box fontWeight={500} mb="10px">
-                <Input
-                  type="email"
-                  value={editEmail}
-                  onChange={(e) => setEditEmail(e.target.value)}
+                  type="tel"
+                  value={editPhone}
+                  onChange={(e) => setEditPhone(Number(e.target.value))}
                   fontSize={12}
                   height={8}
                 />
               </Box>
-              <Input
-                type="tel"
-                value={editPhone}
-                onChange={(e) => setEditPhone(e.target.value)}
-                fontSize={12}
-                height={8}
-              />
-            </Box>
-          </Flex>
+            </Flex>
 
-          <Flex fontWeight={400} color="#065666" transform="rotateY(180deg)">
-            <Box mr="15px">
-              <Text>BIO:</Text>
-            </Box>
-            <Flex direction="column" width="100%">
-              <Textarea
-                resize="none"
-                fontSize={12}
-                value={editBio}
-                onChange={(e) => setEditBio(e.target.value)}
-                mb="20px"
-              />
-              <Flex width="100%" justifyContent="space-evenly">
-                <Button height={5} fontSize="text.xs" onClick={cancelEdit}>
-                  Cancel
-                </Button>
-                <Button height={5} fontSize="text.xs">
-                  Save
-                </Button>
+            <Flex
+              fontWeight={400}
+              color="#065666"
+              transform="rotateY(180deg)"
+              className="client-card-edit-bio-container"
+            >
+              <Box mr="15px">
+                <Text>BIO:</Text>
+              </Box>
+              <Flex direction="column" width="100%">
+                <Textarea
+                  resize="none"
+                  fontSize={12}
+                  value={editBio}
+                  onChange={(e) => setEditBio(e.target.value)}
+                  mb="20px"
+                />
+                <Flex
+                  width="100%"
+                  justifyContent="space-evenly"
+                  className="client-card-edit-buttons-container"
+                >
+                  <Button height={5} fontSize="text.xs" onClick={cancelEdit}>
+                    Cancel
+                  </Button>
+                  <Button
+                    height={5}
+                    fontSize="text.xs"
+                    type="submit"
+                    onClick={handleSubmit}
+                  >
+                    Save
+                  </Button>
+                  <Button
+                    height={5}
+                    fontSize="text.xs"
+                    _hover={{ background: 'red.400', color: 'white' }}
+                    onClick={handleDelete}
+                  >
+                    Delete
+                  </Button>
+                </Flex>
               </Flex>
             </Flex>
-          </Flex>
-        </form>
+          </form>
+        </>
       ) : (
         // READ SIDE OF THE CARD
         <>
@@ -172,12 +252,16 @@ const ClientCard = ({ firstName, lastName, age, bio, email, phone, id }) => {
               />
             </Box>
             <Box>
-              <Flex>
-                <Text fontWeight={700}>
-                  {firstName + ' ' + lastName} | {age} | Client
-                </Text>
+              <Flex className="client-card-name-container">
+                <Link href={`/userClients/${id}`}>
+                  <a className="client-link">
+                    <Text fontWeight={700} className="client-link-text">
+                      {firstName + ' ' + lastName} | {age} | Client
+                    </Text>
+                  </a>
+                </Link>
               </Flex>
-              <Box fontWeight={500}>
+              <Box fontWeight={500} className="client-card-info-container">
                 <Text>{email}</Text>
               </Box>
               <Box>{phone}</Box>
@@ -189,17 +273,19 @@ const ClientCard = ({ firstName, lastName, age, bio, email, phone, id }) => {
               right="0"
               _hover={{ cursor: 'pointer' }}
               onClick={toggleEdit}
-            >
-              Cancel
-            </EditIcon>
+            ></EditIcon>
           </Flex>
 
-          <Flex fontWeight={400} color="#065666">
+          <Flex
+            fontWeight={400}
+            color="#065666"
+            className="client-card-bio-container"
+          >
             <Box mr="15px">
               <Text>BIO:</Text>
             </Box>
             <Flex direction="column">
-              {bio.length > 300 && expanded === false ? (
+              {bio?.length > 300 && expanded === false ? (
                 <motion.div
                   className="motion-div"
                   initial={'closed'}
@@ -207,7 +293,7 @@ const ClientCard = ({ firstName, lastName, age, bio, email, phone, id }) => {
                   variants={isExpanded}
                   layout
                 >
-                  {bio.substring(0, 300)}...
+                  {bio?.substring(0, 300)}...
                 </motion.div>
               ) : (
                 <motion.div
@@ -218,18 +304,33 @@ const ClientCard = ({ firstName, lastName, age, bio, email, phone, id }) => {
                   layout
                 >
                   <motion.p>
-                    {bio.substring(0, 300)}
+                    {bio?.substring(0, 300)}
                     <motion.span
                       initial={'closedText'}
                       animate={expanded ? 'expandedText' : 'closedText'}
                       variants={textEffect}
                     >
-                      {bio.substring(300, 500)}
+                      {bio?.length < 500 ? (
+                        <span>{bio?.substring(300, 500)}</span>
+                      ) : (
+                        <>
+                          <span>{bio?.substring(300, 500)}...</span>
+                          <Link href={`/userClients/${id}`}>
+                            <a
+                              className="continue-reading-bio"
+                              style={{ color: '#065666', fontWeight: '500' }}
+                            >
+                              {' '}
+                              Read More
+                            </a>
+                          </Link>
+                        </>
+                      )}
                     </motion.span>
                   </motion.p>
                 </motion.div>
               )}
-              {bio.length > 300 ? (
+              {bio?.length > 300 ? (
                 <Box
                   as="button"
                   onClick={toggleExpanded}

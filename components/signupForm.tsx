@@ -258,10 +258,7 @@ const SignupForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
                   Phone Number
                 </FormLabel>
                 <InputGroup>
-                  <InputLeftElement children={<PhoneIcon color="gray.300" />} />
                   <Input
-                    display="flex"
-                    alignItems="center"
                     id="signup-password-input"
                     type="phone"
                     required

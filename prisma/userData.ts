@@ -18,11 +18,11 @@ export const userData: {
     permissions: 'ADMIN',
     type: 'TRAINER',
     password: 'mypass',
-    email: 'ianborman@gmail.com',
+    email: 'trey@gmail.com',
     // profile: {
-    firstName: 'Ian',
-    lastName: 'Borman',
-    age: 27,
+    firstName: 'Trey',
+    lastName: 'Deveraux',
+    age: 26,
     phone: 8888888888,
     about: 'this is my biography',
     // },
@@ -34,6 +34,7 @@ export const userData: {
         phone: 8888888888,
         email: 'jerry@gmail.com',
         about: 'This is Jerry Seinfield',
+        clientId: '6413c3931c4b785d31440620',
       },
       {
         firstName: 'Lebron',
@@ -42,6 +43,7 @@ export const userData: {
         phone: 7777777777,
         email: 'lebronsucks@gmail.com',
         about: 'Michael is always better',
+        clientId: '6413c3931c4b785d31440621',
       },
       {
         firstName: 'Jace',
@@ -50,6 +52,7 @@ export const userData: {
         phone: 1029384938,
         email: 'jaceolsen@gmail.com',
         about: 'I am the forgotten twin',
+        clientId: '6413c3941c4b785d31440622',
       },
       {
         firstName: 'Vance',
@@ -58,6 +61,7 @@ export const userData: {
         phone: 9302583473,
         email: 'vj@hotmail.com',
         about: 'Call me V',
+        clientId: '6413c3941c4b785d31440623',
       },
       {
         firstName: 'Leroy',
@@ -66,6 +70,7 @@ export const userData: {
         phone: 2921234637,
         email: 'lerooyjenkins@afkcharge.com',
         about: 'Lerooooooy Jeeeenkiiinnsss',
+        clientId: '6413c3941c4b785d31440624',
       },
       {
         firstName: 'Spider',
@@ -74,6 +79,7 @@ export const userData: {
         phone: 3374445432,
         email: 'peterparker@ispoileverything.com',
         about: 'Everybody dies!',
+        clientId: '6413c3941c4b785d31440625',
       },
       {
         firstName: 'Bat',
@@ -82,6 +88,7 @@ export const userData: {
         phone: 3374445332,
         email: 'darknight@imafraidofbats.com',
         about: "I'm Batman!",
+        clientId: '6413c3941c4b785d31440626',
       },
       {
         firstName: 'Super',
@@ -90,6 +97,7 @@ export const userData: {
         phone: 3389445432,
         email: 'thesisoforhope@makesnosense.com',
         about: 'Man of Steel',
+        clientId: '6413c3941c4b785d31440627',
       },
       {
         firstName: 'Aqua',
@@ -98,6 +106,7 @@ export const userData: {
         phone: 3374444532,
         email: 'chrissharmasbestfriend@rockclimbing.com',
         about: 'Speaks dolphin, climbs V9',
+        clientId: '6413c3941c4b785d31440628',
       },
       {
         firstName: 'Bartholomew',
@@ -107,6 +116,7 @@ export const userData: {
         email: 'havefunwiththisname@makingfrontendhard.com',
         about:
           "I'm gonna give you hell in your design!!! Cause my name is unrealistically long.",
+        clientId: '6413c3941c4b785d31440629',
       },
       {
         firstName: 'Faulk',
@@ -115,6 +125,7 @@ export const userData: {
         phone: 3374445430,
         email: 'faulkyou@faulkingmotherfaulker.com',
         about: 'Faulk off',
+        clientId: '6413c3941c4b785d3144062a',
       },
     ],
     appointments: [
@@ -127,6 +138,8 @@ export const userData: {
         appointmentDuration: 20000,
         appointmentNotes:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Habitasse platea dictumst quisque sagittis. Urna neque viverra justo nec. Donec ultrices tincidunt arcu non sodales neque sodales ut. Diam ut venenatis tellus in metus.',
+        userIdDs: ['6413c156f336d7e1ca20d8f1'],
+        clientId: '6413c3941c4b785d3144062a',
       },
       {
         type: 'STRETCHING',
@@ -137,6 +150,8 @@ export const userData: {
         appointmentDuration: 30000,
         appointmentNotes:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Habitasse platea dictumst quisque sagittis. Urna neque viverra justo nec. Donec ultrices tincidunt arcu non sodales neque sodales ut. Diam ut venenatis tellus in metus.',
+        userIDs: ['6413c156f336d7e1ca20d8f1'],
+        clientId: '6413c3941c4b785d31440629',
       },
       {
         type: 'YOGA',
@@ -147,6 +162,8 @@ export const userData: {
         appointmentDuration: 30000,
         appointmentNotes:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Habitasse platea dictumst quisque sagittis. Urna neque viverra justo nec. Donec ultrices tincidunt arcu non sodales neque sodales ut. Diam ut venenatis tellus in metus.',
+        userIDs: ['6413c156f336d7e1ca20d8f1'],
+        clientId: '6413c3941c4b785d31440628',
       },
       {
         type: 'WEIGHTLIFTING',
@@ -157,6 +174,8 @@ export const userData: {
         appointmentDuration: 30000,
         appointmentNotes:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Habitasse platea dictumst quisque sagittis. Urna neque viverra justo nec. Donec ultrices tincidunt arcu non sodales neque sodales ut. Diam ut venenatis tellus in metus.',
+        userIDs: ['6413c156f336d7e1ca20d8f1'],
+        clientId: '6413c3941c4b785d31440628',
       },
       {
         type: 'YOGA',
@@ -167,6 +186,8 @@ export const userData: {
         appointmentDuration: 30000,
         appointmentNotes:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Habitasse platea dictumst quisque sagittis. Urna neque viverra justo nec. Donec ultrices tincidunt arcu non sodales neque sodales ut. Diam ut venenatis tellus in metus.',
+        userIDs: ['6413c156f336d7e1ca20d8f1'],
+        clientId: '6413c3941c4b785d31440627',
       },
       {
         type: 'WORKOUT',
@@ -177,6 +198,8 @@ export const userData: {
         appointmentDuration: 30000,
         appointmentNotes:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Habitasse platea dictumst quisque sagittis. Urna neque viverra justo nec. Donec ultrices tincidunt arcu non sodales neque sodales ut. Diam ut venenatis tellus in metus.',
+        userIDs: ['6413c156f336d7e1ca20d8f1'],
+        clientId: '6413c3941c4b785d31440624',
       },
       {
         type: 'WORKOUT',
@@ -187,6 +210,8 @@ export const userData: {
         appointmentDuration: 30000,
         appointmentNotes:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Habitasse platea dictumst quisque sagittis. Urna neque viverra justo nec. Donec ultrices tincidunt arcu non sodales neque sodales ut. Diam ut venenatis tellus in metus.',
+        userIDs: ['6413c156f336d7e1ca20d8f1'],
+        clientId: '6413c3941c4b785d31440624',
       },
     ],
   },

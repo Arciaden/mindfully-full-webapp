@@ -1,10 +1,24 @@
-import { Box, Button, Flex, Text, Link } from '@chakra-ui/react'
+import {
+  Box,
+  Button,
+  Flex,
+  Text,
+  Link,
+  Avatar,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+} from '@chakra-ui/react'
 import Image from 'next/image'
+import { useProfile } from '../lib/hooks'
 
 import logo from '../public/placeholderLogo.png'
 import { OutlineButton } from './buttons'
 
 const NavigationBar = ({ children }) => {
+  const { user, isLoading } = useProfile()
+
   return (
     <>
       <Flex
@@ -26,19 +40,31 @@ const NavigationBar = ({ children }) => {
             </Flex>
           </Link>
         </Flex>
+        <Flex w="70%" alignItems="center" justifyContent="left">
+          <Link
+            href="/myClients"
+            style={{ textDecoration: 'none', marginRight: '10px' }}
+          >
+            <Text>My Clients</Text>
+          </Link>
+          <Link
+            href="/userAppointments/appointmentIndex"
+            style={{ textDecoration: 'none', marginRight: '10px' }}
+          >
+            <Text>My Appointments</Text>
+          </Link>
+        </Flex>
         <Flex alignItems="center">
-          <form method="POST" action="http://localhost:3000/api/logout">
-            <Button
-              type={'submit'}
-              backgroundColor="#EDF1F2"
-              color="#025fc6"
-              borderRadius={4}
-              px={30}
+          <Link href="/profile">
+            <Avatar
+              name={user?.firstName + ' ' + user?.lastName}
               size="md"
-              fontWeight={500}
-            >
-              Logout
-            </Button>
+              src="https://res.cloudinary.com/deveraux-design/image/upload/v1679353585/pexels-chloe-1043471_ktlxyj.jpg"
+              mr="15px"
+            />
+          </Link>
+          <form method="POST" action="http://localhost:3000/api/logout">
+            <button type={'submit'}>Logout</button>
           </form>
         </Flex>
       </Flex>
