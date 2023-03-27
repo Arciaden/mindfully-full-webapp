@@ -4,7 +4,7 @@ import prisma from '../../../lib/prisma'
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { id } = req.body
 
-  if (req.method === 'GET') {
+  if (req.method === 'POST') {
     const client = await prisma.client
       .findUnique({
         where: {

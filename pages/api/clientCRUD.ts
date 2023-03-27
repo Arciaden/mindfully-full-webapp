@@ -2,9 +2,10 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '../../lib/prisma'
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const { id, firstName, lastName, age, phone, email, about } = req.body
+  const { id, firstName, lastName, age, phone, email, about, trainerID } =
+    req.body
   if (req.method === 'PATCH') {
-    const user = await prisma.client.update({
+    const client = await prisma.client.update({
       where: {
         id: id,
       },
@@ -18,13 +19,49 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       },
     })
 
-    if (!user) {
-      res.status(401).json({ error: 'User not found' })
-      console.log('Client Update Error: User not found')
+    if (!client) {
+      res.status(401).json({ error: 'Client not found' })
+      console.log('Client Update Error: Client not found')
     }
 
-    res.status(200).json(user)
+    res.status(200).json(client)
   }
   if (req.method === 'DELETE') {
+    const client = await prisma.client.delete({
+      where: {
+        id: id,
+      },
+    })
+
+    return res.status(200).json(client)
+  }
+
+  if (req.method === 'POST') {
+    const client = await prisma.client.create({
+      data: {
+        firstName,
+        lastName,
+        age,
+        phone,
+        email,
+        about,
+      },
+    })
+
+    const user = await prisma.user.update({
+      where: {
+        id: trainerID,
+      },
+      data: {
+        clients: {
+          connect: {
+            id: client.id,
+          },
+        },
+      },
+    })
+
+    console.log(client)
+    res.status(200).json({ client, user })
   }
 }

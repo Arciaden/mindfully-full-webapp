@@ -13,7 +13,6 @@ model User {
   id                 String        @id @default(auto()) @map("_id") @db.ObjectId
   permissions        Permission    @default(ADMIN)
   type               Type          @default(TRAINER)
-  // profile        Profile
   email              String        @unique
   password           String
   passwordResetToken String?
@@ -30,14 +29,6 @@ model User {
   updatedAt          DateTime      @updatedAt
 }
 
-// type Profile {
-//   firstName String
-//   lastName  String
-//   phone     Int
-//   about     String?
-//   age       Int
-// }
-
 //Enum gives us the ability to set a type for each user, as well as a default.
 enum Permission {
   USER
@@ -51,7 +42,7 @@ enum Type {
 
 model Client {
   id          String        @id @default(auto()) @map("_id") @db.ObjectId
-  clientID    String        @db.ObjectId
+  clientID    String?       @db.ObjectId
   user        User?         @relation(fields: [clientID], references: [id], onDelete: Cascade)
   firstName   String
   lastName    String
@@ -60,21 +51,24 @@ model Client {
   email       String
   about       String?
   Appointment Appointment[]
+  createdAt   DateTime?     @default(now())
+  updatedAt   DateTime?     @updatedAt
 }
 
 model Appointment {
-  id                         String   @id @default(auto()) @map("_id") @db.ObjectId
+  id                         String    @id @default(auto()) @map("_id") @db.ObjectId
   type                       String
-  userIDs                    String[] @db.ObjectId
-  users                      User[]   @relation(fields: [userIDs], references: [id])
-  clients                    Client?  @relation(fields: [clientId], references: [id])
+  userIDs                    String[]  @db.ObjectId
+  users                      User[]    @relation(fields: [userIDs], references: [id])
+  clients                    Client?   @relation(fields: [clientId], references: [id])
   clientName                 String?
   appointmentPlanTitle       String
   appointmentPlanDescription String
   appointmentDuration        Int
   appointmentNotes           String?
-  date                       DateTime @default(now())
-  createdAt                  DateTime @default(now())
-  updatedAt                  DateTime @updatedAt
-  clientId                   String?  @db.ObjectId
+  date                       DateTime  @default(now())
+  time                       DateTime? @default(now())
+  createdAt                  DateTime  @default(now())
+  updatedAt                  DateTime  @updatedAt
+  clientId                   String?   @db.ObjectId
 }

@@ -47,6 +47,8 @@ const run = async () => {
                 appointment.appointmentPlanDescription,
               appointmentPlanTitle: appointment.appointmentPlanTitle,
               appointmentNotes: appointment.appointmentNotes,
+              userIDs: appointment.userIDs,
+              clientId: appointment.clientId,
             })),
           },
         },

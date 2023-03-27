@@ -1,43 +1,26 @@
-import styles from '../styles/Home.module.css'
-import { useProfile } from '../lib/hooks'
-import { Text } from '@chakra-ui/react'
-import { useRef } from 'react'
-
 import {
-  Grid,
-  GridItem,
-  Box,
-  Heading,
   Flex,
-  Input,
-  Button,
-  Drawer,
-  DrawerBody,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  useDisclosure,
+  CircularProgress,
+  Grid,
+  Box,
+  GridItem,
+  Heading,
+  Text,
 } from '@chakra-ui/react'
-import CreateClientForm from '../components/createClientForm'
-// import CreateAppointmentForm from '../components/createAppointmentForm'
+import 'react-calendar/dist/Calendar.css'
+import NewClientTable from '../components/newClientTable'
+import { useProfile } from '../lib/hooks'
+import IndexPieChart from '../components/indexPieChart'
+import UpcomingAppointments from '../components/upcomingAppointments'
 import Link from 'next/link'
-import ClientCard from '../components/clientCard'
-import { LayoutGroup } from 'framer-motion'
 
-//Dashboard
-const Home = () => {
+const HomePage = () => {
   const { user, isLoading } = useProfile()
-
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const btnRef = useRef()
-
   return (
     <>
-      <Box>
+      <Box w="100vw" h="90vh">
         <Flex
-          mb="10"
+          mb="30px"
           p="5"
           pb="3"
           borderBottom="1px solid #e6e6e6"
@@ -47,85 +30,99 @@ const Home = () => {
           backgroundColor="#fff"
         >
           <Heading as="h1" size="lg" fontWeight="300" pb="2" w="20%">
-            My Clients
+            Dashboard
           </Heading>
-          <Flex w="80%" justifyContent="end">
-            <Flex mr="20px">
-              <Input className="client-search-bar" w="100%" mr="10px" />
-              <Button w="50%">Search</Button>
-            </Flex>
-            <Box>
-              <Button
-                ref={btnRef}
-                onClick={onOpen}
-                fontSize="text.md"
-                borderRadius="50%"
-                h="40px"
-                w="40px"
-              >
-                +
-              </Button>
-            </Box>
-          </Flex>
         </Flex>
-        <Flex className="dashboard-wrapper" justifyContent="center">
-          <Grid
-            className="dashboard-container"
-            gridTemplateColumns="repeat(3, 1fr)"
-            w="90%"
-            gap={4}
-            rowGap={4}
-            justifyContent="center"
-          >
-            <LayoutGroup>
-              {user?.clients?.map((client) => (
-                <GridItem w="100%">
-                  <ClientCard
-                    key={client.id}
-                    firstName={client.firstName}
-                    lastName={client.lastName}
-                    age={client.age}
-                    bio={client.about}
-                    email={client.email}
-                    phone={client.phone}
-                    id={client.id}
+        {isLoading ? (
+          <CircularProgress
+            isIndeterminate
+            color="blue.300"
+            size="80px"
+            position="absolute"
+            top="45%"
+            left="45%"
+          />
+        ) : (
+          user && (
+            <Grid
+              gridTemplateColumns="repeat(2, 1fr)"
+              rowGap={6}
+              p="0 20px 0 20px"
+            >
+              <GridItem colStart={1}>
+                <Heading
+                  as="h2"
+                  fontWeight="normal"
+                  fontSize="text.lg"
+                  borderBottom="1px solid #f0f0f0"
+                  w="50%"
+                  pb="5px"
+                  mb="15px"
+                >
+                  Newest Clients
+                </Heading>
+                {/* Current Client Table */}
+                {user?.clients?.length > 0 ? (
+                  <NewClientTable />
+                ) : (
+                  <Text>No Client or Appointment Data</Text>
+                )}
+              </GridItem>
+              <GridItem colStart={2}>
+                <Heading
+                  as="h2"
+                  fontWeight="normal"
+                  fontSize="text.lg"
+                  borderBottom="1px solid #f0f0f0"
+                  w="50%"
+                  pb="5px"
+                  mb="15px"
+                >
+                  User Stats
+                </Heading>
+                {user?.clients?.length > 0 ? (
+                  <IndexPieChart
+                    clients={user?.clients?.length}
+                    appointments={user?.appointments?.length}
                   />
-                </GridItem>
-              ))}
-            </LayoutGroup>
-          </Grid>
-        </Flex>
+                ) : (
+                  <Text>No Client or Appointment Data</Text>
+                )}
+              </GridItem>
+              <GridItem colSpan={2}>
+                <Flex
+                  borderBottom="1px solid #f0f0f0"
+                  pb="5px"
+                  mb="20px"
+                  w="50%"
+                  justifyContent="space-between"
+                >
+                  <Heading as="h2" fontWeight="normal" fontSize="text.lg">
+                    Upcoming Apointments
+                  </Heading>
+                  <Link href="/userAppointments/appointmentIndex">
+                    <Heading
+                      as="h3"
+                      _hover={{ cursor: 'pointer' }}
+                      fontWeight="normal"
+                      fontSize="text.md"
+                    >
+                      View All Appointments
+                    </Heading>
+                  </Link>
+                </Flex>
+                {user?.clients?.length > 0 ? (
+                  <UpcomingAppointments />
+                ) : (
+                  <Text>No Client or Appointment Data</Text>
+                )}
+              </GridItem>
+            </Grid>
+          )
+        )}
       </Box>
-      {/* CreateAppointmentForm */}
-      {/* Add Client Form here */}
-      <Drawer
-        isOpen={isOpen}
-        placement="right"
-        onClose={onClose}
-        finalFocusRef={btnRef}
-        size="sm"
-      >
-        <DrawerOverlay />
-        <DrawerContent>
-          <Flex
-            backgroundColor="#025fc6"
-            h="80px"
-            w="100%"
-            alignItems="center"
-            justifyContent="right"
-            p="25px"
-          >
-            <Heading fontSize="text.lg" fontWeight="light" color="white">
-              Add a Client
-            </Heading>
-          </Flex>
-          <DrawerBody>
-            <CreateClientForm onClose={onClose} />
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
     </>
   )
 }
 
-export default Home
+export default HomePage
