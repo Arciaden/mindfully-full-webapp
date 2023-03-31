@@ -46,6 +46,7 @@ model Client {
   user        User?         @relation(fields: [clientID], references: [id], onDelete: Cascade)
   firstName   String
   lastName    String
+  fullName    String
   age         Int
   phone       Int
   email       String

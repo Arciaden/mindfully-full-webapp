@@ -30,6 +30,7 @@ export const userData: {
       {
         firstName: 'Jerry',
         lastName: 'Seinfield',
+        fullname: 'Jerry Seinfield',
         age: 50,
         phone: 8888888888,
         email: 'jerry@gmail.com',
@@ -39,6 +40,7 @@ export const userData: {
       {
         firstName: 'Lebron',
         lastName: 'James',
+        fullName: 'Lebron James',
         age: 45,
         phone: 7777777777,
         email: 'lebronsucks@gmail.com',
@@ -48,6 +50,7 @@ export const userData: {
       {
         firstName: 'Jace',
         lastName: 'Olsen',
+        fullName: 'Jace Olsen',
         age: 21,
         phone: 1029384938,
         email: 'jaceolsen@gmail.com',
@@ -57,6 +60,7 @@ export const userData: {
       {
         firstName: 'Vance',
         lastName: 'Jenkins',
+        fullName: 'Vance Jenkins',
         age: 27,
         phone: 9302583473,
         email: 'vj@hotmail.com',
@@ -66,6 +70,7 @@ export const userData: {
       {
         firstName: 'Leroy',
         lastName: 'Jenkins',
+        fullName: 'Leroy Jenkins',
         age: 77,
         phone: 2921234637,
         email: 'lerooyjenkins@afkcharge.com',
@@ -75,6 +80,7 @@ export const userData: {
       {
         firstName: 'Spider',
         lastName: 'Man',
+        fullName: 'Spider Man',
         age: 17,
         phone: 3374445432,
         email: 'peterparker@ispoileverything.com',
@@ -84,6 +90,7 @@ export const userData: {
       {
         firstName: 'Bat',
         lastName: 'Man',
+        fullName: 'Bat Man',
         age: 17,
         phone: 3374445332,
         email: 'darknight@imafraidofbats.com',
@@ -93,6 +100,7 @@ export const userData: {
       {
         firstName: 'Super',
         lastName: 'Man',
+        fullName: 'Super Man',
         age: 30,
         phone: 3389445432,
         email: 'thesisoforhope@makesnosense.com',
@@ -102,6 +110,7 @@ export const userData: {
       {
         firstName: 'Aqua',
         lastName: 'Man',
+        fullName: 'Aqua Man',
         age: 40,
         phone: 3374444532,
         email: 'chrissharmasbestfriend@rockclimbing.com',
@@ -111,6 +120,7 @@ export const userData: {
       {
         firstName: 'Bartholomew',
         lastName: 'Angelopoulos',
+        fullName: 'Bartholomew Angelopoulos',
         age: 109,
         phone: 3374445432,
         email: 'havefunwiththisname@makingfrontendhard.com',
@@ -121,6 +131,7 @@ export const userData: {
       {
         firstName: 'Faulk',
         lastName: 'Faulkingham',
+        fullName: 'Faulk Faulkingham',
         age: 902,
         phone: 3374445430,
         email: 'faulkyou@faulkingmotherfaulker.com',

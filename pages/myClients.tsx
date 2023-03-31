@@ -28,34 +28,38 @@ import { SearchIcon } from '@chakra-ui/icons'
 //Skeleton Cards Array
 const skeletons = [1, 2, 3, 4, 5, 6]
 
+//Client Search Stuff
+
 //My Clients Page
 //Need to add loading graphics to this page
 const MyClients = () => {
   const { user } = useProfile()
-  const [loading, isLoading] = useState(false)
-  const [search, setSearch] = useState('')
+  const [query, setQuery] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = useRef()
 
-  // Client Search Information Object & Search Function (coming back to this, lots of research needed to get this to work)
-  // const clientNames = [
-  //   {
-  //     name: 'name',
-  //   },
-  //   {
-  //     name: 'jeeper',
-  //   },
-  // ]
-  // user &&
-  //   user?.clients?.map((client) => {
-  //     if (search.length > 0 && clientNames.length > 0) {
-  //       clientNames.push({ name: `${client.firstName} ${client.lastName}` })
-  //       clientNames.filter((client) => {
-  //         return client.name.match(search)
-  //       })
-  //     }
-  //   })
-  // console.log(clientNames)
+  //Search Bar Functionality
+  //Declaring an empty array to push the user.clients object into for easy filtering
+  const clients = []
+
+  //Pushing the user.clients object into the clients array
+  user?.clients?.map((client) => {
+    clients.push(client)
+  })
+
+  //Filter Function, this will allow the user to use the search bar to find clients by name
+  const getFilteredClients = (query, clients) => {
+    if (!query) {
+      return clients
+    }
+    return clients.filter((client) =>
+      client.fullName.includes(query.toLowerCase())
+    )
+  }
+
+  //Calling the filter function and passing the query from User Input and the clients array (which is an array made up of objects)
+  const filteredClients = getFilteredClients(query, clients)
 
   return (
     <>
@@ -77,9 +81,8 @@ const MyClients = () => {
             <Input
               className="client-search-bar"
               placeholder="Search for a client"
-              type="search"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              type="text "
+              onChange={(e) => setQuery(e.target.value)}
             />
             <InputLeftElement
               pointerEvents="none"
@@ -99,6 +102,7 @@ const MyClients = () => {
             </Button>
           </Box>
         </Flex>
+
         <Flex
           className="dashboard-wrapper"
           justifyContent="center"
@@ -115,8 +119,8 @@ const MyClients = () => {
             {/* //Styling for loaded client cards */}
             <LayoutGroup>
               {user ? (
-                user?.clients
-                  ?.map((client) => (
+                filteredClients
+                  .map((client) => (
                     <GridItem>
                       <ClientCard
                         key={client.id}

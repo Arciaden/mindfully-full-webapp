@@ -8,8 +8,8 @@ const run = async () => {
   await prisma.user.deleteMany()
   await prisma.appointment.deleteMany()
   await prisma.client.deleteMany()
-
   const salt = bcrypt.genSaltSync()
+
   await Promise.all(
     userData.map((user) => {
       return prisma.user.upsert({
@@ -21,17 +21,21 @@ const run = async () => {
           password: bcrypt.hashSync(user.password, salt),
           email: user.email,
           // profile: {
-          firstName: user.firstName,
-          lastName: user.lastName,
+          firstName: user.firstName.toLowerCase(),
+          lastName: user.lastName.toLowerCase(),
           age: user.age,
           phone: user.phone,
-          about: user.about,
+          about: user.about.toLowerCase(),
           // },
           clients: {
             create: user.clients.map((client) => ({
               name: client.name,
-              firstName: client.firstName,
-              lastName: client.lastName,
+              firstName: client.firstName.toLowerCase(),
+              lastName: client.lastName.toLowerCase(),
+              fullName:
+                client.firstName.toLowerCase() +
+                ' ' +
+                client.lastName.toLowerCase(),
               age: client.age,
               phone: client.phone,
               email: client.email,
@@ -44,9 +48,10 @@ const run = async () => {
               date: appointment.date,
               appointmentDuration: appointment.appointmentDuration,
               appointmentPlanDescription:
-                appointment.appointmentPlanDescription,
-              appointmentPlanTitle: appointment.appointmentPlanTitle,
-              appointmentNotes: appointment.appointmentNotes,
+                appointment.appointmentPlanDescription.toLowerCase(),
+              appointmentPlanTitle:
+                appointment.appointmentPlanTitle.toLowerCase(),
+              appointmentNotes: appointment.appointmentNotes.toLowerCase(),
               userIDs: appointment.userIDs,
               clientId: appointment.clientId,
             })),

@@ -27,6 +27,7 @@ const CreateClientForm = ({ onClose }) => {
   const { user } = useProfile()
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
+  const [fullName, setFullName] = useState('')
   const [age, setAge] = useState(0)
   const [phone, setPhone] = useState(0)
   const [email, setEmail] = useState('')
@@ -36,13 +37,14 @@ const CreateClientForm = ({ onClose }) => {
     e.preventDefault()
 
     const formData = {
-      firstName,
-      lastName,
+      firstName: firstName.toLowerCase(),
+      lastName: lastName.toLowerCase(),
       age,
       phone,
-      email,
-      about: bio,
+      email: email.toLowerCase(),
+      about: bio.toLowerCase(),
       trainerID: user.id,
+      fullName: firstName.toLowerCase() + ' ' + lastName.toLowerCase(),
     }
     fetch(`${window.location.origin}/api/clientCRUD`, {
       method: 'POST',

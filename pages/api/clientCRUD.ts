@@ -2,20 +2,30 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '../../lib/prisma'
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const { id, firstName, lastName, age, phone, email, about, trainerID } =
-    req.body
+  const {
+    id,
+    firstName,
+    lastName,
+    age,
+    phone,
+    email,
+    about,
+    trainerID,
+    fullName,
+  } = req.body
   if (req.method === 'PATCH') {
     const client = await prisma.client.update({
       where: {
         id: id,
       },
       data: {
-        firstName,
-        lastName,
+        firstName: firstName.toLowerCase(),
+        lastName: lastName.toLowerCase(),
         age,
         phone,
-        email,
+        email: email.toLowerCase(),
         about,
+        fullName: firstName.toLowerCase() + ' ' + lastName.toLowerCase(),
       },
     })
 
@@ -45,6 +55,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         phone,
         email,
         about,
+        fullName,
       },
     })
 
