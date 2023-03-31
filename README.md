@@ -24,7 +24,7 @@ Next add the following into a .env file in the root of your project (replacing *
    <li>
       FROM_EMAIL="*exampleemail@gmail.com*"
    </li>
-   li>
+   <li>
        FROM_NAME="*exampleUserName*"
    </li>
  </ul>
