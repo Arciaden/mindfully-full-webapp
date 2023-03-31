@@ -143,7 +143,11 @@ const ClientCard = ({ firstName, lastName, age, bio, email, phone, id }) => {
                 className="client-card-avatar-container"
               >
                 <Avatar
-                  name={firstName + ' ' + lastName}
+                  name={
+                    firstName.charAt(0).toUpperCase() +
+                    ' ' +
+                    lastName.charAt(0).toUpperCase()
+                  }
                   size="lg"
                   src="https://res.cloudinary.com/deveraux-design/image/upload/v1667011530/Mindfully%20Full/seinfeld_teftvl.jpg"
                 />
@@ -246,7 +250,11 @@ const ClientCard = ({ firstName, lastName, age, bio, email, phone, id }) => {
           <Flex lineHeight={6} mb="10px" position="relative">
             <Box mr="20px">
               <Avatar
-                name={firstName + ' ' + lastName}
+                name={
+                  firstName.charAt(0).toUpperCase() +
+                  ' ' +
+                  lastName.charAt(0).toUpperCase()
+                }
                 size="lg"
                 src="https://res.cloudinary.com/deveraux-design/image/upload/v1667011530/Mindfully%20Full/seinfeld_teftvl.jpg"
               />
@@ -256,7 +264,12 @@ const ClientCard = ({ firstName, lastName, age, bio, email, phone, id }) => {
                 <Link href={`/userClients/${id}`}>
                   <a className="client-link">
                     <Text fontWeight={700} className="client-link-text">
-                      {firstName + ' ' + lastName} | {age} | Client
+                      {firstName.charAt(0).toUpperCase() +
+                        firstName.slice(1) +
+                        ' ' +
+                        lastName.charAt(0).toUpperCase() +
+                        lastName.slice(1)}{' '}
+                      | {age} | Client
                     </Text>
                   </a>
                 </Link>
