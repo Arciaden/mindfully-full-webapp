@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run 
+1. Run 
 ```bash
 npm i
 ```
@@ -28,8 +28,12 @@ Next add the following into a .env file in the root of your project (replacing *
        FROM_NAME="*exampleUserName*"
    </li>
  </ul>
+ 
+ 2. Install MongoDB and set up a db either <a href="https://www.prisma.io/dataguide/mongodb/setting-up-a-local-mongodb-database">locally</a> or with <a href="https://www.mongodb.com/docs/atlas/">MongoDB Atlas</a>.
+
+If using a cloud DB (via Atlas) Be sure to whitelist the IPs that you would like to connect to the database from.
   
-Next run the development server with one of the commands below.
+3. Run the development server with one of the commands below.
 
 ```bash
 npm run dev
