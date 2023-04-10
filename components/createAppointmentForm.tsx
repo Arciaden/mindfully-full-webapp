@@ -74,7 +74,7 @@ const CreateAppointmentForm = () => {
               )
             }}
           >
-            {user?.clients.map((client) => (
+            {user?.clients?.map((client) => (
               <option
                 key={client.id}
                 value={[client.id, client.firstName, client.lastName]}

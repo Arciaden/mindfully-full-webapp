@@ -2,13 +2,9 @@ import { Box, Grid, GridItem, Heading, Text, Flex } from '@chakra-ui/react'
 import { useProfile } from '../lib/hooks'
 import { DateTime } from 'luxon'
 import Link from 'next/link'
-import appointment from '../pages/api/appointment'
 
 const UpcomingAppointments = () => {
   const { user, isLoading } = useProfile()
-
-  let date = DateTime.fromISO('2023-03-21T23:00:40.305Z')
-  console.log(date)
 
   return (
     <Box>

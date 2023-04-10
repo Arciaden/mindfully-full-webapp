@@ -4,15 +4,15 @@ import prisma from '../../../lib/prisma'
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { id } = req.body
 
-  const client = await prisma.client
-    .findUnique({
+  const appointments = await prisma.appointment
+    .findMany({
       where: {
-        id,
+        clientId: id,
       },
     })
     .catch((error) => res.status(404).json({ error: error.message }))
 
-  if (client) {
-    res.status(200).json(client)
+  if (appointments) {
+    res.status(200).json(appointments)
   }
 }

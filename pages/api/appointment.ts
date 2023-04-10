@@ -28,12 +28,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const appointment = await prisma.appointment.create({
       data: {
         userIDs: trainerID,
-        appointmentPlanTitle: appPlanTitle,
+        appointmentPlanTitle: appPlanTitle.toLowerCase(),
         appointmentDuration: appDuration,
-        appointmentPlanDescription: appPlanDesc,
-        type,
+        appointmentPlanDescription: appPlanDesc.toLowerCase(),
+        type: type.toLowerCase(),
         clientId: clientID,
-        clientName,
+        clientName: clientName.toLowerCase(),
       },
     })
 

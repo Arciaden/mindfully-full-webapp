@@ -44,7 +44,7 @@ const run = async () => {
           },
           appointments: {
             create: user.appointments.map((appointment) => ({
-              type: appointment.type,
+              type: appointment.type.toLowerCase(),
               date: appointment.date,
               appointmentDuration: appointment.appointmentDuration,
               appointmentPlanDescription:

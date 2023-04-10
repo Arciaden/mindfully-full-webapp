@@ -42,8 +42,9 @@ enum Type {
 
 model Client {
   id          String        @id @default(auto()) @map("_id") @db.ObjectId
-  clientID    String?       @db.ObjectId
-  user        User?         @relation(fields: [clientID], references: [id], onDelete: Cascade)
+  clientId    String?       @db.ObjectId
+  noteId      String?       @db.ObjectId
+  user        User?         @relation(fields: [clientId], references: [id], onDelete: Cascade)
   firstName   String
   lastName    String
   fullName    String
@@ -52,8 +53,18 @@ model Client {
   email       String
   about       String?
   Appointment Appointment[]
+  notes       ClientNotes[]
   createdAt   DateTime?     @default(now())
   updatedAt   DateTime?     @updatedAt
+}
+
+model ClientNotes {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  note      String?
+  noteId    String?   @db.ObjectId
+  client    Client?   @relation(fields: [noteId], references: [id])
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
 }
 
 model Appointment {

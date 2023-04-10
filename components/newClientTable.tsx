@@ -8,6 +8,7 @@ import {
   Tbody,
 } from '@chakra-ui/react'
 import Link from 'next/link'
+import { DateTime } from 'luxon'
 import { useProfile } from '../lib/hooks'
 
 const NewClientTable = () => {
@@ -32,10 +33,13 @@ const NewClientTable = () => {
             user?.clients?.slice(0, 5).map((client) => (
               <Tr key={client.id}>
                 <Td>
-                  {client.firstName} {client.lastName}
+                  {client.firstName.slice(0, 1).toUpperCase() +
+                    client.firstName.slice(1)}{' '}
+                  {client.lastName.slice(0, 1).toUpperCase() +
+                    client.lastName.slice(1)}
                 </Td>
                 <Td>{client.age}</Td>
-                <Td>{client.createdAt}</Td>
+                <Td>{DateTime.fromISO(client.createdAt).toLocaleString()}</Td>
                 <Td>
                   <Link href={`/userClients/${client.id}`}>View Client</Link>
                 </Td>

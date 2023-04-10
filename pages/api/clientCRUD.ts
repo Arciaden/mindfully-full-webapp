@@ -13,6 +13,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     trainerID,
     fullName,
   } = req.body
+
+  //Updating a client
   if (req.method === 'PATCH') {
     const client = await prisma.client.update({
       where: {
@@ -34,8 +36,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       console.log('Client Update Error: Client not found')
     }
 
-    res.status(200).json(client)
+    return res.status(200).json(client)
   }
+
+  //Deleting a client
   if (req.method === 'DELETE') {
     const client = await prisma.client.delete({
       where: {
@@ -46,6 +50,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(200).json(client)
   }
 
+  //Creating a client and adding the relationship to the trainer (user)
   if (req.method === 'POST') {
     const client = await prisma.client.create({
       data: {
@@ -73,6 +78,21 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     })
 
     console.log(client)
-    res.status(200).json({ client, user })
+    return res.status(200).json({ client, user })
+  }
+
+  if (req.method === 'POST' && id === req.query) {
+    //Creating client notes
+    const client = await prisma.client.findFirst({
+      where: {
+        id: id,
+      },
+    })
+
+    if (!client) {
+      return res.status(401).json({ error: 'nothing found' })
+    }
+
+    return res.status(200).json(client)
   }
 }
