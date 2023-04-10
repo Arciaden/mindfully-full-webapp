@@ -149,7 +149,7 @@ export const userData: {
         appointmentDuration: 20000,
         appointmentNotes:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Habitasse platea dictumst quisque sagittis. Urna neque viverra justo nec. Donec ultrices tincidunt arcu non sodales neque sodales ut. Diam ut venenatis tellus in metus.',
-        userIdDs: ['6413c156f336d7e1ca20d8f1'],
+        userIDs: ['6413c156f336d7e1ca20d8f1'],
         clientId: '6413c3941c4b785d3144062a',
       },
       {
