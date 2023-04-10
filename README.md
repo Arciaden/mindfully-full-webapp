@@ -10,24 +10,7 @@ to install all the packages that are needed to run the project successfully.
 
 Next add the following into a .env file in the root of your project (replacing *placeholders* with your keys as neccessary)
 
-.env file contents
-<ul>
-    <li>
-       DATABASE_URL="*MONGO_DB_CONNECTION_STRING*"
-    </li>
-   <li>
-     RESET_PASSWORD_TOKEN='*RANDOM_STRING*'
-   </li>
-   <li>
-      SENDGRID_API_KEY="SG.*API_KEY*"
-   </li>
-   <li>
-      FROM_EMAIL="*exampleemail@gmail.com*"
-   </li>
-   <li>
-       FROM_NAME="*exampleUserName*"
-   </li>
- </ul>
+
  
  2. Install MongoDB and set up a db either <a href="https://www.prisma.io/dataguide/mongodb/setting-up-a-local-mongodb-database">locally</a> or with <a href="https://www.mongodb.com/docs/atlas/">MongoDB Atlas</a>.
     
