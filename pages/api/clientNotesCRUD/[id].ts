@@ -2,17 +2,28 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '../../../lib/prisma'
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const { id } = req.body
+  const { id, note } = req.body
 
-  const notes = await prisma.clientNotes
-    .findMany({
-      where: {
-        noteId: id,
+  if (req.method === 'POST') {
+    const notes = await prisma.clientNotes.create({
+      data: {
+        note: note.toLowerCase(),
       },
     })
-    .catch((error) => res.status(404).json({ error: error.message }))
 
-  if (notes) {
-    res.status(200).json(notes)
+    const client = await prisma.client.update({
+      where: {
+        id: id,
+      },
+      data: {
+        notes: {
+          connect: {
+            id: notes.id,
+          },
+        },
+      },
+    })
+    console.log(client, notes)
+    return res.status(200).json({ client, notes })
   }
 }
