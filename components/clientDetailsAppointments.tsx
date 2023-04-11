@@ -1,29 +1,14 @@
-import {
-  Box,
-  Flex,
-  Grid,
-  GridItem,
-  Heading,
-  Input,
-  Text,
-  Select,
-  Button,
-} from '@chakra-ui/react'
+import { Box, Grid, GridItem, Heading, Input, Text } from '@chakra-ui/react'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import { DateTime } from 'luxon'
-import AppointmentSort from './appointmentSort'
 import Link from 'next/link'
-import appointment from '../pages/api/appointment'
-import CreateAppointmentForm from './createAppointmentForm'
 
 const ClientDetailsAppointments = () => {
   const [appointmentData, setAppointmentData] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [query, setQuery] = useState('')
-  const [category, setCategory] = useState('')
-  const [addAppointment, setAddApppointment] = useState(false)
 
   const router = useRouter()
   const { id } = router.query
