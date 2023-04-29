@@ -13,8 +13,8 @@ import {
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useRouter } from 'next/router'
-import { DateTime } from 'luxon'
 import { AddIcon } from '@chakra-ui/icons'
+import ClientNotes from './clientNotes'
 
 const ClientDetailsNotes = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -48,7 +48,7 @@ const ClientDetailsNotes = () => {
   const handleSubmit = async () => {
     setIsLoading(true)
     await axios
-      .post(`${window.location.origin}/api/clientNotesCRUD/${id}`, {
+      .post(`${window.location.origin}/api/clientNotesCRUD`, {
         id,
         note,
       })
@@ -138,29 +138,16 @@ const ClientDetailsNotes = () => {
                 onClick={() => setAddNote(true)}
               />
             </Flex>
-            <Box h="500px" overflow="scroll">
+            <Box h="500px" overflow="scroll" p="20px">
               {notesData &&
                 queriedNotes
                   .sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1))
                   .map((note) => (
-                    <>
-                      <Box
-                        borderRadius="10px"
-                        boxShadow="0 0 5px #f1f0f0"
-                        padding="20px"
-                      >
-                        <Heading
-                          as="h4"
-                          mb="15px"
-                          fontSize="text.md"
-                          fontWeight={500}
-                        >
-                          {DateTime.fromISO(note.createdAt).toLocaleString()}
-                        </Heading>
-                        <Text>{note.note}</Text>
-                      </Box>
-                      <Box></Box>
-                    </>
+                    <ClientNotes
+                      note={note.note}
+                      date={note.createdAt}
+                      id={note.id}
+                    />
                   ))}
             </Box>
           </>

@@ -16,7 +16,7 @@ const UpcomingAppointments = () => {
         {user &&
           user?.appointments
             .slice(0, 5)
-            .sort((a, b) => (a.createdAt > b.createdAt ? 1 : -1))
+            .sort((a, b) => (a.date > b.date ? 1 : -1))
             .map((appointment) => (
               <GridItem
                 key={appointment.id}
@@ -38,14 +38,11 @@ const UpcomingAppointments = () => {
                     fontSize="text.md"
                     fontWeight="500"
                   >
-                    {DateTime.fromISO(appointment.createdAt).toLocaleString()}
+                    {DateTime.fromISO(appointment.date).toLocaleString()}
                   </Heading>
 
                   <Text>
-                    {appointment.clientName} -{' '}
-                    {`${DateTime.fromISO(appointment.time).hour}:${
-                      DateTime.fromISO(appointment.time).minute
-                    } PM`}
+                    {appointment.clientName} {`${appointment.time} PM`}
                   </Text>
                   <Text></Text>
                   <Text>{appointment.appointmentPlanTitle}</Text>

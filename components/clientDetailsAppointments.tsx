@@ -73,94 +73,109 @@ const ClientDetailsAppointments = () => {
         />
       </Box>
 
-      <Box className="appointment-container" overflow="scroll" h="500px">
-        <Box _hover={{ cursor: 'pointer' }}>
-          {appointmentData &&
-            queriedAppointments.map((appointment) => (
-              <Link href={`/userAppointments/${appointment.id}`}>
-                <Box
-                  boxShadow="0 0 5px #f1f0f0"
-                  borderRadius="10px"
-                  p="20px"
-                  mb="15px"
-                  transition="0.3s ease"
-                  _hover={{
-                    backgroundColor: '#f1f0f0',
-                    transition: '0.3s ease',
-                  }}
-                  key={appointment.id}
-                >
-                  <Heading
-                    as="h4"
+      <Box
+        className="appointment-container"
+        overflow="scroll"
+        h="500px"
+        p="20px"
+      >
+        {appointmentData.length > 0 ? (
+          <Box _hover={{ cursor: 'pointer' }}>
+            {appointmentData &&
+              queriedAppointments.map((appointment) => (
+                <Link href={`/userAppointments/${appointment.id}`}>
+                  <Box
+                    boxShadow="0 0 5px #f1f0f0"
+                    borderRadius="10px"
+                    p="20px"
                     mb="15px"
-                    fontSize="text.md"
-                    fontWeight={500}
+                    transition="0.3s ease"
+                    _hover={{
+                      backgroundColor: '#f1f0f0',
+                      transition: '0.3s ease',
+                    }}
+                    key={appointment.id}
                   >
-                    {DateTime.fromISO(appointment.date).toLocaleString()}{' '}
-                    Appointment Summary
-                  </Heading>
-                  <Grid templateColumns="repeat(5, 1fr)">
-                    <GridItem>
-                      <Heading as="h5" fontSize="text.sm" fontWeight={500}>
-                        Category
-                      </Heading>
-                      <Text fontSize="text.sm">
-                        {appointment?.type?.slice(0, 1).toUpperCase() +
-                          appointment?.type?.slice(1)}
-                      </Text>
-                    </GridItem>
-                    <GridItem>
-                      <Heading as="h5" fontSize="text.sm" fontWeight={500}>
-                        Title
-                      </Heading>
-                      <Text fontSize="text.sm">
-                        {appointment?.appointmentPlanTitle
-                          ?.slice(0, 1)
-                          .toUpperCase() +
-                          appointment?.appointmentPlanTitle?.slice(1)}
-                      </Text>
-                    </GridItem>
-                    <GridItem>
-                      <Heading as="h5" fontSize="text.sm" fontWeight={500}>
-                        Duration
-                      </Heading>
-                      <Text fontSize="text.sm">
-                        {appointment?.appointmentDuration >= 3601 ? (
-                          <Text>
-                            {Math.floor(
-                              appointment?.appointmentDuration / 3600
-                            )}{' '}
-                            Hours
-                          </Text>
-                        ) : (
-                          <Text>
-                            {Math.floor(appointment?.appointmentDuration / 60)}{' '}
-                            Minutes
-                          </Text>
-                        )}
-                      </Text>
-                    </GridItem>
-                    <GridItem colSpan={2}>
-                      <Heading as="h5" fontSize="text.sm" fontWeight={500}>
-                        Appointment Notes
-                      </Heading>
-                      {appointment.appointmentNotes ? (
-                        <Text>
-                          {appointment?.appointmentNotes
+                    <Heading
+                      as="h4"
+                      mb="15px"
+                      fontSize="text.md"
+                      fontWeight={500}
+                    >
+                      {DateTime.fromISO(appointment.date).toLocaleString()}{' '}
+                      Appointment Summary
+                    </Heading>
+                    <Grid templateColumns="repeat(5, 1fr)">
+                      <GridItem>
+                        <Heading as="h5" fontSize="text.sm" fontWeight={500}>
+                          Category
+                        </Heading>
+                        <Text fontSize="text.sm">
+                          {appointment?.type?.slice(0, 1).toUpperCase() +
+                            appointment?.type?.slice(1)}
+                        </Text>
+                      </GridItem>
+                      <GridItem>
+                        <Heading as="h5" fontSize="text.sm" fontWeight={500}>
+                          Title
+                        </Heading>
+                        <Text fontSize="text.sm">
+                          {appointment?.appointmentPlanTitle
                             ?.slice(0, 1)
                             .toUpperCase() +
-                            appointment?.appointmentNotes?.slice(1)}
-                          ...
+                            appointment?.appointmentPlanTitle?.slice(1)}
                         </Text>
-                      ) : (
-                        <Text>No Notes Yet</Text>
-                      )}
-                    </GridItem>
-                  </Grid>
-                </Box>
-              </Link>
-            ))}
-        </Box>
+                      </GridItem>
+                      <GridItem>
+                        <Heading as="h5" fontSize="text.sm" fontWeight={500}>
+                          Duration
+                        </Heading>
+                        <Text fontSize="text.sm">
+                          {appointment?.appointmentDuration >= 3601 ? (
+                            <Text>
+                              {Math.floor(
+                                appointment?.appointmentDuration / 3600
+                              )}{' '}
+                              Hours
+                            </Text>
+                          ) : (
+                            <Text>
+                              {Math.floor(
+                                appointment?.appointmentDuration / 60
+                              )}{' '}
+                              Minutes
+                            </Text>
+                          )}
+                        </Text>
+                      </GridItem>
+                      <GridItem colSpan={2}>
+                        <Heading as="h5" fontSize="text.sm" fontWeight={500}>
+                          Appointment Notes
+                        </Heading>
+                        {appointment.appointmentNotes ? (
+                          <Text>
+                            {appointment?.appointmentNotes
+                              ?.slice(0, 1)
+                              .toUpperCase() +
+                              appointment?.appointmentNotes?.slice(1)}
+                            ...
+                          </Text>
+                        ) : (
+                          <Text>No Notes Yet</Text>
+                        )}
+                      </GridItem>
+                    </Grid>
+                  </Box>
+                </Link>
+              ))}
+          </Box>
+        ) : (
+          <Box _hover={{ cursor: 'pointer', color: 'blue' }}>
+            <Link href="/userAppointments/appointmentIndex">
+              <Text>No Appointments Yet! Add One Here!</Text>
+            </Link>
+          </Box>
+        )}
       </Box>
     </>
   )

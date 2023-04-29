@@ -68,19 +68,19 @@ model ClientNotes {
 }
 
 model Appointment {
-  id                         String    @id @default(auto()) @map("_id") @db.ObjectId
+  id                         String   @id @default(auto()) @map("_id") @db.ObjectId
   type                       String
-  userIDs                    String[]  @db.ObjectId
-  users                      User[]    @relation(fields: [userIDs], references: [id])
-  clients                    Client?   @relation(fields: [clientId], references: [id])
+  userIDs                    String[] @db.ObjectId
+  users                      User[]   @relation(fields: [userIDs], references: [id])
+  clients                    Client?  @relation(fields: [clientId], references: [id])
   clientName                 String?
   appointmentPlanTitle       String
   appointmentPlanDescription String
   appointmentDuration        Int
   appointmentNotes           String?
-  date                       DateTime  @default(now())
-  time                       DateTime? @default(now())
-  createdAt                  DateTime  @default(now())
-  updatedAt                  DateTime  @updatedAt
-  clientId                   String?   @db.ObjectId
+  date                       DateTime @default(now())
+  time                       Int?
+  createdAt                  DateTime @default(now())
+  updatedAt                  DateTime @updatedAt
+  clientId                   String?  @db.ObjectId
 }
