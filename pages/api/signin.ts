@@ -28,7 +28,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       },
       jwtSecret,
       {
-        expiresIn: '8h',
+        expiresIn: '24h',
       }
     )
 

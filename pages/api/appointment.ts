@@ -11,6 +11,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       appDuration,
       appPlanDesc,
       type,
+      time,
+      date,
     } = req.body
 
     const user = await prisma.user.findUnique({
@@ -33,7 +35,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         appointmentPlanDescription: appPlanDesc.toLowerCase(),
         type: type.toLowerCase(),
         clientId: clientID,
+        date,
         clientName: clientName.toLowerCase(),
+        time,
       },
     })
 

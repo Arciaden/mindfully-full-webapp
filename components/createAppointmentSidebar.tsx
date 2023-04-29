@@ -6,12 +6,13 @@ import {
   Select,
   Textarea,
   Button,
+  Flex,
 } from '@chakra-ui/react'
 import { useState } from 'react'
 import { useProfile } from '../lib/hooks'
 import durationObject from '../lib/durationObject'
 
-const CreateAppointmentForm = ({ date }) => {
+const CreateAppointmentSidebar = () => {
   const { user } = useProfile()
   const [client, setClient] = useState('')
   const [appDesc, setAppDesc] = useState('')
@@ -20,8 +21,12 @@ const CreateAppointmentForm = ({ date }) => {
   const [type, setType] = useState('')
   const [clientName, setClientName] = useState('')
   const [time, setTime] = useState(0)
+  const [date, setDate] = useState(Date())
 
-  console.log(clientName)
+  let newDate = new Date(date)
+  newDate.setHours(newDate.getHours() + 6)
+  let isoDate = newDate.toISOString()
+  console.log(isoDate)
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -34,7 +39,7 @@ const CreateAppointmentForm = ({ date }) => {
       appPlanDesc: appDesc,
       appDuration,
       type,
-      date,
+      date: isoDate,
       time,
     }
     fetch(`${window.location.origin}/api/appointment`, {
@@ -57,22 +62,22 @@ const CreateAppointmentForm = ({ date }) => {
     <Box>
       <form onSubmit={handleSubmit}>
         <FormControl>
-          <FormLabel>Appointment Title</FormLabel>
+          <FormLabel mt="10px">Title</FormLabel>
           <Input type="text" onChange={(e) => setAppTitle(e.target.value)} />
           {/* <FormLabel>Trainer</FormLabel>
-          <Select
-            placeholder="Select Trainer"
-            onChange={(e) => setTrainer(e.target.value)}
-          >
-            <option value={user?.id}>
-              {user?.firstName.slice(0, 1).toUpperCase() +
-                user?.firstName.slice(1) +
-                ' ' +
-                user?.lastName.slice(0, 1).toUpperCase() +
-                user?.lastName.slice(1)}
-            </option>
-          </Select> */}
-          <FormLabel>Client</FormLabel>
+            <Select
+              placeholder="Select Trainer"
+              onChange={(e) => setTrainer(e.target.value)}
+            >
+              <option value={user?.id}>
+                {user?.firstName.slice(0, 1).toUpperCase() +
+                  user?.firstName.slice(1) +
+                  ' ' +
+                  user?.lastName.slice(0, 1).toUpperCase() +
+                  user?.lastName.slice(1)}
+              </option>
+            </Select> */}
+          <FormLabel mt="10px">Client</FormLabel>
           <Select
             placeholder="Select Client"
             onChange={(e) => {
@@ -94,16 +99,18 @@ const CreateAppointmentForm = ({ date }) => {
                 </option>
               ))}
           </Select>
-          <FormLabel>Appointment Type</FormLabel>
+          <FormLabel mt="10px">Category</FormLabel>
           <Input type="text" onChange={(e) => setType(e.target.value)} />
-          <FormLabel>Appointment Description</FormLabel>
+          <FormLabel mt="10px">Description</FormLabel>
           <Textarea onChange={(e) => setAppDesc(e.target.value)}></Textarea>
-          <FormLabel>Time</FormLabel>
+          <FormLabel mt="10px">Date</FormLabel>
+          <Input type="date" onChange={(e) => setDate(e.target.value)} />
+          <FormLabel mt="10px">Time</FormLabel>
           <Input
             onChange={(e) => setTime(Number(e.target.value.replace(':', '')))}
             type="time"
           />
-          <FormLabel>Duration</FormLabel>
+          <FormLabel mt="5px">Duration</FormLabel>
           <Select
             placeholder="Select Appointment Duration"
             onChange={(e) => setAppDuration(Number(e.target.value))}
@@ -123,11 +130,15 @@ const CreateAppointmentForm = ({ date }) => {
             ))}
           </Select>
 
-          <Button type="submit">Create Appointment</Button>
+          <Flex justifyContent="center">
+            <Button type="submit" mt="20px" w="100%">
+              Create Appointment
+            </Button>
+          </Flex>
         </FormControl>
       </form>
     </Box>
   )
 }
 
-export default CreateAppointmentForm
+export default CreateAppointmentSidebar

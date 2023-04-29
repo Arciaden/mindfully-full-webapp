@@ -1,10 +1,18 @@
-import { Box, Text } from '@chakra-ui/react'
+import { Box, Text, Flex } from '@chakra-ui/react'
+
+import AppointmentCalendar from '../../components/appointmentCalendar'
+import AppointmentsSidebar from '../../components/appointmentsSidebar'
 
 const AppointmentsIndex = () => {
   return (
-    <Box>
-      <Text>All Appointments Page</Text>
-    </Box>
+    <Flex>
+      <Box className="appointment-sidebar-container">
+        <AppointmentsSidebar />
+      </Box>
+      <Box>
+        <AppointmentCalendar />
+      </Box>
+    </Flex>
   )
 }
 
