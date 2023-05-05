@@ -20,7 +20,7 @@ import ClientDetailsAppointments from '../../components/clientDetailsAppointment
 const ClientPage = () => {
   const router = useRouter()
   const { id } = router.query
-  const [client, setClient] = useState()
+  const [client, setClient] = useState<any>({})
 
   const [isLoading, setIsLoading] = useState(false)
 
