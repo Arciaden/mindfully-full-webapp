@@ -1,76 +1,76 @@
-import { Flex, Heading, Text } from '@chakra-ui/react'
+import { Textarea, Text, Button, Box, Flex, Heading } from '@chakra-ui/react'
+import { CloseIcon, EditIcon } from '@chakra-ui/icons'
+import { useState } from 'react'
 
-const AppointmentNotesForm = ({ title, type, duration, description }) => {
+const AppointmentNotesForm = ({ id, note }) => {
+  const [edit, setEdit] = useState(false)
+  const [editNote, setEditNote] = useState(note)
+  const [count, setCount] = useState(note.length)
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    const formData = {
+      id,
+      note: editNote,
+    }
+    fetch(`${window.location.origin}/api/appointment`, {
+      method: 'PATCH',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((res) => {
+        console.log('request processed successfully')
+
+        return console.log(res.json())
+      })
+      .catch((error) => error)
+  }
+
+  const toggleEdit = () => {
+    setEdit((state) => !state)
+  }
+
   return (
     <>
-      <Flex justifyContent="space-between" mb="20px">
-        <Flex flexDirection="column" w="32%">
-          <Heading
-            as="h3"
-            fontSize="text.xl"
-            fontWeight="normal"
-            borderBottom="1px solid #e6e6e6"
-            pb="5px"
-            w="75%"
-          >
-            Title
-          </Heading>
-          <Text pt="5px" pl="5px" fontSize="text.md">
-            {title}
-          </Text>
-        </Flex>
-        <Flex flexDirection="column" w="32%">
-          <Heading
-            as="h3"
-            fontSize="text.xl"
-            fontWeight="normal"
-            borderBottom="1px solid #e6e6e6"
-            pb="5px"
-            w="75%"
-          >
-            Type
-          </Heading>
-          <Text pt="5px" pl="5px" fontSize="text.md">
-            {type}
-          </Text>
-        </Flex>
-        <Flex flexDirection="column" w="32%">
-          <Heading
-            as="h3"
-            fontSize="text.xl"
-            fontWeight="normal"
-            borderBottom="1px solid #e6e6e6"
-            pb="5px"
-            w="75%"
-          >
-            Duration
-          </Heading>
-          {duration >= 3601 ? (
-            <Text pt="5px" ml="5px" fontSize="text.md">
-              {Math.floor(duration / 3600)} Hours
-            </Text>
-          ) : (
-            <Text pt="5px" pl="5px" fontSize="text.md">
-              {Math.floor(duration / 60)} Minutes
-            </Text>
-          )}
-        </Flex>
-      </Flex>
-      <Flex flexDirection="column">
-        <Heading
-          as="h3"
-          fontSize="text.xl"
-          fontWeight="normal"
-          borderBottom="1px solid #e6e6e6"
-          w="75%"
-          pb="5px"
-        >
-          Description
-        </Heading>
-        <Text pt="5px" pl="5px" fontSize="text.md">
-          {description}
-        </Text>
-      </Flex>
+      {edit ? (
+        <>
+          <Box w="95%">
+            <form onSubmit={handleSubmit}>
+              <Textarea
+                maxLength={3000}
+                rows={19}
+                value={editNote}
+                mb="10px"
+                onChange={(e) => {
+                  setEditNote(e.target.value)
+                  setCount(e.target.value.length)
+                }}
+              ></Textarea>
+              <Text>{count} / 3000</Text>
+              <Flex w="100%" justifyContent="end">
+                <Button type="submit" mt="10px" onClick={toggleEdit}>
+                  Update Note
+                </Button>
+              </Flex>
+            </form>
+          </Box>
+        </>
+      ) : (
+        <Text>{note}</Text>
+      )}
+      <Box
+        position="absolute"
+        top="0"
+        right="2%"
+        _hover={{ cursor: 'pointer' }}
+        onClick={toggleEdit}
+      >
+        {edit ? <CloseIcon /> : <EditIcon />}
+      </Box>
     </>
   )
 }

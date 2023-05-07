@@ -87,11 +87,11 @@ const ClientDetailsInformation = ({
         </GridItem>
         <GridItem colSpan={7}>
           <Heading fontSize="text.xxl" fontWeight="normal" as="h2">
-            {firstName.slice(0, 1).toUpperCase() +
-              firstName.slice(1) +
+            {firstName?.slice(0, 1).toUpperCase() +
+              firstName?.slice(1) +
               ' ' +
-              lastName.slice(0, 1).toUpperCase() +
-              lastName.slice(1)}
+              lastName?.slice(0, 1).toUpperCase() +
+              lastName?.slice(1)}
           </Heading>
         </GridItem>
         <GridItem colStart={9}>
@@ -250,7 +250,7 @@ const ClientDetailsInformation = ({
                 First Name
               </Text>
               <Text>
-                {firstName.slice(0, 1).toUpperCase() + firstName.slice(1)}
+                {firstName?.slice(0, 1).toUpperCase() + firstName?.slice(1)}
               </Text>
             </GridItem>
             <GridItem colStart={5} colEnd={8}>
@@ -258,7 +258,7 @@ const ClientDetailsInformation = ({
                 Last Name
               </Text>
               <Text>
-                {lastName.slice(0, 1).toUpperCase() + lastName.slice(1)}
+                {lastName?.slice(0, 1).toUpperCase() + lastName?.slice(1)}
               </Text>
             </GridItem>
             <GridItem colStart={8} colEnd={10}>

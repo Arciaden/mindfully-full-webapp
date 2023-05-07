@@ -44,7 +44,7 @@ const IndexCalendar = () => {
   const [type, setType] = useState('')
   const [clientName, setClientName] = useState('')
   const [time, setTime] = useState(0)
-  const [clientInfo, setClientInfo] = useState('')
+  const [id, setID] = useState('')
 
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { user, isLoading } = useProfile()
@@ -82,6 +82,26 @@ const IndexCalendar = () => {
       .catch((error) => error)
   }
 
+  const handleDelete = (e) => {
+    e.preventDefault()
+
+    fetch(`${window.location.origin}/api/appointment`, {
+      method: 'DELETE',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id,
+      }),
+    })
+      .then((res) => {
+        console.log('request successful')
+        return res.json()
+      })
+      .catch((error) => error)
+  }
+
   function isSameDay(a, b) {
     return differenceInCalendarDays(a, b) === 0
   }
@@ -106,6 +126,7 @@ const IndexCalendar = () => {
                   fontSize="text.xxxs"
                   onClick={(e) => {
                     e.stopPropagation()
+                    setID(appointment.id)
                   }}
                   key={appointment.id}
                   zIndex={1}
@@ -161,6 +182,19 @@ const IndexCalendar = () => {
                     >
                       <Button>View Appointment</Button>
                     </Link>
+                    <Box mt="15px">
+                      <form>
+                        <Button
+                          type="submit"
+                          backgroundColor="red"
+                          color="white"
+                          w="100%"
+                          onClick={handleDelete}
+                        >
+                          Delete Appointment
+                        </Button>
+                      </form>
+                    </Box>
                   </Flex>
                 </PopoverBody>
               </PopoverContent>
