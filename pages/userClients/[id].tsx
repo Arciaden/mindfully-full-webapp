@@ -72,17 +72,17 @@ const ClientPage = () => {
         zIndex="10"
         backgroundColor="#fff"
       >
-        <Heading as="h1" size="lg" fontWeight="300" pb="2" w="100%">
+        {/* <Heading as="h1" size="lg" fontWeight="300" pb="2" w="100%">
           {isLoading ? (
             <Skeleton height="30px" />
           ) : client ? (
-            client.firstName.slice(0, 1).toUpperCase() +
-            client.firstName.slice(1) +
+            client?.firstName.slice(0, 1).toUpperCase() +
+            client?.firstName.slice(1) +
             ' ' +
-            client.lastName.slice(0, 1).toUpperCase() +
-            client.lastName.slice(1)
+            client?.lastName.slice(0, 1).toUpperCase() +
+            client?.lastName.slice(1)
           ) : null}
-        </Heading>
+        </Heading> */}
       </Flex>
       <Flex justifyContent="center">
         <Box

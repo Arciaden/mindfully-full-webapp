@@ -17,7 +17,9 @@ import { useRouter } from 'next/router'
 import { DateTime } from 'luxon'
 import axios from 'axios'
 import { CloseIcon, EditIcon } from '@chakra-ui/icons'
+import AppointmentInfoForm from '../../components/appointmentInfoForm'
 import AppointmentNotesForm from '../../components/appointmentNotesForm'
+import CreateAppointmentNotes from '../../components/createAppointmentNotes'
 
 const AppointmentPage: React.FC = () => {
   const router = useRouter()
@@ -129,102 +131,15 @@ const AppointmentPage: React.FC = () => {
                       />
                     ) : appointment ? (
                       <>
-                        {edit ? (
-                          <AppointmentNotesForm
-                            title={appointment.appointmentPlanTitle}
-                            type={appointment.type}
-                            duration={appointment.appointmentDuration}
-                            description={appointment.appointmentPlanDescription}
-                          />
-                        ) : (
-                          <>
-                            <Flex justifyContent="space-between" mb="20px">
-                              <Flex flexDirection="column" w="32%">
-                                <Heading
-                                  as="h3"
-                                  fontSize="text.xl"
-                                  fontWeight="normal"
-                                  borderBottom="1px solid #e6e6e6"
-                                  pb="5px"
-                                  w="75%"
-                                >
-                                  Title
-                                </Heading>
-                                <Text pt="5px" pl="5px" fontSize="text.md">
-                                  {appointment?.appointmentPlanTitle}
-                                </Text>
-                              </Flex>
-                              <Flex flexDirection="column" w="32%">
-                                <Heading
-                                  as="h3"
-                                  fontSize="text.xl"
-                                  fontWeight="normal"
-                                  borderBottom="1px solid #e6e6e6"
-                                  pb="5px"
-                                  w="75%"
-                                >
-                                  Type
-                                </Heading>
-                                <Text pt="5px" pl="5px" fontSize="text.md">
-                                  {appointment?.type}
-                                </Text>
-                              </Flex>
-                              <Flex flexDirection="column" w="32%">
-                                <Heading
-                                  as="h3"
-                                  fontSize="text.xl"
-                                  fontWeight="normal"
-                                  borderBottom="1px solid #e6e6e6"
-                                  pb="5px"
-                                  w="75%"
-                                >
-                                  Duration
-                                </Heading>
-                                {appointment?.appointmentDuration >= 3601 ? (
-                                  <Text pt="5px" ml="5px" fontSize="text.md">
-                                    {Math.floor(
-                                      appointment?.appointmentDuration / 3600
-                                    )}{' '}
-                                    Hours
-                                  </Text>
-                                ) : (
-                                  <Text pt="5px" pl="5px" fontSize="text.md">
-                                    {Math.floor(
-                                      appointment?.appointmentDuration / 60
-                                    )}{' '}
-                                    Minutes
-                                  </Text>
-                                )}
-                              </Flex>
-                            </Flex>
-                            <Flex flexDirection="column">
-                              <Heading
-                                as="h3"
-                                fontSize="text.xl"
-                                fontWeight="normal"
-                                borderBottom="1px solid #e6e6e6"
-                                w="75%"
-                                pb="5px"
-                              >
-                                Description
-                              </Heading>
-                              <Text pt="5px" pl="5px" fontSize="text.md">
-                                {appointment?.appointmentPlanDescription}
-                              </Text>
-                            </Flex>
-                          </>
-                        )}
+                        <AppointmentInfoForm
+                          id={appointment.id}
+                          title={appointment.appointmentPlanTitle}
+                          type={appointment.type}
+                          duration={appointment.appointmentDuration}
+                          description={appointment.appointmentPlanDescription}
+                        />
                       </>
                     ) : null}
-                  </Box>
-                  <Box
-                    position="absolute"
-                    top="0"
-                    right="2%"
-                    _hover={{ cursor: 'pointer' }}
-                    onClick={toggleEdit}
-                  >
-                    {edit ? <CloseIcon /> : <EditIcon />}
                   </Box>
                 </TabPanel>
                 <TabPanel>
@@ -240,9 +155,12 @@ const AppointmentPage: React.FC = () => {
                   ) : (
                     <Flex>
                       {appointment.appointmentNotes ? (
-                        <Text>{appointment.appointmentNotes}</Text>
+                        <AppointmentNotesForm
+                          id={id}
+                          note={appointment.appointmentNotes}
+                        />
                       ) : (
-                        'No notes yet'
+                        <CreateAppointmentNotes id={id} />
                       )}
                     </Flex>
                   )}
