@@ -40,12 +40,16 @@ const UpcomingAppointments = () => {
                   >
                     {DateTime.fromISO(appointment.date).toLocaleString()}
                   </Heading>
-
                   <Text>
-                    {appointment.clientName} {`${appointment.time} PM`}
+                    {appointment.clientName.toUpperCase()}{' '}
+                    {appointment.time > 1200
+                      ? String(appointment.time - 1200).replace(
+                          /(.{2})$/,
+                          ':$1'
+                        )
+                      : String(appointment.time).replace(/(.{2})$/, ':$1')}
+                    {appointment.time > 1200 ? ' PM' : ' AM'}
                   </Text>
-                  <Text></Text>
-                  <Text>{appointment.appointmentPlanTitle}</Text>
                   {appointment.appointmentDuration >= 3601 ? (
                     <Text>
                       {Math.floor(appointment.appointmentDuration / 3600)} Hours
