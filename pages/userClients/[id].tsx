@@ -21,7 +21,6 @@ const ClientPage = () => {
   const router = useRouter()
   const { id } = router.query
   const [client, setClient] = useState<any>({})
-
   const [isLoading, setIsLoading] = useState(false)
 
   // const { client, isLoading } = useClient(id)
@@ -135,6 +134,7 @@ const ClientPage = () => {
                         phone={client?.phone}
                         email={client?.email}
                         bio={client?.about}
+                        imageUrl={client?.imageUrl}
                         id={client?.id}
                       />
                     ) : (

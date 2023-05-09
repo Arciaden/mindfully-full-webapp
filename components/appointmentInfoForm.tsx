@@ -4,7 +4,6 @@ import {
   Text,
   Input,
   Select,
-  FormLabel,
   Textarea,
   Button,
   Box,
@@ -22,6 +21,7 @@ const AppointmentInfoForm = ({ title, type, duration, description, id }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    setEdit(false)
 
     const formData = {
       id,
@@ -62,7 +62,7 @@ const AppointmentInfoForm = ({ title, type, duration, description, id }) => {
         {edit ? <CloseIcon /> : <EditIcon />}
       </Box>
       {edit ? (
-        <form onSubmit={handleSubmit}>
+        <form>
           <Flex justifyContent="space-between" mb="20px">
             <Flex flexDirection="column" w="32%">
               <Heading
@@ -76,6 +76,7 @@ const AppointmentInfoForm = ({ title, type, duration, description, id }) => {
                 Title
               </Heading>
               <Input
+                type="text"
                 fontSize="text.md"
                 value={editTitle}
                 onChange={(e) => setEditTitle(e.target.value)}
@@ -149,7 +150,7 @@ const AppointmentInfoForm = ({ title, type, duration, description, id }) => {
             />
           </Flex>
           <Flex justifyContent="right">
-            <Button type="submit" onClick={toggleEdit}>
+            <Button type="submit" onClick={handleSubmit}>
               Update Appointment
             </Button>
           </Flex>

@@ -12,6 +12,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     about,
     trainerID,
     fullName,
+    imageUrl,
   } = req.body
 
   //Updating a client
@@ -61,6 +62,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         email,
         about,
         fullName,
+        imageUrl,
       },
     })
 

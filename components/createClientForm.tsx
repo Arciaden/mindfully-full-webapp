@@ -15,9 +15,10 @@ import {
   DrawerFooter,
   Button,
 } from '@chakra-ui/react'
-
+import Script from 'next/script'
+import { CldImage, CldUploadWidget } from 'next-cloudinary'
 import { PhoneIcon } from '@chakra-ui/icons'
-
+import ImageUploader from './imageUploader'
 import { useState } from 'react'
 import { useProfile } from '../lib/hooks'
 
@@ -25,6 +26,8 @@ import { useProfile } from '../lib/hooks'
 
 const CreateClientForm = ({ onClose }) => {
   const { user } = useProfile()
+  const [previewImg, setPreviewImg] = useState('')
+  const [imgUrl, setImgUrl] = useState('')
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [fullName, setFullName] = useState('')
@@ -45,6 +48,7 @@ const CreateClientForm = ({ onClose }) => {
       about: bio.toLowerCase(),
       trainerID: user.id,
       fullName: firstName.toLowerCase() + ' ' + lastName.toLowerCase(),
+      imageUrl: imgUrl,
     }
     fetch(`${window.location.origin}/api/clientCRUD`, {
       method: 'POST',
@@ -65,6 +69,42 @@ const CreateClientForm = ({ onClose }) => {
     <>
       <FormControl position="relative" h="100%" overflow="hidden">
         <form onSubmit={handleSubmit}>
+          <Box>
+            <FormLabel>Profile Image</FormLabel>
+            <Script
+              src="https://upload-widget.cloudinary.com/global/all.js"
+              type="text/javascript"
+            />
+            <CldUploadWidget
+              signatureEndpoint="/api/cldSig"
+              onUpload={(result, widget) => {
+                setPreviewImg(result.info.public_id)
+                setImgUrl(result.info.secure_url)
+              }}
+            >
+              {({ open }) => {
+                function handleOnClick(e) {
+                  e.preventDefault()
+                  open()
+                }
+                return (
+                  <>
+                    {previewImg.length > 0 ? (
+                      <CldImage
+                        width="100"
+                        height="100"
+                        src={previewImg}
+                        alt="Profile image for new client"
+                      />
+                    ) : (
+                      <Button onClick={handleOnClick}>Upload an Image</Button>
+                    )}
+                  </>
+                )
+              }}
+            </CldUploadWidget>
+            {/* <ImageUploader /> */}
+          </Box>
           <Box margin="12px 0 12px 0">
             <FormLabel>First Name</FormLabel>
             <Input onChange={(e) => setFirstName(e.target.value)} />
@@ -108,6 +148,7 @@ const CreateClientForm = ({ onClose }) => {
             <FormLabel>Bio</FormLabel>
             <Textarea onChange={(e) => setBio(e.target.value)}></Textarea>
           </Box>
+
           <Flex justifyContent="left" position="absolute" bottom="2%" left="0">
             <Button
               variant="outline"

@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client'
 import { userData } from './userData'
 import bcrypt from 'bcrypt'
+import appointment from '../pages/api/appointment'
 
 const prisma = new PrismaClient()
 
@@ -20,13 +21,12 @@ const run = async () => {
           type: user.type,
           password: bcrypt.hashSync(user.password, salt),
           email: user.email,
-          // profile: {
+          imageUrl: user.imageUrl,
           firstName: user.firstName.toLowerCase(),
           lastName: user.lastName.toLowerCase(),
           age: user.age,
           phone: user.phone,
           about: user.about.toLowerCase(),
-          // },
           clients: {
             create: user.clients.map((client) => ({
               name: client.name,
@@ -47,6 +47,8 @@ const run = async () => {
               type: appointment.type.toLowerCase(),
               date: appointment.date,
               appointmentDuration: appointment.appointmentDuration,
+              time: appointment.time,
+              clientName: appointment.clientName,
               appointmentPlanDescription:
                 appointment.appointmentPlanDescription.toLowerCase(),
               appointmentPlanTitle:
@@ -57,14 +59,22 @@ const run = async () => {
             })),
           },
         },
-        include: {
-          clients: true,
-          appointments: true,
-        },
       })
     })
   )
 }
+// await prisma.user.update({
+//   where: {
+//     id: trainerID,
+//   },
+//   data: {
+//     appointments: {
+//       connect: {
+//         id: appointment.id,
+//       },
+//     },
+//   },
+// })
 
 run()
   .catch((error) => {

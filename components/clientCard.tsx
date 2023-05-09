@@ -39,7 +39,16 @@ const editCard = {
   read: {},
 }
 
-const ClientCard = ({ firstName, lastName, age, bio, email, phone, id }) => {
+const ClientCard = ({
+  firstName,
+  lastName,
+  age,
+  bio,
+  email,
+  phone,
+  id,
+  imageUrl,
+}) => {
   const [expanded, setExpanded] = useState(false)
   const [edit, setEdit] = useState(false)
 
@@ -69,6 +78,8 @@ const ClientCard = ({ firstName, lastName, age, bio, email, phone, id }) => {
     setEditPhone(phone)
     setEditAge(age)
   }
+
+  console.log(imageUrl)
 
   //Updating a client
   const handleSubmit = (e) => {
@@ -149,7 +160,7 @@ const ClientCard = ({ firstName, lastName, age, bio, email, phone, id }) => {
                     lastName.charAt(0).toUpperCase()
                   }
                   size="lg"
-                  src="https://res.cloudinary.com/deveraux-design/image/upload/v1667011530/Mindfully%20Full/seinfeld_teftvl.jpg"
+                  src={imageUrl}
                 />
               </Box>
               <Box>
@@ -256,7 +267,7 @@ const ClientCard = ({ firstName, lastName, age, bio, email, phone, id }) => {
                   lastName.charAt(0).toUpperCase()
                 }
                 size="lg"
-                src="https://res.cloudinary.com/deveraux-design/image/upload/v1667011530/Mindfully%20Full/seinfeld_teftvl.jpg"
+                src={imageUrl}
               />
             </Box>
             <Box>
