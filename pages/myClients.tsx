@@ -130,6 +130,7 @@ const MyClients = () => {
                         bio={client.about}
                         email={client.email}
                         phone={client.phone}
+                        imageUrl={client.imageUrl}
                         id={client.id}
                       />
                     </GridItem>

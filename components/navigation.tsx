@@ -59,7 +59,7 @@ const NavigationBar = ({ children }) => {
             <Avatar
               name={user?.firstName + ' ' + user?.lastName}
               size="md"
-              src="https://res.cloudinary.com/deveraux-design/image/upload/v1679353585/pexels-chloe-1043471_ktlxyj.jpg"
+              src={user?.imageUrl}
               mr="15px"
             />
           </Link>

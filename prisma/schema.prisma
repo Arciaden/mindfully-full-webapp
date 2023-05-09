@@ -17,6 +17,7 @@ model User {
   password           String
   passwordResetToken String?
   passwordResetAt    DateTime?
+  imageUrl           String?
   firstName          String
   lastName           String
   phone              Int           @unique
@@ -45,6 +46,7 @@ model Client {
   clientId    String?       @db.ObjectId
   noteId      String?       @db.ObjectId
   user        User?         @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  imageUrl    String?
   firstName   String
   lastName    String
   fullName    String

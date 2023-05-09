@@ -26,7 +26,6 @@ const CreateAppointmentSidebar = () => {
   let newDate = new Date(date)
   newDate.setHours(newDate.getHours() + 6)
   let isoDate = newDate.toISOString()
-  console.log(isoDate)
 
   const handleSubmit = (e) => {
     e.preventDefault()

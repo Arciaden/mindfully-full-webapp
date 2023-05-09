@@ -10,6 +10,8 @@ export const userData: {
   age: number
   phone: number
   about: string
+  imageUrl: string
+  userID: string
   // profile: Profile
   appointments: any[]
   clients: any[]
@@ -19,9 +21,12 @@ export const userData: {
     type: 'TRAINER',
     password: 'mypass',
     email: 'trey@gmail.com',
+    userID: '64445299fd9c5445fec52d6f',
     // profile: {
     firstName: 'Trey',
     lastName: 'Deveraux',
+    imageUrl:
+      'https://res.cloudinary.com/deveraux-design/image/upload/v1683521548/pxe5tfadlloda5uukwxi.jpg',
     age: 26,
     phone: 8888888888,
     about: 'this is my biography',
@@ -146,47 +151,58 @@ export const userData: {
         appointmentPlanTitle: '15 minutes of mindfullness',
         appointmentPlanDescription:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Habitasse platea dictumst quisque sagittis. Urna neque viverra justo nec. Donec ultrices tincidunt arcu non sodales neque sodales ut. Diam ut venenatis tellus in metus.',
-        appointmentDuration: 20000,
+        appointmentDuration: 2000,
+        time: 1900,
         appointmentNotes:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Habitasse platea dictumst quisque sagittis. Urna neque viverra justo nec. Donec ultrices tincidunt arcu non sodales neque sodales ut. Diam ut venenatis tellus in metus.',
         userIDs: ['6413c156f336d7e1ca20d8f1'],
         clientId: '6413c3941c4b785d3144062a',
+        clientName: 'jerry seinfield',
       },
       {
         type: 'STRETCHING',
+        id: '6444529afd9c5445fec52d7b',
         date: new Date('2022-10-11T04:53:50.420Z'),
         appointmentPlanTitle: '20 Minute Abs',
         appointmentPlanDescription:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Habitasse platea dictumst quisque sagittis. Urna neque viverra justo nec. Donec ultrices tincidunt arcu non sodales neque sodales ut. Diam ut venenatis tellus in metus.',
-        appointmentDuration: 30000,
+        appointmentDuration: 3000,
+        time: 1300,
         appointmentNotes:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Habitasse platea dictumst quisque sagittis. Urna neque viverra justo nec. Donec ultrices tincidunt arcu non sodales neque sodales ut. Diam ut venenatis tellus in metus.',
         userIDs: ['6413c156f336d7e1ca20d8f1'],
         clientId: '6413c3941c4b785d31440629',
+        clientName: 'jerry seinfield',
       },
       {
         type: 'YOGA',
+        id: '6444529bfd9c5445fec52d7c',
         date: new Date('2022-10-11T04:53:50.420Z'),
         appointmentPlanTitle: 'Yoga for climbing',
         appointmentPlanDescription:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Habitasse platea dictumst quisque sagittis. Urna neque viverra justo nec. Donec ultrices tincidunt arcu non sodales neque sodales ut. Diam ut venenatis tellus in metus.',
-        appointmentDuration: 30000,
+        appointmentDuration: 1500,
+        time: 1300,
         appointmentNotes:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Habitasse platea dictumst quisque sagittis. Urna neque viverra justo nec. Donec ultrices tincidunt arcu non sodales neque sodales ut. Diam ut venenatis tellus in metus.',
         userIDs: ['6413c156f336d7e1ca20d8f1'],
         clientId: '6413c3941c4b785d31440628',
+        clientName: 'jerry seinfield',
       },
       {
         type: 'WEIGHTLIFTING',
+        id: '6444529bfd9c5445fec52d7d',
         date: new Date('2022-10-11T04:53:50.420Z'),
         appointmentPlanTitle: 'Heavy Lifting Techniques',
         appointmentPlanDescription:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Habitasse platea dictumst quisque sagittis. Urna neque viverra justo nec. Donec ultrices tincidunt arcu non sodales neque sodales ut. Diam ut venenatis tellus in metus.',
-        appointmentDuration: 30000,
+        appointmentDuration: 2500,
+        time: 1400,
         appointmentNotes:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Habitasse platea dictumst quisque sagittis. Urna neque viverra justo nec. Donec ultrices tincidunt arcu non sodales neque sodales ut. Diam ut venenatis tellus in metus.',
         userIDs: ['6413c156f336d7e1ca20d8f1'],
         clientId: '6413c3941c4b785d31440628',
+        clientName: 'jerry seinfield',
       },
       {
         type: 'YOGA',
@@ -194,11 +210,13 @@ export const userData: {
         appointmentPlanTitle: '20 Minute Abs',
         appointmentPlanDescription:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Habitasse platea dictumst quisque sagittis. Urna neque viverra justo nec. Donec ultrices tincidunt arcu non sodales neque sodales ut. Diam ut venenatis tellus in metus.',
-        appointmentDuration: 30000,
+        appointmentDuration: 1000,
+        time: 500,
         appointmentNotes:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Habitasse platea dictumst quisque sagittis. Urna neque viverra justo nec. Donec ultrices tincidunt arcu non sodales neque sodales ut. Diam ut venenatis tellus in metus.',
         userIDs: ['6413c156f336d7e1ca20d8f1'],
         clientId: '6413c3941c4b785d31440627',
+        clientName: 'jerry seinfield',
       },
       {
         type: 'WORKOUT',
@@ -206,11 +224,13 @@ export const userData: {
         appointmentPlanTitle: '20 Minute Abs',
         appointmentPlanDescription:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Habitasse platea dictumst quisque sagittis. Urna neque viverra justo nec. Donec ultrices tincidunt arcu non sodales neque sodales ut. Diam ut venenatis tellus in metus.',
-        appointmentDuration: 30000,
+        appointmentDuration: 700,
+        time: 700,
         appointmentNotes:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Habitasse platea dictumst quisque sagittis. Urna neque viverra justo nec. Donec ultrices tincidunt arcu non sodales neque sodales ut. Diam ut venenatis tellus in metus.',
         userIDs: ['6413c156f336d7e1ca20d8f1'],
         clientId: '6413c3941c4b785d31440624',
+        clientName: 'jerry seinfield',
       },
       {
         type: 'WORKOUT',
@@ -218,11 +238,13 @@ export const userData: {
         appointmentPlanTitle: '20 Minute Abs',
         appointmentPlanDescription:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Habitasse platea dictumst quisque sagittis. Urna neque viverra justo nec. Donec ultrices tincidunt arcu non sodales neque sodales ut. Diam ut venenatis tellus in metus.',
-        appointmentDuration: 30000,
+        appointmentDuration: 2100,
+        time: 1600,
         appointmentNotes:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Habitasse platea dictumst quisque sagittis. Urna neque viverra justo nec. Donec ultrices tincidunt arcu non sodales neque sodales ut. Diam ut venenatis tellus in metus.',
         userIDs: ['6413c156f336d7e1ca20d8f1'],
         clientId: '6413c3941c4b785d31440624',
+        clientName: 'jerry seinfield',
       },
     ],
   },

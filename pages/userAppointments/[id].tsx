@@ -20,14 +20,13 @@ import { CloseIcon, EditIcon } from '@chakra-ui/icons'
 import AppointmentInfoForm from '../../components/appointmentInfoForm'
 import AppointmentNotesForm from '../../components/appointmentNotesForm'
 import CreateAppointmentNotes from '../../components/createAppointmentNotes'
+import AppointmentTest from '../../components/appointmentTest'
 
 const AppointmentPage: React.FC = () => {
   const router = useRouter()
   const { id } = router.query
-
-  const [appointment, setAppointment] = useState<any>({})
+  const [appointment, setAppointment] = useState<any>()
   const [isLoading, setIsLoading] = useState<Boolean>(false)
-  const [edit, setEdit] = useState<Boolean>(false)
 
   //Replace this with the useAppointment Hook once I figure out how to
   //This will give us caching etc.
@@ -43,10 +42,6 @@ const AppointmentPage: React.FC = () => {
   useEffect(() => {
     id ? getAppointment() : null
   }, [id])
-
-  const toggleEdit = () => {
-    setEdit((state) => !state)
-  }
 
   return (
     <Box>
@@ -129,17 +124,17 @@ const AppointmentPage: React.FC = () => {
                         top="55%"
                         left="45%"
                       />
-                    ) : appointment ? (
-                      <>
+                    ) : (
+                      appointment && (
                         <AppointmentInfoForm
-                          id={appointment.id}
-                          title={appointment.appointmentPlanTitle}
-                          type={appointment.type}
-                          duration={appointment.appointmentDuration}
-                          description={appointment.appointmentPlanDescription}
+                          id={appointment?.id}
+                          title={appointment?.appointmentPlanTitle}
+                          type={appointment?.type}
+                          duration={appointment?.appointmentDuration}
+                          description={appointment?.appointmentPlanDescription}
                         />
-                      </>
-                    ) : null}
+                      )
+                    )}
                   </Box>
                 </TabPanel>
                 <TabPanel>
@@ -154,7 +149,7 @@ const AppointmentPage: React.FC = () => {
                     />
                   ) : (
                     <Flex>
-                      {appointment.appointmentNotes ? (
+                      {appointment && appointment.appointmentNotes ? (
                         <AppointmentNotesForm
                           id={id}
                           note={appointment.appointmentNotes}

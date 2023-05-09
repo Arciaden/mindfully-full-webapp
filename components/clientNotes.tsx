@@ -15,7 +15,6 @@ import { useState } from 'react'
 const ClientNotes = ({ note, date, id }) => {
   const [edit, setEdit] = useState(false)
   const [editNote, setEditNote] = useState(note)
-  console.log(id)
 
   const handleSubmit = async () => {
     await axios

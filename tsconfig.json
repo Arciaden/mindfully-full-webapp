@@ -24,7 +24,9 @@
     "components/signinForm.tsx",
     "theme/components/button.js",
     "pages/forgotPassword.tsx",
-    "pages/api/resetPassword.js"
+    "pages/api/resetPassword.js",
+    "pages/api/cldSig.tjs",
+    "pages/api/cldSig.js"
   ],
   "exclude": ["node_modules"]
 }

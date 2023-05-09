@@ -52,8 +52,6 @@ const CreateAppointmentNotes = ({ id }) => {
           </form>
         </Box>
       </>
-
-      <Text>{note}</Text>
     </>
   )
 }
