@@ -223,9 +223,7 @@ const IndexCalendar = () => {
                       alignItems="center"
                       w="100%"
                     >
-                      <Link
-                        href={`http://localhost:3000/userAppointments/${appointment.id}`}
-                      >
+                      <Link href={`/userAppointments/${appointment.id}`}>
                         <Button>View Appointment</Button>
                       </Link>
                       <Box>

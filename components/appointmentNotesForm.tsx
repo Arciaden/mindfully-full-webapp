@@ -9,6 +9,7 @@ const AppointmentNotesForm = ({ id, note }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    setEdit(false)
 
     const formData = {
       id,
@@ -52,7 +53,7 @@ const AppointmentNotesForm = ({ id, note }) => {
               ></Textarea>
               <Text>{count} / 3000</Text>
               <Flex w="100%" justifyContent="end">
-                <Button type="submit" mt="10px" onClick={toggleEdit}>
+                <Button type="submit" mt="10px">
                   Update Note
                 </Button>
               </Flex>
@@ -65,7 +66,7 @@ const AppointmentNotesForm = ({ id, note }) => {
       <Box
         position="absolute"
         top="0"
-        right="2%"
+        right="2.1%"
         _hover={{ cursor: 'pointer' }}
         onClick={toggleEdit}
       >
