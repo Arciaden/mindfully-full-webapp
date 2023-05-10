@@ -164,37 +164,84 @@ const IndexCalendar = () => {
                   </Heading>
                 </PopoverHeader>
                 <PopoverBody>
-                  <Flex flexDirection="column" justifyContent="space-between">
-                    <Heading as="h4" fontSize="text.sm" mb="15px">
-                      {appointment.appointmentPlanTitle + ' - '}
-                      {Math.floor(appointment.appointmentDuration / 60) +
-                        ' minutes'}
-                    </Heading>
-                    <Heading as="h5" fontSize="text.xs" mb="15px">
-                      {appointment.type}
-                    </Heading>
-                    <Text fontSize="text.sm" mb="15px">
-                      {appointment.appointmentPlanDescription}
-                    </Text>
-
-                    <Link
-                      href={`http://localhost:3000/userAppointments/${appointment.id}`}
-                    >
-                      <Button>View Appointment</Button>
-                    </Link>
-                    <Box mt="15px">
-                      <form>
-                        <Button
-                          type="submit"
-                          backgroundColor="red"
-                          color="white"
-                          w="100%"
-                          onClick={handleDelete}
-                        >
-                          Delete Appointment
-                        </Button>
-                      </form>
+                  <Flex
+                    flexDirection="column"
+                    alignItems="start"
+                    justifyContent="space-between"
+                    height={350}
+                    padding="15px"
+                  >
+                    <Box w="100%" textAlign="left">
+                      <Heading
+                        as="h5"
+                        fontSize="text.md"
+                        fontWeight="500"
+                        borderBottom="1px solid #f0f0f0"
+                        pb="5px"
+                        mb="10px"
+                        w="70%"
+                      >
+                        Title / Duration
+                      </Heading>
+                      <Text fontSize="text.sm" mb="15px">
+                        {appointment.appointmentPlanTitle + ' - '}
+                        {Math.floor(appointment.appointmentDuration / 60) +
+                          ' minutes'}
+                      </Text>
+                      <Heading
+                        as="h5"
+                        fontSize="text.md"
+                        fontWeight="500"
+                        borderBottom="1px solid #f0f0f0"
+                        pb="5px"
+                        mb="10px"
+                        w="70%"
+                      >
+                        Type
+                      </Heading>
+                      <Text fontSize="text.sm" mb="15px">
+                        {appointment.type.toUpperCase()}
+                      </Text>
+                      <Heading
+                        as="h5"
+                        fontSize="text.md"
+                        fontWeight="500"
+                        borderBottom="1px solid #f0f0f0"
+                        pb="5px"
+                        mb="10px"
+                        w="70%"
+                      >
+                        Title / Duration
+                      </Heading>
+                      <Text fontSize="text.sm" mb="15px">
+                        {appointment.appointmentPlanDescription}
+                      </Text>
                     </Box>
+
+                    <Flex
+                      justifyContent="space-evenly"
+                      alignItems="center"
+                      w="100%"
+                    >
+                      <Link
+                        href={`http://localhost:3000/userAppointments/${appointment.id}`}
+                      >
+                        <Button>View Appointment</Button>
+                      </Link>
+                      <Box>
+                        <form>
+                          <Button
+                            type="submit"
+                            backgroundColor="red"
+                            color="white"
+                            w="100%"
+                            onClick={handleDelete}
+                          >
+                            Delete Appointment
+                          </Button>
+                        </form>
+                      </Box>
+                    </Flex>
                   </Flex>
                 </PopoverBody>
               </PopoverContent>
