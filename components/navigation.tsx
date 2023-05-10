@@ -63,7 +63,7 @@ const NavigationBar = ({ children }) => {
               mr="15px"
             />
           </Link>
-          <form method="POST" action="http://localhost:3000/api/logout">
+          <form method="POST" action="/api/logout">
             <button type={'submit'}>Logout</button>
           </form>
         </Flex>
