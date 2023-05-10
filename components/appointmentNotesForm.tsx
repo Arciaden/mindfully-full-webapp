@@ -66,7 +66,7 @@ const AppointmentNotesForm = ({ id, note }) => {
       <Box
         position="absolute"
         top="0"
-        right="2%"
+        right="2.1%"
         _hover={{ cursor: 'pointer' }}
         onClick={toggleEdit}
       >
