@@ -1,15 +1,4 @@
-import {
-  Box,
-  Button,
-  Flex,
-  Text,
-  Link,
-  Avatar,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-} from '@chakra-ui/react'
+import { Flex, Text, Link, Avatar, SkeletonCircle } from '@chakra-ui/react'
 import Image from 'next/image'
 import { useProfile } from '../lib/hooks'
 
@@ -55,15 +44,20 @@ const NavigationBar = ({ children }) => {
           </Link>
         </Flex>
         <Flex alignItems="center">
-          <Link href="/profile">
-            <Avatar
-              name={user?.firstName + ' ' + user?.lastName}
-              size="md"
-              src={user?.imageUrl}
-              mr="15px"
-            />
-          </Link>
-          <form method="POST" action="/api/logout">
+          {isLoading ? (
+            <SkeletonCircle size="10" mr="25px" />
+          ) : (
+            <Link href="/profile">
+              <Avatar
+                name={user?.firstName + ' ' + user?.lastName}
+                size="md"
+                src={user?.imageUrl}
+                mr="15px"
+              />
+            </Link>
+          )}
+
+          <form method="POST" action="api/logout">
             <button type={'submit'}>Logout</button>
           </form>
         </Flex>

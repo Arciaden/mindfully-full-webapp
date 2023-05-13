@@ -9,7 +9,7 @@ const AppointmentsIndex = () => {
       <Box className="appointment-sidebar-container">
         <AppointmentsSidebar />
       </Box>
-      <Box>
+      <Box w="75%">
         <AppointmentCalendar />
       </Box>
     </Flex>

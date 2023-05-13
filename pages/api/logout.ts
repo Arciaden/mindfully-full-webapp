@@ -13,5 +13,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     })
   )
 
-  res.redirect('/signin')
+  console.log('successful logout')
+  res.status(200).redirect('/signin')
 }

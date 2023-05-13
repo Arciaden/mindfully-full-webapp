@@ -14,8 +14,6 @@ export default function middleware(req) {
   const token = req.cookies.get('MINDFULLY_FULL_ACCESS_TOKEN')
 
   if (!token && prod === 'production') {
-    return NextResponse.redirect(
-      'https://mindfully-full-webapp-5g2d.vercel.app/signin'
-    )
+    return NextResponse.redirect('http://localhost:3000/signin')
   }
 }

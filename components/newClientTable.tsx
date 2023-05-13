@@ -31,9 +31,9 @@ const NewClientTable = () => {
         <Tbody>
           {user &&
             user?.clients
-              ?.slice(0, 5)
               .sort((a, b) => (a.createdAt > b.createdAt ? 1 : -1))
               .reverse()
+              .slice(0, 5)
               .map((client) => (
                 <Tr key={client.id}>
                   <Td>

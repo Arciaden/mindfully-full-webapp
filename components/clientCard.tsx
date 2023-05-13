@@ -114,6 +114,7 @@ const ClientCard = ({
 
   //Delete a client
   const handleDelete = () => {
+    setEdit(false)
     fetch(`${window.location.origin}/api/clientCRUD`, {
       method: 'DELETE',
       credentials: 'include',

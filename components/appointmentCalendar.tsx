@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import {
   Box,
+  Progress,
   Flex,
   Badge,
   Modal,
@@ -27,6 +28,7 @@ import {
   PopoverBody,
   Text,
   Heading,
+  CircularProgress,
 } from '@chakra-ui/react'
 import { differenceInCalendarDays, parseISO } from 'date-fns'
 import Calendar from 'react-calendar'
@@ -36,7 +38,6 @@ import durationObject from '../lib/durationObject'
 
 const IndexCalendar = () => {
   const [date, setDate] = useState(new Date())
-  const [appointmentLoading, setAppointmentLoading] = useState(false)
   const [client, setClient] = useState('')
   const [appDesc, setAppDesc] = useState('')
   const [appTitle, setAppTitle] = useState('')
@@ -51,7 +52,6 @@ const IndexCalendar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    setAppointmentLoading(true)
 
     const formData = {
       trainerID: user?.id,
@@ -74,7 +74,7 @@ const IndexCalendar = () => {
     })
       .then((res) => {
         console.log('request processed successfully')
-        setAppointmentLoading(false)
+
         onClose()
 
         return console.log(res.json())
@@ -113,7 +113,7 @@ const IndexCalendar = () => {
         isSameDay(parseISO(date.toISOString()), parseISO(appointment.date))
       )
 
-      if (!appointmentLoading) {
+      if (!isLoading) {
         return filteredAppointments?.map((appointment) => (
           <>
             <Popover placement="right">
@@ -151,7 +151,7 @@ const IndexCalendar = () => {
               >
                 <PopoverArrow />
                 <PopoverCloseButton />
-                <PopoverHeader>
+                <PopoverHeader p="10px">
                   <Heading as="h3" fontSize="text.md" fontWeight="normal">
                     {appointment.clientName.toUpperCase() + ' - '}
                     {appointment.time > 1200
@@ -254,25 +254,20 @@ const IndexCalendar = () => {
     <>
       {/* // The styling for this component is done with css. You can find this in
       global.css */}
-
-      <Flex>
-        <Box className="calendar-container">
-          <Calendar
-            value={date}
-            onChange={setDate}
-            onClickDay={onOpen}
-            tileContent={tileContentFunction}
-          />
-        </Box>
+      <Flex w="100%" h="100%" justifyContent="center" alignItems="center">
+        {isLoading ? (
+          <CircularProgress size="80px" isIndeterminate />
+        ) : (
+          <Box className="calendar-container">
+            <Calendar
+              value={date}
+              onChange={setDate}
+              onClickDay={onOpen}
+              tileContent={tileContentFunction}
+            />
+          </Box>
+        )}
       </Flex>
-      {/* <Box
-        display={active ? 'block' : 'none'}
-        position="initial"
-        top="0"
-        left="0"
-      >
-        {clientInfo}
-      </Box> */}
 
       <Modal
         closeOnOverlayClick={true}
@@ -295,19 +290,7 @@ const IndexCalendar = () => {
                   type="text"
                   onChange={(e) => setAppTitle(e.target.value)}
                 />
-                {/* <FormLabel>Trainer</FormLabel>
-          <Select
-            placeholder="Select Trainer"
-            onChange={(e) => setTrainer(e.target.value)}
-          >
-            <option value={user?.id}>
-              {user?.firstName.slice(0, 1).toUpperCase() +
-                user?.firstName.slice(1) +
-                ' ' +
-                user?.lastName.slice(0, 1).toUpperCase() +
-                user?.lastName.slice(1)}
-            </option>
-          </Select> */}
+
                 <FormLabel>Client</FormLabel>
                 <Select
                   mb="10px"
