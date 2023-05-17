@@ -10,11 +10,9 @@ export const config = {
 
 export default function middleware(req) {
   const token = req.cookies.get('MINDFULLY_FULL_ACCESS_TOKEN')
-  if (!token && process.env.NODE_ENV === 'production') {
+  if (!token) {
     return NextResponse.redirect(
       'https://mindfully-full-webapp-5g2d.vercel.app/signin'
     )
-  } else {
-    return NextResponse.redirect('http://localhost:3000/signin')
   }
 }
